@@ -1,0 +1,112 @@
+:root {
+    /*colors*/
+    --SD-Primary: rgb(0, 0, 0);
+    --SD-Secondary: rgb(51, 51, 51);
+    --SD-Tertiary: rgb(255, 255, 255);
+    /*typography*/
+    --fs-caption: 0.75rem;
+    --fs-body: 1rem;
+    --fs-body-large: 1.25rem;
+    --fs-head: 1.5rem;
+    --fs-head-large: 2rem;
+    /*fonts*/
+}
+
+body {
+    display: flex;
+    margin: 0;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smooth: antialiased;
+    font-kerning: normal;
+    text-rendering: optimizeLegibility;
+    text-decoration-skip-ink: auto;
+    image-rendering: auto;
+    -webkit-line-break: normal;
+    -moz-line-break: normal;
+    -ms-line-break: normal;
+    line-break: normal;
+    orphans: 3;
+    widows: 3;
+    hanging-punctuation: first allow-end last;
+}
+
+.navbar {
+    display: grid;
+    grid-template-columns:30% 30% 30%;
+    background-color: var(--SD-Primary);
+    width: 100%;
+    color: var(--SD-Tertiary);
+    justify-content: center ;
+    align-items: center;
+    text-align: center;
+    padding-top: 1.5vh;
+}
+
+.group{
+    font-size: var(--fs-body-large);
+}
+
+.nav{
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2,auto);
+}
+
+
+.nav-link{
+    text-decoration: none;
+    color: inherit;
+    font-size: var(--fs-body-large);
+}
+
+.nav-link:hover, .nav-link:focus{
+    color: var(--SD-Secondary);
+}
+
+#dragon-logo {
+    max-width: 15%;
+}
+
+
+
+
+
+
+/*media queries for changing screen sizes*/
+@media only screen and (min-width: 280px) {
+    :root {
+        font-size: 70%;
+    }
+}
+
+@media only screen and (min-width: 576px) {
+    :root {
+        font-size: 85%;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    :root {
+        font-size: 90%;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    :root {
+        font-size: 95%;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    :root {
+        font-size: 100%;
+    }
+}
+
+@media only screen and (min-width: 1400px) {
+    :root {
+        font-size: 110%;
+    }
+}
