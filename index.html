@@ -8,32 +8,49 @@
     <meta name="description" content="Landing page for the Stealth Dragons" />
     <!--CSS and Fonts-->
     <link rel="stylesheet" type="text/css" href="style.css" />
-    <!--Title-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans&display=swap" rel="stylesheet">
     <title>The Stealth Dragons</title>
 </head>
 
 <body>
     <!--Navigation Bar-->
     <header class="navbar">
-        <div>
+        <nav>
             <ul class="nav">
                 <li class="nav-item"> <a class="nav-link" href="#">Aaryaman</a>
                 </li>
                 <li class="nav-item"> <a class="nav-link" href="#">Cian</a>
                 </li>
             </ul>
-        </div>
-        <div class="group"><img id="dragon-logo" src="/resources/stealth-dragon-logo.png" alt="Stealth Dragon">
-            <h1>Stealth Dragons</h1>
-        </div>
-        <div>
+        </nav>
+        <nav class="group"><img id="dragon-logo" src="/resources/stealth-dragon-logo.png" alt="Stealth Dragon">
+            <h1 class="group-title">Stealth Dragons</h1>
+        </nav>
+        <nav>
             <ul class="nav">
                 <li class="nav-item"> <a class="nav-link" href="#">Jiarui</a>
                 </li>
                 <li class="nav-item"> <a class="nav-link" href="#">Sam</a>
                 </li>
             </ul>
-        </div>
+        </nav>
+        <!--Did not know how to do this without js here is the source https://www.youtube.com/watch?v=8QKOaTYvYUA&t=902s-->
+        <input type="checkbox" id="nav-toggler" class="nav-toggler">
+        <nav class="nav-data">
+            <ul class="mobile-nav">
+                <li class="nav-item"> <a class="nav-link" href="#">Aaryaman</a>
+                </li>
+                <li class="nav-item"> <a class="nav-link" href="#">Cian</a>
+                </li>
+                <li class="nav-item"> <a class="nav-link" href="#">Jiarui</a>
+                </li>
+                <li class="nav-item"> <a class="nav-link" href="#">Sam</a>
+                </li>
+            </ul>
+        </nav>
+        <label for="nav-toggler" class="nav-toggler-icon"><img src="/resources/Hamburger_icon_white.svg" alt="expand/collapse menu"></label>
     </header>
 </body>
 

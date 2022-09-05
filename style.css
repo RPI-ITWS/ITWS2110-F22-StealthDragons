@@ -3,6 +3,7 @@
     --SD-Primary: rgb(0, 0, 0);
     --SD-Secondary: rgb(51, 51, 51);
     --SD-Tertiary: rgb(255, 255, 255);
+    --SD-Red: rgb(255,0,0);
     /*typography*/
     --fs-caption: 0.75rem;
     --fs-body: 1rem;
@@ -10,6 +11,8 @@
     --fs-head: 1.5rem;
     --fs-head-large: 2rem;
     /*fonts*/
+    --body-font: 'Open Sans', sans-serif;
+    --title-font: 'Montserrat', sans-serif;
 }
 
 body {
@@ -42,16 +45,19 @@ body {
     align-items: center;
     text-align: center;
     padding-top: 1.5vh;
+    position: sticky;
 }
 
-.group{
-    font-size: var(--fs-body-large);
+.group-title{
+    font-size: var(--fs-head);
+    font-family: var(--title-font);
+    text-transform: uppercase;
 }
 
 .nav{
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(2,auto);
+    grid-template-columns: 50% 50%;
 }
 
 
@@ -59,20 +65,45 @@ body {
     text-decoration: none;
     color: inherit;
     font-size: var(--fs-body-large);
+    font-family: var(--body-font);
+    border-radius: 2%;
+    padding: 4%;
 }
 
 .nav-link:hover, .nav-link:focus{
-    color: var(--SD-Secondary);
+    color: var(--SD-Red);
 }
 
 #dragon-logo {
-    max-width: 15%;
+    width: 15%;
 }
 
+.nav-toggler{
+    display: none;
+}
 
+.mobile-nav{
+    list-style: none;
+    width: 100%;
+    padding-left: 0%;
 
+}
 
+.nav-data{
+    display: none;
+}
 
+.nav-toggler:checked ~ .nav-data {
+    display: block;
+}
+
+.nav-toggler-icon{
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 2vh;
+    margin-left: 2vw;
+}
 
 /*media queries for changing screen sizes*/
 @media only screen and (min-width: 280px) {
@@ -97,6 +128,12 @@ body {
     :root {
         font-size: 95%;
     }
+    .mobile-nav{
+        display: none;
+    }
+    .nav-toggler-icon{
+        display: none;
+    }
 }
 
 @media only screen and (min-width: 1200px) {
@@ -109,4 +146,17 @@ body {
     :root {
         font-size: 110%;
     }
+}
+
+@media only screen and (max-width: 992px){
+    .nav{
+        display: none;
+    }
+    .navbar{
+        grid-template-columns: none;
+    }
+    .nav-item{
+        padding-top: 1vh;
+    }
+
 }
