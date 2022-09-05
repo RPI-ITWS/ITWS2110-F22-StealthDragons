@@ -3,7 +3,7 @@
     --SD-Primary: rgb(0, 0, 0);
     --SD-Secondary: rgb(51, 51, 51);
     --SD-Tertiary: rgb(255, 255, 255);
-    --SD-Red: rgb(255,0,0);
+    --SD-Red: rgb(255, 0, 0);
     /*typography*/
     --fs-caption: 0.75rem;
     --fs-body: 1rem;
@@ -37,31 +37,31 @@ body {
 
 .navbar {
     display: grid;
-    grid-template-columns:30% 30% 30%;
+    grid-template-columns: 30% 30% 30%;
     background-color: var(--SD-Primary);
     width: 100%;
     color: var(--SD-Tertiary);
-    justify-content: center ;
+    justify-content: center;
     align-items: center;
     text-align: center;
     padding-top: 1.5vh;
     position: sticky;
 }
 
-.group-title{
+.group-title {
     font-size: var(--fs-head);
     font-family: var(--title-font);
     text-transform: uppercase;
 }
 
-.nav{
+.nav {
     list-style: none;
     display: grid;
     grid-template-columns: 50% 50%;
 }
 
 
-.nav-link{
+.nav-link {
     text-decoration: none;
     color: inherit;
     font-size: var(--fs-body-large);
@@ -70,7 +70,8 @@ body {
     padding: 4%;
 }
 
-.nav-link:hover, .nav-link:focus{
+.nav-link:hover,
+.nav-link:focus {
     color: var(--SD-Red);
 }
 
@@ -78,26 +79,29 @@ body {
     width: 15%;
 }
 
-.nav-toggler{
+.nav-toggler {
     display: none;
 }
 
-.mobile-nav{
+#right-nav {
+    direction: rtl;
+}
+.mobile-nav {
     list-style: none;
     width: 100%;
     padding-left: 0%;
 
 }
 
-.nav-data{
+.nav-data {
     display: none;
 }
 
-.nav-toggler:checked ~ .nav-data {
+.nav-toggler:checked~.nav-data {
     display: block;
 }
 
-.nav-toggler-icon{
+.nav-toggler-icon {
     position: absolute;
     top: 0;
     left: 0;
@@ -128,10 +132,12 @@ body {
     :root {
         font-size: 95%;
     }
-    .mobile-nav{
+
+    .mobile-nav {
         display: none;
     }
-    .nav-toggler-icon{
+
+    .nav-toggler-icon {
         display: none;
     }
 }
@@ -148,14 +154,16 @@ body {
     }
 }
 
-@media only screen and (max-width: 992px){
-    .nav{
+@media only screen and (max-width: 992px) {
+    .nav {
         display: none;
     }
-    .navbar{
+
+    .navbar {
         grid-template-columns: none;
     }
-    .nav-item{
+
+    .nav-item {
         padding-top: 1vh;
     }
 
