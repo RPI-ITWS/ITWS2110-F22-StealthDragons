@@ -13,10 +13,12 @@
     /*fonts*/
     --body-font: 'Open Sans', sans-serif;
     --title-font: 'Montserrat', sans-serif;
+    /*spacing*/
+    --margin-t: 2vh;
+    --margin-b: 2vh;
 }
 
 body {
-    display: flex;
     margin: 0;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
@@ -35,6 +37,7 @@ body {
     hanging-punctuation: first allow-end last;
 }
 
+/* CSS for Nav */
 .navbar {
     display: grid;
     grid-template-columns: 30% 30% 30%;
@@ -46,12 +49,6 @@ body {
     text-align: center;
     padding-top: 1.5vh;
     position: sticky;
-}
-
-.group-title {
-    font-size: var(--fs-head);
-    font-family: var(--title-font);
-    text-transform: uppercase;
 }
 
 .nav {
@@ -75,8 +72,10 @@ body {
     color: var(--SD-Red);
 }
 
-#dragon-logo {
-    width: 15%;
+#SD-logo {
+    width: 55%;
+    vertical-align: middle;
+
 }
 
 .nav-toggler {
@@ -86,6 +85,7 @@ body {
 #right-nav {
     direction: rtl;
 }
+
 .mobile-nav {
     list-style: none;
     width: 100%;
@@ -107,7 +107,57 @@ body {
     left: 0;
     margin-top: 2vh;
     margin-left: 2vw;
+    cursor: pointer;
 }
+
+/* CSS for pigctures*/
+
+#group-intro {
+    padding-bottom: var(--margin-b);
+    padding-top: var(--margin-t);
+    padding-left: 2vw;
+    padding-right: 2vw ;
+}
+
+.members,
+.projects {
+    font-family: var(--title-font);
+    font-size: var(--fs-head);
+    text-align: center;
+}
+
+.group-photos {
+    display: grid;
+    grid-template-columns: 24% 24% 24% 24%;
+    grid-gap: 1%;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.member-photo {
+    background-color: var(--SD-Secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.head-shot {
+    width: 80%;
+}
+
+.member-name{
+    font-family: var(--body-font);
+    font-size:var(--fs-body-large);
+}
+
+.member-bio{
+    font-family: var(--body-font);
+    font-size: var(--fs-body);
+}
+/* CSS for Projects*/
+
+
 
 /*media queries for changing screen sizes*/
 @media only screen and (min-width: 280px) {
