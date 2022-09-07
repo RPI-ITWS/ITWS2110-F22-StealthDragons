@@ -23,7 +23,6 @@ body {
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-smooth: antialiased;
     font-kerning: normal;
     text-rendering: optimizeLegibility;
     text-decoration-skip-ink: auto;
@@ -131,7 +130,7 @@ body {
     grid-template-columns: 24% 24% 24% 24%;
     grid-gap: 1%;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 
 }
 
@@ -149,6 +148,7 @@ body {
 .member-name{
     font-family: var(--body-font);
     font-size:var(--fs-body-large);
+    
 }
 
 .member-bio{
@@ -188,7 +188,10 @@ body {
     font-family: var(--body-font);
     font-size: var(--fs-body);
     padding-top: 6.5vh;
-    
+}
+
+.P-link{
+    color: var(--SD-Red);
 }
 /* CSS for Footer */
 #footer{
