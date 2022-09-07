@@ -109,7 +109,7 @@ body {
     cursor: pointer;
 }
 
-/* CSS for pigctures*/
+/* CSS for pictures*/
 
 #group-intro,#group-projects {
     padding-bottom: var(--margin-b);
@@ -198,6 +198,13 @@ body {
     background-color: black;
     width: 100%;
     height: 5vh;
+}
+.group-slogan{
+    color: var(--SD-Red);
+    font-family: var(--title-font);
+    font-size: var(--fs-head);
+    text-align: center;
+    padding: 0.5vh;
 }
 
 
