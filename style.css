@@ -1,269 +1,299 @@
 :root {
-    /*colors*/
-    --SD-Primary: rgb(0, 0, 0);
-    --SD-Secondary: rgb(51, 51, 51);
-    --SD-Tertiary: rgb(255, 255, 255);
-    --SD-Red: rgb(255, 0, 0);
-    /*typography*/
-    --fs-caption: 0.75rem;
-    --fs-body: 1rem;
-    --fs-body-large: 1.25rem;
-    --fs-head: 1.5rem;
-    --fs-head-large: 2rem;
-    /*fonts*/
-    --body-font: 'Open Sans', sans-serif;
-    --title-font: 'Montserrat', sans-serif;
-    /*spacing*/
-    --margin-t: 2vh;
-    --margin-b: 2vh;
+  /*colors*/
+  --SD-Primary: rgb(0, 0, 0);
+  --SD-Secondary: rgb(51, 51, 51);
+  --SD-Tertiary: rgb(255, 255, 255);
+  --SD-Red: rgb(255, 0, 0);
+  /*typography*/
+  --fs-caption: 0.75rem;
+  --fs-body: 1rem;
+  --fs-body-large: 1.25rem;
+  --fs-head: 1.5rem;
+  --fs-head-large: 2rem;
+  /*fonts*/
+  --body-font: "Open Sans", sans-serif;
+  --title-font: "Montserrat", sans-serif;
+  /*spacing*/
+  --margin-t: 2vh;
+  --margin-b: 2vh;
 }
 
 body {
-    margin: 0;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-kerning: normal;
-    text-rendering: optimizeLegibility;
-    text-decoration-skip-ink: auto;
-    image-rendering: auto;
-    -webkit-line-break: normal;
-    -moz-line-break: normal;
-    -ms-line-break: normal;
-    line-break: normal;
-    orphans: 3;
-    widows: 3;
-    hanging-punctuation: first allow-end last;
+  margin: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+  text-decoration-skip-ink: auto;
+  image-rendering: auto;
+  -webkit-line-break: normal;
+  -moz-line-break: normal;
+  -ms-line-break: normal;
+  line-break: normal;
+  orphans: 3;
+  widows: 3;
+  hanging-punctuation: first allow-end last;
 }
 
 /* CSS for Nav */
 .navbar {
-    display: grid;
-    grid-template-columns: 30% 30% 30%;
-    background-color: var(--SD-Primary);
-    width: 100%;
-    color: var(--SD-Tertiary);
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding-top: 1.5vh;
-    position: sticky;
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  background-color: var(--SD-Primary);
+  width: 100%;
+  color: var(--SD-Tertiary);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-top: 1.5vh;
+  position: sticky;
 }
 
 .nav {
-    list-style: none;
-    display: grid;
-    grid-template-columns: 50% 50%;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 50% 50%;
 }
 
-
 .nav-link {
-    text-decoration: none;
-    color: inherit;
-    font-size: var(--fs-body-large);
-    font-family: var(--body-font);
-    border-radius: 2%;
-    padding: 4%;
+  text-decoration: none;
+  color: inherit;
+  font-size: var(--fs-body-large);
+  font-family: var(--body-font);
+  border-radius: 2%;
+  padding: 4%;
 }
 
 .nav-link:hover,
 .nav-link:focus {
-    color: var(--SD-Red);
+  color: var(--SD-Red);
 }
 
 #SD-logo {
-    width: 55%;
-    vertical-align: middle;
-
+  width: 55%;
+  vertical-align: middle;
 }
 
 .nav-toggler {
-    display: none;
+  display: none;
 }
 
 #right-nav {
-    direction: rtl;
+  direction: rtl;
 }
 
 .mobile-nav {
-    list-style: none;
-    width: 100%;
-    padding-left: 0%;
-
+  list-style: none;
+  width: 100%;
+  padding-left: 0%;
 }
 
 .nav-data {
-    display: none;
+  display: none;
 }
 
-.nav-toggler:checked~.nav-data {
-    display: block;
+.nav-toggler:checked ~ .nav-data {
+  display: block;
 }
 
 .nav-toggler-icon {
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin-top: 2vh;
-    margin-left: 2vw;
-    cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 2vh;
+  margin-left: 2vw;
+  cursor: pointer;
 }
 
 /* CSS for pictures*/
 
-#group-intro,#group-projects {
-    padding-bottom: var(--margin-b);
-    padding-top: var(--margin-t);
-    padding-left: 7vw;
-    padding-right: 7vw ;
+#group-intro,
+#group-projects {
+  padding-bottom: var(--margin-b);
+  padding-top: var(--margin-t);
+  padding-left: 7vw;
+  padding-right: 7vw;
 }
 
 .members,
 .projects {
-    font-family: var(--title-font);
-    font-size: var(--fs-head);
-    text-align: center;
+  font-family: var(--title-font);
+  font-size: var(--fs-head);
+  text-align: center;
 }
 
 .group-photos {
-    display: grid;
-    grid-template-columns: 24% 24% 24% 24%;
-    grid-gap: 1%;
-    justify-content: center;
-    align-items: flex-start;
-
+  display: grid;
+  grid-template-columns: 24% 24% 24% 24%;
+  grid-gap: 1%;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .member-photo {
-    background-color: var(--SD-Secondary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background-color: var(--SD-Secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .head-shot {
-    width: 80%;
+  width: 80%;
 }
 
-.member-name{
-    font-family: var(--body-font);
-    font-size:var(--fs-body-large);
-    
+.member-name {
+  font-family: var(--body-font);
+  font-size: var(--fs-body-large);
 }
 
-.member-bio{
-    font-family: var(--body-font);
-    font-size: var(--fs-body);
+.member-bio {
+  font-family: var(--body-font);
+  font-size: var(--fs-body);
 }
 /* CSS for Projects*/
-.projects{
-    padding-top: var(--margin-t);
+.projects {
+  padding-top: var(--margin-t);
 }
-.project-1, .project-3{
-    display: grid;
-    grid-template-columns: 40% 55%;
-    grid-gap: 5%;
-    padding-bottom: var(--margin-b);
+.project-1,
+.project-3 {
+  display: grid;
+  grid-template-columns: 40% 55%;
+  grid-gap: 5%;
+  padding-bottom: var(--margin-b);
 }
-.project-title{
-    font-size: var(--fs-body-large);
-    font-family: var(--title-font);
-    text-decoration: underline;
+.project-title {
+  font-size: var(--fs-body-large);
+  font-family: var(--title-font);
+  text-decoration: underline;
 }
-.project-screenshot{
-    width: 100%;
-    border: 1vw solid;
-    border-color: var(--SD-Secondary);
+.project-screenshot {
+  width: 100%;
+  border: 1vw solid;
+  border-color: var(--SD-Secondary);
 }
-.project-2{
-    display: grid;
-    grid-template-columns: 55% 40%;
-    grid-gap: 2%;
-    border-bottom: 0.5vh solid;
-    border-color: var(--SD-Secondary);
-    border-top: 0.5vh solid;
-    padding-bottom: var(--margin-b);
+.project-2 {
+  display: grid;
+  grid-template-columns: 55% 40%;
+  grid-gap: 2%;
+  border-bottom: 0.5vh solid;
+  border-color: var(--SD-Secondary);
+  border-top: 0.5vh solid;
+  padding-bottom: var(--margin-b);
 }
-.project-desc{
-    font-family: var(--body-font);
-    font-size: var(--fs-body);
-    padding-top: 6.5vh;
+.project-desc {
+  font-family: var(--body-font);
+  font-size: var(--fs-body);
+  padding-top: 6.5vh;
 }
 
-.P-link{
-    color: var(--SD-Red);
+.P-link {
+  color: var(--SD-Red);
 }
 /* CSS for Footer */
-#footer{
-    background-color: black;
-    width: 100%;
-    height: 5vh;
+#footer {
+  background-color: black;
+  width: 100%;
+  height: 5vh;
 }
-.group-slogan{
-    color: var(--SD-Red);
-    font-family: var(--title-font);
-    font-size: var(--fs-head);
-    text-align: center;
-    padding: 0.5vh;
+.group-slogan {
+  color: var(--SD-Red);
+  font-family: var(--title-font);
+  font-size: var(--fs-head);
+  text-align: center;
+  padding: 0.5vh;
 }
-
 
 /*media queries for changing screen sizes*/
 @media only screen and (min-width: 280px) {
-    :root {
-        font-size: 70%;
-    }
+  :root {
+    font-size: 70%;
+  }
 }
 
 @media only screen and (min-width: 576px) {
-    :root {
-        font-size: 85%;
-    }
+  :root {
+    font-size: 85%;
+  }
 }
 
 @media only screen and (min-width: 768px) {
-    :root {
-        font-size: 90%;
-    }
+  :root {
+    font-size: 90%;
+  }
 }
 
 @media only screen and (min-width: 992px) {
-    :root {
-        font-size: 95%;
-    }
+  :root {
+    font-size: 95%;
+  }
 
-    .mobile-nav {
-        display: none;
-    }
+  .mobile-nav {
+    display: none;
+  }
 
-    .nav-toggler-icon {
-        display: none;
-    }
+  .nav-toggler-icon {
+    display: none;
+  }
 }
 
 @media only screen and (min-width: 1200px) {
-    :root {
-        font-size: 100%;
-    }
+  :root {
+    font-size: 100%;
+  }
 }
 
 @media only screen and (min-width: 1400px) {
-    :root {
-        font-size: 110%;
-    }
+  :root {
+    font-size: 110%;
+  }
 }
 
 @media only screen and (max-width: 992px) {
-    .nav {
-        display: none;
-    }
+  .nav {
+    display: none;
+  }
 
-    .navbar {
-        grid-template-columns: none;
-    }
+  .navbar {
+    grid-template-columns: none;
+  }
 
-    .nav-item {
-        padding-top: 1vh;
-    }
+  .nav-item {
+    padding-top: 1vh;
+  }
+}
 
+.nameHeader {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.resumeOverview {
+  float: left;
+  width: 50%;
+  padding: 0px;
+}
+
+.resumeOverview h2 {
+  padding-left: 10px;
+}
+
+.resumeOverview p {
+  padding-left: 10px;
+}
+
+.overview-right {
+  width: 50%;
+  float: left;
+}
+
+.overview-right img {
+  padding-right: 10px;
+  display: flex;
+  align-items: right;
+  justify-content: right;
+}
+
+.resPic {
+  width: 25%;
 }
