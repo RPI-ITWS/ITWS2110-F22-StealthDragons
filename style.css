@@ -125,7 +125,7 @@ body {
 
 .group-photos {
   display: grid;
-  grid-template-columns: 24% 24% 24% 24%;
+  grid-template-columns: 30% 30% 30%;
   grid-gap: 1%;
   justify-content: center;
   align-items: flex-start;
