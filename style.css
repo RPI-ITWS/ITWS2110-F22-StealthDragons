@@ -244,6 +244,7 @@ body {
 .howelc-title {
   font-size: var(--fs-head);
   font-family: var(--title-font);
+  text-decoration: underline;
 }
 
 .howelc-body {
