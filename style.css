@@ -288,14 +288,122 @@ body {
 }
 
 .overview-right img {
-  padding-right: 10px;
   display: flex;
   align-items: right;
   justify-content: right;
+  padding-bottom: 40px;
 }
 
-.resPic {
-  width: 25%;
+.headerBarDiv {
+  text-align: center;
+  border-bottom: 2px solid #333;
+  border-top: 2px solid #333;
+  margin-bottom: 5px;
+}
+
+.headerBar {
+  display: inline;
+  text-align: center;
+  font-size: large;
+}
+
+.headerBar li {
+  display: inline;
+  list-style: none;
+  text-align: center;
+}
+
+.imgWrapper {
+  display: flex;
+  text-align: center;
+  padding-bottom: 1vh;
+}
+
+.resumeOverviewLeft {
+  position: relative;
+}
+
+.resumeOverviewRight {
+  position: relative;
+  text-align: center;
+  height: auto;
+}
+
+.sectionWrapperThreeSec {
+  font-family: var(--body-font);
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  justify-content: center;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.thuloa-title {
+  font-family: var(--title-font);
+  text-align: center;
+}
+
+header {
+  font-family: var(--title-font);
+}
+
+.resumeOverviewLeft {
+  font-family: var(--body-font);
+}
+
+.sectionWrapper {
+  font-family: var(--body-font);
+  display: grid;
+  grid-template-columns: 50% 50%;
+  justify-content: center;
+}
+
+.profPic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2vh;
+}
+
+.job {
+  padding-left: 1vw;
+  padding-right: 1vw;
+}
+
+section {
+  padding-right: 5vw;
+  padding-left: 5vw;
+}
+
+.h-card-thuloa {
+  justify-content: center;
+  text-align: center;
+  border-radius: 10px;
+  border: 2px solid #2d2f37;
+  flex-basis: content;
+}
+
+.cardp {
+  margin: 1vh;
+}
+
+.carda {
+  padding-left: 1vw;
+  padding-right: 1vw;
+}
+
+.skillsWrapper {
+  font-family: var(--body-font);
+}
+
+.body-thuloa {
+  background-color: rgb(205, 205, 228);
 }
 
 .leungs2 {
