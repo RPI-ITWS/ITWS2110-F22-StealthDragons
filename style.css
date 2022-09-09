@@ -93,7 +93,7 @@ body {
   display: none;
 }
 
-.nav-toggler:checked ~ .nav-data {
+.nav-toggler:checked~.nav-data {
   display: block;
 }
 
@@ -109,7 +109,7 @@ body {
 /* CSS for pictures*/
 
 #group-intro,
-#group-projects {
+#group-projects{
   padding-bottom: var(--margin-b);
   padding-top: var(--margin-t);
   padding-left: 7vw;
@@ -151,10 +151,12 @@ body {
   font-family: var(--body-font);
   font-size: var(--fs-body);
 }
+
 /* CSS for Projects*/
 .projects {
   padding-top: var(--margin-t);
 }
+
 .project-1,
 .project-3 {
   display: grid;
@@ -162,16 +164,19 @@ body {
   grid-gap: 5%;
   padding-bottom: var(--margin-b);
 }
+
 .project-title {
   font-size: var(--fs-body-large);
   font-family: var(--title-font);
   text-decoration: underline;
 }
+
 .project-screenshot {
   width: 100%;
   border: 1vw solid;
   border-color: var(--SD-Secondary);
 }
+
 .project-2 {
   display: grid;
   grid-template-columns: 55% 40%;
@@ -181,6 +186,7 @@ body {
   border-top: 0.5vh solid;
   padding-bottom: var(--margin-b);
 }
+
 .project-desc {
   font-family: var(--body-font);
   font-size: var(--fs-body);
@@ -190,12 +196,14 @@ body {
 .P-link {
   color: var(--SD-Red);
 }
+
 /* CSS for Footer */
 #footer {
   background-color: black;
   width: 100%;
   height: 5vh;
 }
+
 .group-slogan {
   color: var(--SD-Red);
   font-family: var(--title-font);
@@ -203,6 +211,61 @@ body {
   text-align: center;
   padding: 0.5vh;
 }
+
+/* CSS for Cian's Resume */
+.howelc-row1 {
+  display: grid;
+  grid-template-columns: 12% 18% 70%;
+  grid-gap: 1%;
+}
+
+.howelc-img {
+  width: 100%;
+  border: 0.25vh solid;
+  border-color: var(--SD-Primary);
+  border-radius: 0.5vh;
+}
+
+.h-card-howelc {
+  background-color: var(--SD-Secondary);
+  color: var(--SD-Tertiary);
+  border: 0.25vh solid;
+  border-color: var(--SD-Primary);
+  border-radius: 0.5vh;
+  font-size: var(--fs-body);
+  font-family: var(--body-font);
+
+}
+
+.u-email-howelc {
+  color: var(--SD-Tertiary);
+}
+
+.howelc-title {
+  font-size: var(--fs-head);
+  font-family: var(--title-font);
+}
+
+.howelc-body {
+  font-size: var(--fs-body);
+  font-family: var(--body-font);
+}
+
+#howelc-info{
+  padding-top: var(--margin-t);
+  padding-left: 7vw;
+  padding-right: 7vw;
+}
+#howelc-resume{
+  padding-bottom: var(--margin-b);
+  padding-left: 18vw;
+  padding-right: 7vw;
+}
+.spacing-box{
+  display: flex;
+  justify-content: space-between;
+}
+
 
 /*media queries for changing screen sizes*/
 @media only screen and (min-width: 280px) {
@@ -294,6 +357,9 @@ body {
   padding-bottom: 40px;
 }
 
+.resPic {
+  width: 25%;
+  
 .headerBarDiv {
   text-align: center;
   border-bottom: 2px solid #333;
