@@ -298,6 +298,8 @@ body {
   width: 25%;
 }
 
-leungs2-title {
-  font: "--title-";
+.leungs2 {
+  font-family: var(--title-font);
+  font-size: var(--fs-head);
   text-align: center;
+}
