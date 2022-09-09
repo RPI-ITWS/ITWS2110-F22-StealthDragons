@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <!--meta tags-->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, intial-scale=1" />
+    <meta name="description" content="Landing page for the Stealth Dragons" />
+    <!--CSS and Fonts-->
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <title>The Stealth Dragons</title>
+  </head>
+
+  <body>
+    <!--Navigation Bar for PC and Large Tablets-->
+    <header class="navbar">
+      <nav>
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="resumes/thuloa.html">Aaryaman</a>
+          </li>
+        </ul>
+      </nav>
+      <nav class="group">
+        <a href="index.html"
+          ><img
+            id="SD-logo"
+            src="resources/Stealth-Dragons-Logo.svg"
+            alt="Stealth Dragon"
+        /></a>
+      </nav>
+      <nav>
+        <ul class="nav" id="right-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="resumes/leungs2.html">Sam</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="resumes/howelc.html">Cian</a>
+          </li>
+        </ul>
+      </nav>
+      <!--Did not know how to do this without js here is the source https://www.youtube.com/watch?v=8QKOaTYvYUA&t=902s-->
+      <!--Navigation Bar for Mobile-->
+      <input type="checkbox" id="nav-toggler" class="nav-toggler" />
+      <nav class="nav-data">
+        <ul class="mobile-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="resumes/thuloa.html">Aaryaman</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="resumes/howelc.html">Cian</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="resumes/leungs2.html">Sam</a>
+          </li>
+        </ul>
+      </nav>
+      <label for="nav-toggler" class="nav-toggler-icon"
+        ><img
+          src="resources/Hamburger_icon_white.svg"
+          alt="expand/collapse menu"
+      /></label>
+    </header>
+    <!--Sections for group member photos and introductions-->
+    <section id="group-intro">
+      <h2 class="members">Group Members</h2>
+      <div class="group-photos">
+        <div class="member-photo">
+          <img
+            src="resources/AaryamanHeadshot.jpeg"
+            class="head-shot"
+            alt="Aaryaman Thuloj"
+          />
+        </div>
+        <div class="member-photo">
+          <img
+            src="resources/SD-Cian.jpg"
+            class="head-shot"
+            alt="Cian Howell"
+          />
+        </div>
+        <div class="member-photo">
+          <img
+            src="resources/samzoompic.jpg"
+            class="head-shot"
+            alt="Sam Leung"
+          />
+        </div>
+      </div>
+      <div class="group-photos">
+        <div>
+          <p class="member-name">Aaryaman Thuloj</p>
+          <p class="member-bio">
+            Sophomore CS & ITWS dual major with interests in software and web
+            development. Previously interned at Liberty Mutual Insurance in the
+            summer of 2022, working with software development and data analysis.
+            Excited to learn more!
+          </p>
+          <a class="P-link" href="resumes/thuloa.html">Link to personal page</a>
+        </div>
+        <div>
+          <p class="member-name">Cian Howell</p>
+          <p class="member-bio">
+            Junior ITWS major with an entrepreneurship focus track. Experience
+            doing front-end web development for multiple companies. Interested
+            in product management and full stack development.
+          </p>
+          <a class="P-link" href="resumes/howelc.html">Link to personal page</a>
+        </div>
+        <div>
+          <p class="member-name">Sam Leung</p>
+          <p class="member-bio">
+            Sophomore ITWS major on an informational security focus track and
+            AFROTC cadet. No professional experience in the IT field yet, but
+            interested in any IT or web experience opportunities.
+          </p>
+          <a class="P-link" href="resumes/leungs2.html"
+            >Link to personal page</a
+          >
+        </div>
+      </div>
+    </section>
+    <!--Section to display three group projects-->
+    <section id="group-projects">
+      <h3 class="projects">Projects</h3>
+      <div class="project-1">
+        <div>
+          <h4 class="project-title">DateBase</h4>
+          <img
+            class="project-screenshot"
+            src="resources/DateBase-Project.png"
+            alt="DateBase Landing Page"
+          />
+          <a class="P-link" href="https://viyerelu.net/rpi-f21-iit-t16/"
+            >Link to Project</a
+          >
+        </div>
+        <div>
+          <p class="project-desc">
+            The main function of DateBase is to help users track the shelf life
+            of perishable products. A user enters four pieces of data about the
+            food item, including date, name, location, and quantity. This data
+            is locally stored and displayed on the calendar. When the date
+            passes, the user will be notified via the calendar page. The user
+            will then manually clear the notification when they see fit. This
+            project focused on JavaScript and locally storage. The calendar is
+            created dynamically, completely with vanilla JavaScript.
+          </p>
+        </div>
+      </div>
+      <div class="project-2">
+        <div>
+          <p class="project-desc">
+            We were approached by the founder and CEO of Qti.ai to do the
+            front-end development of two pages on his website. Bootstrap was the
+            framework we chose to utilize, as many developers use bootstrap, it
+            is easy to learn, and it can be used Node.js and React. Not much
+            design choice was given, as the CEO wanted the website to appear a
+            specific way. Essentially, we were given a Figma frame and were
+            asked to make the website match.
+          </p>
+        </div>
+        <div>
+          <h4 class="project-title">Qti.ai</h4>
+          <img
+            class="project-screenshot"
+            src="resources/Qti-Project.png"
+            alt="DateBase Landing Page"
+          />
+          <a class="P-link" href="https://qti.ai/">Link to Project</a>
+        </div>
+      </div>
+      <div class="project-3">
+        <div>
+          <h4 class="project-title">Do ITWS</h4>
+          <img
+            class="project-screenshot"
+            src="resources/DOITWS.png"
+            alt="DO ITWS Landing Page"
+          />
+          <a class="P-link" href="">Link to Project</a>
+        </div>
+        <div>
+          <p class="project-desc">
+            This project's goal was to create a comfortable and user friendly
+            planner webpage. The goal was to allow stressed high schoolers and
+            college students to have an easily navigatable and simple interface
+            to keep track of their assignments and tests. The interface allowed
+            users to simply input their assignment details, the due date, and
+            their priority listing for the assignment. The website would then
+            order the assignments based on priority and then due date and guide
+            users in which assignments they should complete first.
+          </p>
+        </div>
+      </div>
+    </section>
+    <!--Footer with slogan-->
+    <footer id="footer">
+      <p class="group-slogan">Design. Create. Execute.</p>
+    </footer>
+  </body>
+</html>
