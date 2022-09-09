@@ -94,7 +94,7 @@ body {
   display: none;
 }
 
-.nav-toggler:checked~.nav-data {
+.nav-toggler:checked ~ .nav-data {
   display: block;
 }
 
@@ -109,7 +109,7 @@ body {
 
 /* CSS for Intro portion of home page*/
 #group-intro,
-#group-projects{
+#group-projects {
   padding-bottom: var(--margin-b);
   padding-top: var(--margin-t);
   padding-left: 7vw;
@@ -234,7 +234,6 @@ body {
   border-radius: 0.5vh;
   font-size: var(--fs-body);
   font-family: var(--body-font);
-
 }
 
 .u-email-howelc {
@@ -252,21 +251,20 @@ body {
   font-family: var(--body-font);
 }
 
-#howelc-info{
+#howelc-info {
   padding-top: var(--margin-t);
   padding-left: 7vw;
   padding-right: 7vw;
 }
-#howelc-resume{
+#howelc-resume {
   padding-bottom: var(--margin-b);
   padding-left: 18vw;
   padding-right: 7vw;
 }
-.spacing-box{
+.spacing-box {
   display: flex;
   justify-content: space-between;
 }
-
 
 /*media queries for changing screen sizes*/
 @media only screen and (min-width: 280px) {
@@ -346,22 +344,10 @@ body {
   padding-left: 10px;
 }
 
-.overview-right {
-  width: 50%;
-  float: left;
-}
-
-.overview-right img {
-  display: flex;
-  align-items: right;
-  justify-content: right;
-  padding-bottom: 40px;
-}
-
 .resPic {
   width: 25%;
 }
-  
+
 .headerBarDiv {
   text-align: center;
   border-bottom: 2px solid #333;
@@ -417,7 +403,7 @@ body {
   text-align: center;
 }
 
-.header-thuloa{
+.header-thuloa {
   font-family: var(--title-font);
 }
 
