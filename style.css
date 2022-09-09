@@ -361,6 +361,7 @@ body {
   font-size: large;
 }
 
+/* to create vertical bar at the top*/
 .headerBar li {
   display: inline;
   list-style: none;
@@ -383,6 +384,7 @@ body {
   height: auto;
 }
 
+/* setup sectionWrapper for three elements */
 .sectionWrapperThreeSec {
   font-family: var(--body-font);
   display: grid;
@@ -390,6 +392,7 @@ body {
   justify-content: center;
 }
 
+/* for same-line effect with attribute tags */
 .left {
   float: left;
 }
@@ -398,19 +401,23 @@ body {
   float: right;
 }
 
+/* set fonts */
 .thuloa-title {
   font-family: var(--title-font);
   text-align: center;
 }
 
+/* set fonts */
 .header-thuloa {
   font-family: var(--title-font);
 }
 
+/* set fonts */
 .resumeOverviewLeft {
   font-family: var(--body-font);
 }
 
+/* set fonts and wrapper formatting */
 .sectionWrapper {
   font-family: var(--body-font);
   display: grid;
@@ -425,11 +432,13 @@ body {
   padding-top: 2vh;
 }
 
+/* set padding */
 .job {
   padding-left: 1vw;
   padding-right: 1vw;
 }
 
+/* set padding */
 .sec-thuloa {
   padding-right: 5vw;
   padding-left: 5vw;
@@ -443,6 +452,7 @@ body {
   flex-basis: content;
 }
 
+/* below two set viewing margins for the h-card microformat*/
 .cardp {
   margin: 1vh;
 }
@@ -452,10 +462,12 @@ body {
   padding-right: 1vw;
 }
 
+/* set fonts for each section */
 .skillsWrapper {
   font-family: var(--body-font);
 }
 
+/* changed ONLY my body background color */
 .body-thuloa {
   background-color: rgb(205, 205, 228);
 }
