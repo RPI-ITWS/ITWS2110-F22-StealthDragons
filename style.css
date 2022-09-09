@@ -226,7 +226,7 @@ body {
   border-radius: 0.5vh;
 }
 
-.h-card {
+.h-card-howelc {
   background-color: var(--SD-Secondary);
   color: var(--SD-Tertiary);
   border: 0.25vh solid;
@@ -237,7 +237,7 @@ body {
 
 }
 
-.u-email {
+.u-email-howelc {
   color: var(--SD-Tertiary);
 }
 
@@ -258,11 +258,12 @@ body {
 }
 #howelc-resume{
   padding-bottom: var(--margin-b);
-  padding-left: 7vw;
+  padding-left: 18vw;
   padding-right: 7vw;
 }
-.end-line{
-  text-align: end;
+.spacing-box{
+  display: flex;
+  justify-content: space-between;
 }
 
 
