@@ -1,3 +1,4 @@
+/*Root element with variables to use throughout enter website*/
 :root {
   /*colors*/
   --SD-Primary: rgb(0, 0, 0);
@@ -17,7 +18,7 @@
   --margin-t: 2vh;
   --margin-b: 2vh;
 }
-
+/*basic body styling*/
 body {
   margin: 0;
   overflow-x: hidden;
@@ -106,8 +107,7 @@ body {
   cursor: pointer;
 }
 
-/* CSS for pictures*/
-
+/* CSS for Intro portion of home page*/
 #group-intro,
 #group-projects{
   padding-bottom: var(--margin-b);
