@@ -25,7 +25,16 @@ had done on the index.html. I learned that I have a lot to catch up on regarding
 need to watch some videos on it and catch up to their skill level.
 
 Aaryaman: 
-Working on this lab was tricky at first as I had forgotten most of the vanilla HTML and CSS concepts I learned in Intro, but I think it was a very good refresher on these concepts. I was able to relearn basic HTML and CSS structure pretty quickly and decided on how to block out my sections on the website for my resume. However, actually implementing this blocking proved to be difficult for me. An example of this would be how my three job experiences are next to each other and take up the same width, and how my image is centered in its own area next to the overview. I initially tried to do this by nesting divs and setting child divs to be a certain width of the parent, and have all of them float left. However, this proved to be very tricky to work with and would break when the page was resized. Instead, I learned from Cian that I could use CSS flex boxes with a grid display, and using properties such as this allowed me to solve the problem much easier, by settings widths through there and having divs be next to each other. This helped lay out most of my personal resume website. I also had trouble implementing the font our team had found but learned to use the font variable names from the root element to do so in different sections on my site, which made everything seamless. In all, this was a very useful lab in that it refreshed my memory on a lot of HTML and CSS, and I learned more about styling. 
+Working on this lab was tricky at first as I had forgotten most of the vanilla HTML and CSS concepts I learned in Intro, but I think it was a very good 
+refresher on these concepts. I was able to relearn basic HTML and CSS structure pretty quickly and decided on how to block out my sections on the website 
+for my resume. However, actually implementing this blocking proved to be difficult for me. An example of this would be how my three job experiences are 
+next to each other and take up the same width, and how my image is centered in its own area next to the overview. I initially tried to do this by nesting 
+divs and setting child divs to be a certain width of the parent, and have all of them float left. However, this proved to be very tricky to work with and 
+would break when the page was resized. Instead, I learned from Cian that I could use CSS flex boxes with a grid display, and using properties such as this 
+allowed me to solve the problem much easier, by settings widths through there and having divs be next to each other. This helped lay out most of my 
+personal resume website. I also had trouble implementing the font our team had found but learned to use the font variable names from the root element to do 
+so in different sections on my site, which made everything seamless. In all, this was a very useful lab in that it refreshed my memory on a lot of HTML and 
+CSS, and I learned more about styling.
 
 Works Cited:
 
