@@ -477,3 +477,14 @@ body {
   font-size: var(--fs-head);
   text-align: center;
 }
+
+.leung-name {
+  font-family: var(--title-font);
+  font-size: 400%;
+  text-align: center;
+}
+
+.leung-body {
+  margin: 10px;
+  padding-left: 10px;
+}
