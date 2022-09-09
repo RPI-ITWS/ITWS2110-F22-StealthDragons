@@ -359,6 +359,7 @@ body {
 
 .resPic {
   width: 25%;
+}
   
 .headerBarDiv {
   text-align: center;
@@ -415,7 +416,7 @@ body {
   text-align: center;
 }
 
-header {
+.header-thuloa{
   font-family: var(--title-font);
 }
 
@@ -442,7 +443,7 @@ header {
   padding-right: 1vw;
 }
 
-section {
+.sec-thuloa {
   padding-right: 5vw;
   padding-left: 5vw;
 }
