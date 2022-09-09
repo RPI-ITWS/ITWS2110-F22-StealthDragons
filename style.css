@@ -297,3 +297,7 @@ body {
 .resPic {
   width: 25%;
 }
+
+leungs2-title {
+  font: "--title-";
+  text-align: center;
