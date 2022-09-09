@@ -19,28 +19,12 @@
     <title>Aaryaman's Resume</title>
   </head>
 
-  <body>
+  <body class="body-thuloa">
     <header>
       <h1 class="nameHeader">Aaryaman Thuloj</h1>
       <div class="headerBarDiv">
         <ul class="headerBar">
-          <li>12 Myrtle Ave, Troy, NY 12180</li>
-          <li>|</li>
-          <li><a href="tel:8455056308">(845)-505-6308</a></li>
-          <li>|</li>
-          <li>
-            <a href="mailto:aaryamanthuloj@gmail.com"
-              >aaryamanthuloj@gmail.com</a
-            >
-          </li>
-          <li>|</li>
-          <li>
-            <a
-              href="https://www.linkedin.com/in/aaryamanthuloj/"
-              target="_blank"
-              >LinkedIn</a
-            >
-          </li>
+          <li><a href="../../index.html">Home</a></li>
         </ul>
       </div>
     </header>
@@ -48,7 +32,7 @@
     <section class="overview">
       <div class="sectionWrapper">
         <div class="resumeOverviewLeft">
-          <h2>Overview</h2>
+          <h2 class="thuloa-title">Overview</h2>
           <p>
             Hello! I am a Sophomore at Rensselaer Polytechnic Institute pursuing
             a dual major in Computer Science along with Information Technology &
@@ -56,7 +40,8 @@
           </p>
           <p>
             I'd like to learn more about web development, and create interactive
-            websites!
+            websites! Also seeking employment in a software engineering role
+            post-graduation.
           </p>
           <p>Interests in the technology industry include:</p>
           <ul>
@@ -67,24 +52,40 @@
           </ul>
         </div>
         <div class="resumeOverviewRight">
-          <img
-            src="../AaryamanHeadshot.jpeg"
-            class="imgWrapper"
-            alt="Aaryaman Thuloj"
-          />
+          <div class="profPic">
+            <img
+              src="../AaryamanHeadshot.jpeg"
+              class="imgWrapper"
+              alt="Aaryaman Thuloj"
+            />
+          </div>
+          <div class="h-card h-card-thuloa">
+            <p class="p-name cardp">Aaryaman Thuloj</p>
+            <p class="p-adr cardp">12 Myrtle Ave, Troy, NY, 12180</p>
+            <p class="p-tel cardp">+1 (845)-505-6308</p>
+            <a class="u-email carda" href="mailto:aaryamanthuloj@gmail.com"
+              >aaryamanthuloj@gmail.com</a
+            >
+            <a
+              class="u-url carda"
+              href="https://www.linkedin.com/in/aaryamanthuloj/"
+              target="_blank"
+              >LinkedIn</a
+            >
+          </div>
         </div>
       </div>
     </section>
 
     <section class="Education">
-      <h2>Education</h2>
+      <h2 class="thuloa-title">Education</h2>
       <div class="sectionWrapper">
         <div class="educationLeft">
           <h3>Rensselaer Polytechnic Institute | Aug. 2021 - May 2025</h3>
           <h4>
             <em
-              >Bachelor of Science in Computer Science and Information
-              Technology & Web Science</em
+              >B.S. in Computer Science and Information Technology & Web
+              Science</em
             >
           </h4>
           <ul>
@@ -102,6 +103,11 @@
               Award, Rensselaer Recognition Award
             </li>
             <li><strong>Minor: </strong>Finance</li>
+            <li>
+              <a href="https://www.rpi.edu/" target="_blank"
+                >Institution Link</a
+              >
+            </li>
           </ul>
         </div>
         <div class="educationRight">
@@ -115,13 +121,18 @@
               AP Computer Science Principles (5/5)
             </li>
             <li>
-              <strong>Activities: </strong>Varsity Lacrosse, National Honor
-              Society, Mu Alpha Theta Mathematics Honor Society, National French
-              Honor Society, FCCLA Competitor, Key Club Member
+              <strong>Activities: </strong>Varsity Lacrosse, Honor Societies
+              (National, Math, French, Social Studies), FCCLA Competitor, Key
+              Club Member
             </li>
             <li>
               <strong>Awards: </strong>AP Scholar with Distinction, National
               Merit Scholar - Commended Student, FCCLA Gold Medalist
+            </li>
+            <li>
+              <a href="https://jps.edison.k12.nj.us/" target="_blank"
+                >Institution Link</a
+              >
             </li>
           </ul>
         </div>
@@ -129,108 +140,122 @@
     </section>
 
     <section class="Experience">
-      <h2>Experience</h2>
-      <div class="job">
-        <span class="left"><strong>TechStart Intern</strong></span>
-        <span class="right"><strong>Remote (Plano, TX)</strong></span>
-        <br />
-        <span class="left"><em>Liberty Mutual Insurance</em></span>
-        <span class="right"><em>May 2022 - Aug. 2022</em></span>
-        <br />
-        <ul>
-          <li>
-            Developed a Python web crawler using the BeautifulSoup library to
-            aggregate data from 6000+ recent job listings.
-          </li>
-          <li>
-            Leveraged the Pandas library on the scraped data to analyze and
-            present industry-wide hiring trends to management, in order to help
-            modernize the recruitment process.
-          </li>
-          <li>
-            Worked on a full-stack web application, using Node.js to run
-            server-side API requests based on user input to fetch one random
-            nearby restaurant to visit with a randomly selected coworker.
-            Information was presented on a React.js frontend.
-          </li>
-          <li>
-            Utilized the Postman API Platform to generate and explore valid GET
-            requests to the TomTom Maps API.
-          </li>
-          <li>
-            Worked under the support team, completing ticket requests at a 98%
-            success rate, using the BMC Remedy system.
-          </li>
-        </ul>
-      </div>
+      <h2 class="thuloa-title">Experience</h2>
+      <div class="sectionWrapperThreeSec">
+        <div class="job">
+          <span class="left"><strong>TechStart Intern</strong></span>
+          <span class="right"><strong>Remote (Plano, TX)</strong></span>
+          <br />
+          <span class="left"
+            ><a
+              href="https://www.libertymutualgroup.com/about-lm/corporate-information/overview"
+              target="_blank"
+              >Liberty Mutual Insurance</a
+            ></span
+          >
+          <span class="right"><em>May 2022 - Aug. 2022</em></span>
+          <br />
+          <ul>
+            <li>
+              Developed a Python web crawler using the BeautifulSoup library to
+              aggregate data from 6000+ recent job listings.
+            </li>
+            <li>
+              Leveraged the Pandas library on the scraped data to analyze and
+              present industry-wide hiring trends to management, in order to
+              help modernize the recruitment process.
+            </li>
+            <li>
+              Worked on a full-stack web application, using Node.js to run
+              server-side API requests based on user input to fetch one random
+              nearby restaurant to visit with a randomly selected coworker.
+              Information was presented on a React.js frontend.
+            </li>
+            <li>
+              Utilized the Postman API Platform to generate and explore valid
+              GET requests to the TomTom Maps API.
+            </li>
+            <li>
+              Worked under the support team, completing ticket requests at a 98%
+              success rate, using the BMC Remedy system.
+            </li>
+          </ul>
+        </div>
 
-      <div class="job">
-        <span class="left"><strong>Custom Computer Builder</strong></span>
-        <span class="right"><strong>Edison, NJ</strong></span>
-        <br />
-        <span class="left"><em>Freelance</em></span>
-        <span class="right"><em>Sep. 2017 - Sep. 2021</em></span>
-        <br />
-        <ul>
-          <li>
-            Helped family, friends, and others build a list of computer
-            components that are compatible with each other for the best value
-            given a budget, use-case, and visual theme, if applicable.
-          </li>
-          <li>
-            Upon arrival of the individual components, assembled the PC in its
-            entirety and did basic setup (e.g installing an operating system,
-            ensuring drivers were up to date). Any problems encountered were
-            troubleshot and solved swiftly.
-          </li>
-          <li>
-            Recommended the best computer peripherals (e.g mouse, keyboard,
-            monitor) to each customer given their use-case.
-          </li>
-        </ul>
-      </div>
+        <div class="job">
+          <span class="left"><strong>Custom Computer Builder</strong></span>
+          <span class="right"><strong>Edison, NJ</strong></span>
+          <br />
+          <span class="left"><em>Freelance</em></span>
+          <span class="right"><em>Sep. 2017 - Sep. 2021</em></span>
+          <br />
+          <ul>
+            <li>
+              Helped family, friends, and others build a list of computer
+              components that are compatible with each other for the best value
+              given a budget, use-case, and visual theme, if applicable.
+            </li>
+            <li>
+              Upon arrival of the individual components, assembled the PC in its
+              entirety and did basic setup (e.g installing an operating system,
+              ensuring drivers were up to date). Any problems encountered were
+              troubleshot and solved swiftly.
+            </li>
+            <li>
+              Recommended the best computer peripherals (e.g mouse, keyboard,
+              monitor) to each customer given their use-case.
+            </li>
+          </ul>
+        </div>
 
-      <div class="job">
-        <span class="left"><strong>Campaign Canvasser</strong></span>
-        <span class="right"><strong>Edison, NJ</strong></span>
-        <br />
-        <span class="left"><em>Crossroads Campaigns</em></span>
-        <span class="right"><em>Apr. 2021 - Jun. 2021</em></span>
-        <br />
-        <ul>
-          <li>
-            Worked in teams until the end of the campaign to create efficient
-            on-foot door-to-door campaigning routes for myself and fellow
-            canvassers to utilize in order to increase the group’s outreach.
-          </li>
-          <li>
-            Edited canvassing vocal scripts to use poll-tested language that was
-            statistically proven to increase voter turnout and support for our
-            candidate.
-          </li>
-          <li>
-            Interacted and spoke with local members of the community, learning
-            to communicate effectively with strangers.
-          </li>
-        </ul>
+        <div class="job">
+          <span class="left"><strong>Campaign Canvasser</strong></span>
+          <span class="right"><strong>Edison, NJ</strong></span>
+          <br />
+          <span class="left"
+            ><a href="https://www.crossroadscampaigns.com/" target="_blank"
+              >Crossroads Campaigns</a
+            ></span
+          >
+          <span class="right"><em>Apr. 2021 - Jun. 2021</em></span>
+          <br />
+          <ul>
+            <li>
+              Worked in teams until the end of the campaign to create efficient
+              on-foot door-to-door campaigning routes for myself and fellow
+              canvassers to utilize in order to increase the group’s outreach.
+            </li>
+            <li>
+              Edited canvassing vocal scripts to use poll-tested language that
+              was statistically proven to increase voter turnout and support for
+              our candidate.
+            </li>
+            <li>
+              Interacted and spoke with local members of the community, learning
+              to communicate effectively with strangers.
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
 
     <section class="skills">
-      <h2>Skills</h2>
-      <p>
-        <strong>Programming Languages: </strong>C++, Python, JavaScript, SQL,
-        Java, HTML/CSS
-      </p>
-      <p>
-        <strong>Technologies and Framworks: </strong>Basic React, Node.js,
-        Express.js, Git, GitHub, Amazon Web Services (AWS), APIs, Postman,
-        Linux, Agile, Scrum, jQuery, FileZilla, BeautifulSoup, Pandas
-      </p>
-      <p>
-        <strong>Soft Skills: </strong>Leadership, Critical Thinking, Teamwork,
-        Communication, Goal-Oriented, Fast Learner
-      </p>
+      <h2 class="thuloa-title">Skills</h2>
+      <div class="skillsWrapper">
+        <p>
+          <strong>Programming Languages: </strong>C++, Python, JavaScript, SQL,
+          Java, HTML/CSS
+        </p>
+        <p>
+          <strong>Technologies and Frameworks: </strong>Basic React, Node.js,
+          Express.js, Git, GitHub, Amazon Web Services (AWS), APIs, Postman,
+          Linux, Agile, Scrum, jQuery, FileZilla, BeautifulSoup, Pandas
+        </p>
+        <p>
+          <strong>Soft Skills: </strong>Leadership, Critical Thinking, Teamwork,
+          Communication, Goal-Oriented, Fast Learner
+        </p>
+      </div>
     </section>
   </body>
 </html>
