@@ -39,11 +39,19 @@ body {
     hanging-punctuation: first allow-end last;
 }
 
+/*Spacing classes*/
+.sec-vert-format{
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+.accordion-spacing{
+    padding-bottom: 1vh;
+}
+
+
 /*Website Header and navbar*/
 .CD-header {
-    position: fixed;
-    top: 0;
-    width: 100%;
     background-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -67,67 +75,37 @@ body {
     color: transparent;
 }
 
-.nav-bar {
-    padding-bottom: var(--vertical-margin);
-    display: grid;
-    column-gap: 1%;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    padding-right: var(--horizontal-margin);
-    padding-left: var(--horizontal-margin);
+.nav-item {
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
 }
 
-.nav-link,.drop-link{
-    padding-top: 0.5vh;
-    padding-bottom: 0.5vh;
-    border: 1px solid var(--CD-Red);
-    display: flex;
-    justify-content: center;
-    background-color: var(--CD-Blue);
-    border-radius: 10px;
-    font-family: var(--body-font);
-    font-size: var(--fs-body);
-    text-decoration: none;
-    color: white;
-    align-items: center;
-}
+.nav-link {}
 
-
-.dropdown-item {
-    color: var(--CD-White);
-    padding-top: 0.5vh;
-    padding-bottom: 0.5vh;
-    background-color: var(--CD-Blue);
-    font-family: var(--body-font);
-    font-size: var(--fs-body);
-    text-decoration: none;
+.CD-title-2 {
+    font-family: var(--title-font);
     text-align: center;
-    border: 1px solid var(--CD-Red);
+    font-size: var(--fs-head-large);
 }
 
-.nav-link:hover,
-.dropdown-item:hover {
-    cursor: pointer;
-    color: var(--CD-Blue);
-    background-color: var(--CD-White);
+.CD-head {
+    font-family: var(--body-font);
+    font-size: var(--fs-head);
 }
 
-.dropdown-menu {
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    position: absolute;
-    width: 8%;
-    display: none;
+.CD-body {
+    font-family: var(--body-font);
+    font-size: var();
 }
 
-.dropdown:hover .dropdown-menu {
-    display: grid;
+.accordion-header {
+    text-align: center;
+    font-family: var(--body-font);
+    font-size: var(--fs-head);
 }
 
-.bi-caret-down-fill{
-    font-size: var(--fs-caption);
-    padding-left: 0.1vw;
+.accordion-button:focus{
 }
-
-
 
 /*media queries for changing screen sizes*/
 @media only screen and (min-width: 280px) {
