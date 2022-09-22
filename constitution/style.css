@@ -58,7 +58,7 @@ section{
 
 /*Website Header and navbar*/
 .CD-header {
-    background: rgba(60, 59, 110, 0.75);
+    background: rgba(0, 0, 0, 0.9);
     padding-top: var(--vertical-margin);
 }
 
