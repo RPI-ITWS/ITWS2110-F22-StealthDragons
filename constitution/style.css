@@ -37,22 +37,29 @@ body {
     orphans: 3;
     widows: 3;
     hanging-punctuation: first allow-end last;
+    background-image: url(resources/old-paper-texture-background.jpg);
+}
+
+section{
+    background-color: white;
 }
 
 /*Spacing classes*/
-.sec-vert-format{
+.sec-vert-format {
     padding-top: 2vh;
     padding-bottom: 2vh;
     border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
-.accordion-spacing{
+
+.accordion-spacing {
     padding-bottom: 1vh;
 }
 
 
 /*Website Header and navbar*/
 .CD-header {
-    background-color: rgba(0, 0, 0, 0.5);
+    background: rgba(60, 59, 110, 0.75);
+    padding-top: var(--vertical-margin);
 }
 
 .blue-text {
@@ -78,9 +85,28 @@ body {
 .nav-item {
     padding-left: 0.5vw;
     padding-right: 0.5vw;
+    padding-top: 0.5vh;
 }
 
-.nav-link {}
+a.nav-link {
+    padding: 0.1vw;
+    background-color: var(--CD-Blue);
+    border-radius: 10px;
+    font-family: var(--body-font);
+    font-size: var(--fs-body);
+    color: white;
+    border: 1px var(--CD-Red) solid;
+    text-align: center
+}
+
+ul.dropdown-menu {
+    --bs-dropdown-link-active-bg: var(--CD-Blue);
+    border-color: var(--CD-Red);
+}
+
+a.dropdown-item {
+    color: var(--CD-Blue);
+}
 
 .CD-title-2 {
     font-family: var(--title-font);
@@ -98,13 +124,20 @@ body {
     font-size: var();
 }
 
-.accordion-header {
-    text-align: center;
-    font-family: var(--body-font);
-    font-size: var(--fs-head);
+div.accordion {
+    --bs-accordion-btn-focus-border-color: none;
+    --bs-accordion-active-color: var(--CD-White);
+    --bs-accordion-active-bg: rgba(60, 59, 110, 0.75);
+    --bs-accordion-border-color: none;
+    --bs-accordion-btn-focus-box-shadow: 0 0 0 0.25rem rgba(178, 34, 52,1);
+    --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='var%28--bs-body-color%29'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+
 }
 
-.accordion-button:focus{
+button.accordion-button{
+    font-family: var(--title-font);
+    font-size: var(--fs-head);
+    align-content: center;
 }
 
 /*media queries for changing screen sizes*/
