@@ -19,6 +19,10 @@
 }
 
 /*basic body styling*/
+html{
+    scroll-padding-top: 12vh;
+    scroll-behavior: smooth;
+}
 body {
     min-width: 100vw;
     min-height: 100vh;
@@ -41,7 +45,7 @@ body {
 }
 
 section{
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 /*Spacing classes*/
@@ -121,7 +125,7 @@ a.dropdown-item {
 
 .CD-body {
     font-family: var(--body-font);
-    font-size: var();
+    font-size: var(--fs-body);
 }
 
 div.accordion {
@@ -138,6 +142,19 @@ button.accordion-button{
     font-family: var(--title-font);
     font-size: var(--fs-head);
     align-content: center;
+}
+
+footer{
+    background-color: rgba(0, 0, 0, 0.9);
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.footer-link{
+    color: var(--CD-Red);
+}
+.footer-link:hover{
+    color: white;
 }
 
 /*media queries for changing screen sizes*/
