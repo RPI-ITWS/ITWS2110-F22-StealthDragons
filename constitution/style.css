@@ -103,6 +103,7 @@ a.nav-link {
     text-align: center
 }
 
+/* Drop Down menu styling */
 ul.dropdown-menu {
     --bs-dropdown-link-active-bg: var(--CD-Blue);
     border-color: var(--CD-Red);
@@ -111,6 +112,8 @@ ul.dropdown-menu {
 a.dropdown-item {
     color: var(--CD-Blue);
 }
+
+/* Font Styling Classes*/
 
 .CD-title-2 {
     font-family: var(--title-font);
@@ -128,6 +131,7 @@ a.dropdown-item {
     font-size: var(--fs-body);
 }
 
+/* Custom styling for boostrap accordion */
 div.accordion {
     --bs-accordion-btn-focus-border-color: none;
     --bs-accordion-active-color: var(--CD-White);
@@ -143,7 +147,7 @@ button.accordion-button{
     font-size: var(--fs-head);
     align-content: center;
 }
-
+/* Footer styling */
 footer{
     background-color: rgba(0, 0, 0, 0.9);
     margin-bottom: 0;
