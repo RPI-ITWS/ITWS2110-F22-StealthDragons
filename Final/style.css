@@ -56,9 +56,20 @@ body {
     border-bottom: 1px solid black;
 }
 
-a.nav-link{
+
+
+
+
+
+
+/* Changed Bootstrap Styling */
+a.nav-link, a.dropdown-item{
     font-size: var(--body-font);
     font-family: var(--nav-font);
+}
+
+a.dropdown-item:active{
+    background-color: var(--RPI-Dark-Gray);
 }
 
 .btn.btn-primary{
@@ -72,6 +83,7 @@ a.nav-link{
     background-color: var(--RPI-White);
     border-color: var(--RPI-Dark-Red);
     color: var(--RPI-Dark-Red);
+    box-shadow: none;
 }
 
 
