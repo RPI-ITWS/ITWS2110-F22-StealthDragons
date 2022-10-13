@@ -22,7 +22,6 @@
 }
 
 /*basic body styling*/
-
 body {
     min-width: 100vw;
     min-height: 100vh;
@@ -43,39 +42,83 @@ body {
     hanging-punctuation: first allow-end last;
 }
 
+.RL-Logo{
+    width: 15rem;
+}
+
+.nav-btn{
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.search-bar{
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+a.nav-link{
+    font-size: var(--body-font);
+    font-family: var(--nav-font);
+}
+
+.btn.btn-primary{
+    background-color: var(--RPI-Dark-Red);
+    border-color: var(--RPI-Dark-Red);
+    font-family: var(--nav-font);
+    font-size: var(--fs-body);
+}
+
+.btn.btn-primary:hover, .btn.btn-primary:focus{
+    background-color: var(--RPI-White);
+    border-color: var(--RPI-Dark-Red);
+    color: var(--RPI-Dark-Red);
+}
+
 
 /*media queries for changing screen sizes*/
+/* Galaxy Fold */
 @media only screen and (min-width: 280px) {
     :root {
         font-size: 75%;
     }
 }
-
+/* sm */
 @media only screen and (min-width: 576px) {
     :root {
         font-size: 90%;
     }
 }
-
+/* md */
 @media only screen and (min-width: 768px) {
     :root {
         font-size: 95%;
     }
 
 }
-
+/* lg */
 @media only screen and (min-width: 992px) {
     :root {
         font-size: 100%;
     }
-}
+    .black-line{
+        border-left: 1px black solid;
+    }
+    .nav-x-padding{
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .search-bar{
+        padding-right: 8rem;
+    }
 
+}
+/* xl */
 @media only screen and (min-width: 1200px) {
     :root {
         font-size: 105%;
     }
 }
-
+/* xxl */
 @media only screen and (min-width: 1400px) {
     :root {
         font-size: 115%;
