@@ -75,6 +75,20 @@ body {
   height: 25rem;
 }
 
+.seller-dash-pill{
+  background-color: white;
+  border-radius: 1rem;
+
+}
+
+.seller-dash-pill:hover{
+  cursor: pointer;
+}
+
+.sell-img{
+  max-height: 10rem;
+}
+
 /* Text */
 .sec-head-1,
 .sec-head-2,
@@ -146,6 +160,12 @@ body {
 
 .product-btn {
   width: 100%;
+}
+
+.sub-text{
+  font-family: var(--body-font);
+  font-size: var(--fs-caption);
+
 }
 
 /* Changed Bootstrap Styling */
