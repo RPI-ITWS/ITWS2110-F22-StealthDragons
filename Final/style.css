@@ -97,7 +97,23 @@ body {
     color: var(--RPI-Light-Gray);
 }
 
+.main-product{
+    height: 60%;
+    width: 100%;
+}
 
+.inactive-thumbnail{
+    opacity: 0.2;
+}
+.inactive-thumbnail:hover,.active-thumbnail:hover, .inactive-thumbnail:focus{
+    opacity: 1;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.active-thumbnail{
+    opacity: 1;
+}
 /* Changed Bootstrap Styling */
 a.nav-link,
 a.dropdown-item {
@@ -154,6 +170,10 @@ a.dropdown-item:active {
     border-color: none;
 }
 
+.btn-close:focus{
+    box-shadow: none;
+
+}
 
 /*media queries for changing screen sizes*/
 /* Galaxy Fold */
