@@ -20,6 +20,7 @@
     integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"
     defer></script>
   <!-- custom js -->
+  <script src="index.js" defer></script>
   <title>Rensselaer List</title>
 </head>
 
@@ -52,14 +53,17 @@
               </ul>
             </li>
             <form class="d-flex ms-lg-auto" role="search">
-              <button class="btn btn-primary mx-1" type="submit"><i class="bi bi-search"></i></button>
-              <input class="search-bar me-5" type="search" placeholder="Search" aria-label="Search">
+              <div class="input-group">
+              <button class="btn btn-primary input-group-text" type="submit"><i class="bi bi-search"></i></button>
+              <input class="form-control" size="35" type="search" placeholder="Search" aria-label="Search">
+            </div>
             </form>
             <li class="nav-item ms-lg-auto">
               <a class="nav-link color-nav-link" href="resources/pages/signup.html">Sign Up</a>
             </li>
             <li class="nav-item pe-2 nav-x-padding">
-              <a class="nav-link color-nav-link" href="#" data-bs-toggle="modal" data-bs-target="#log-in-modal" role="button">Log In</a>
+              <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#log-in-modal" role="button">Log
+                In</a>
             </li>
             <li class="nav-item black-line"></li>
             <li class="nav-item nav-x-padding">
@@ -182,7 +186,7 @@
           </div>
         </a>
       </div>
-      <a " class=" view-all pt-2">View All <i class="bi bi-arrow-right-square"></i></a>
+      <a href="#" class="view-all pt-2">View All <i class="bi bi-arrow-right-square"></i></a>
   </section>
   <!-- Top Listings Section -->
   <section class="container-xxl pb-5">
@@ -393,11 +397,24 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          ...
+          <form>
+            <div class="mb-3">
+              <label for="email-input" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="email-input" aria-describedby="emailHelp">
+            </div>
+            <label for="password-input" class="form-label">Password</label>
+            <div class="mb-3 input-group">
+              <input type="password" class="form-control" id="password-input">
+              <button class="input-group-text bg-transparent" onclick="togglePassword()"><i class="bi bi-eye-slash" id="toggle-password"></i></button>
+              
+            </div>
+            <button type="submit" class="btn btn-primary">Log In</button>
+          </form>
         </div>
         <div class="modal-footer">
-          <a class="modal-footer-link" href="">Sign Up</a>
-          <a class="modal-footer-link" href="">Forgot Password?</a>
+          <a class="modal-footer-link" href="#">Sign Up</a>
+          <span>|</span>
+          <a class="modal-footer-link" href="#">Forgot Password?</a>
         </div>
       </div>
     </div>
