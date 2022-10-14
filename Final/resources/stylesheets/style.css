@@ -75,9 +75,13 @@ body {
 /* Text */
 .sec-head-1,
 .sec-head-2,
+.body-large,
 .card-subtitle,
 .card-title {
   font-family: var(--title-font);
+}
+.body-text{
+  font-family: var(--fs-body-large);
 }
 
 .sec-head-2 {
@@ -119,6 +123,7 @@ body {
 .inactive-thumbnail {
   opacity: 0.2;
 }
+
 .inactive-thumbnail:hover,
 .active-thumbnail:hover,
 .inactive-thumbnail:focus {
@@ -130,6 +135,11 @@ body {
 .active-thumbnail {
   opacity: 1;
 }
+
+.product-btn {
+  width: 100%;
+}
+
 /* Changed Bootstrap Styling */
 a.nav-link,
 a.dropdown-item {
@@ -226,6 +236,7 @@ a.dropdown-item:active {
   .black-line {
     border-left: 1px black solid;
   }
+
 }
 
 /* xl */
