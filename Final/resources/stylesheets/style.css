@@ -67,21 +67,29 @@ body {
 }
 
 .carousel-img {
-  height: 25rem;
+  max-height: 25rem;
   opacity: 0.5;
-  width: 100%;
+}
+
+#top-item-carousel{
+  height: 25rem;
 }
 
 /* Text */
 .sec-head-1,
 .sec-head-2,
-.body-large,
 .card-subtitle,
 .card-title {
   font-family: var(--title-font);
 }
-.body-text {
-  font-family: var(--fs-body-large);
+.body-text{
+  font-family: var(--body-font);
+  font-size: var(--fs-body);
+}
+
+.body-large{
+  font-family: var(--body-font);
+  font-size: var(--fs-body-large)
 }
 
 .sec-head-2 {
