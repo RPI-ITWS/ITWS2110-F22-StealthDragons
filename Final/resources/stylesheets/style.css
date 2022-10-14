@@ -81,7 +81,12 @@ body {
   font-family: var(--title-font);
 }
 .body-text{
-  font-family: var(--fs-body-large);
+  font-family: var(--body-font);
+  font-size: var(--fs-body);
+}
+
+.body-large{
+  font-family: var(--body-font);
 }
 
 .sec-head-2 {
