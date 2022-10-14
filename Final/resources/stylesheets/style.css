@@ -80,7 +80,7 @@ body {
 .card-title {
   font-family: var(--title-font);
 }
-.body-text{
+.body-text {
   font-family: var(--fs-body-large);
 }
 
@@ -236,7 +236,6 @@ a.dropdown-item:active {
   .black-line {
     border-left: 1px black solid;
   }
-
 }
 
 /* xl */
