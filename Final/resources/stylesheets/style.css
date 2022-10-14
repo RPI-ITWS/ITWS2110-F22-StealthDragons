@@ -71,7 +71,7 @@ body {
   opacity: 0.5;
 }
 
-#top-item-carousel{
+#top-item-carousel {
   height: 25rem;
 }
 
@@ -96,14 +96,14 @@ body {
 .card-title {
   font-family: var(--title-font);
 }
-.body-text{
+.body-text {
   font-family: var(--body-font);
   font-size: var(--fs-body);
 }
 
-.body-large{
+.body-large {
   font-family: var(--body-font);
-  font-size: var(--fs-body-large)
+  font-size: var(--fs-body-large);
 }
 
 .sec-head-2 {
@@ -222,7 +222,6 @@ a.dropdown-item:active {
 .form-check-input:active,
 .form-check-input:focus {
   box-shadow: none;
-  border-color: none;
 }
 
 .btn-close:focus {
