@@ -75,7 +75,6 @@ body {
 /* Text */
 .sec-head-1,
 .sec-head-2,
-.body-large,
 .card-subtitle,
 .card-title {
   font-family: var(--title-font);
@@ -87,6 +86,7 @@ body {
 
 .body-large{
   font-family: var(--body-font);
+  font-size: var(--fs-body-large)
 }
 
 .sec-head-2 {
