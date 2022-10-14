@@ -67,9 +67,12 @@ body {
 }
 
 .carousel-img {
-  height: 25rem;
+  max-height: 25rem;
   opacity: 0.5;
-  width: 100%;
+}
+
+#top-item-carousel{
+  height: 25rem;
 }
 
 /* Text */
