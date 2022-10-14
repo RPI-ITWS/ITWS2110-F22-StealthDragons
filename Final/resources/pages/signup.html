@@ -228,10 +228,40 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">...</div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="email-input" class="form-label"
+                  >Email address</label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email-input"
+                  aria-describedby="emailHelp"
+                />
+              </div>
+              <label for="password-input" class="form-label">Password</label>
+              <div class="mb-3 input-group">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password-input"
+                />
+                <button
+                  class="input-group-text bg-transparent"
+                  onclick="togglePassword()"
+                >
+                  <i class="bi bi-eye-slash" id="toggle-password"></i>
+                </button>
+              </div>
+              <button type="submit" class="btn btn-primary">Log In</button>
+            </form>
+          </div>
           <div class="modal-footer">
-            <a class="modal-footer-link" href="">Sign Up</a>
-            <a class="modal-footer-link" href="">Forgot Password?</a>
+            <a class="modal-footer-link" href="#">Sign Up</a>
+            <span>|</span>
+            <a class="modal-footer-link" href="#">Forgot Password?</a>
           </div>
         </div>
       </div>
