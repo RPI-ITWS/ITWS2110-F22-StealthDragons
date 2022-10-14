@@ -80,7 +80,6 @@ body {
 .card-title {
   font-family: var(--title-font);
 }
-
 .body-text{
   font-family: var(--fs-body-large);
 }
@@ -108,7 +107,6 @@ body {
   color: var(--RPI-Dark-Red);
   text-decoration: none;
 }
-
 
 .view-all:hover,
 .view-all:focus,
@@ -186,13 +184,11 @@ a.dropdown-item:active {
 .form-control:active {
   box-shadow: none;
   border-color: var(--RPI-Dark-Red);
-
 }
 
 .form-check-input:checked {
   background-color: var(--RPI-Dark-Red);
   border-color: var(--RPI-Dark-Red);
-
 }
 
 .form-check-input:active,
@@ -203,7 +199,10 @@ a.dropdown-item:active {
 
 .btn-close:focus {
   box-shadow: none;
+}
 
+.card-img-top {
+  height: 10rem;
 }
 
 /*media queries for changing screen sizes*/
@@ -237,7 +236,6 @@ a.dropdown-item:active {
   .black-line {
     border-left: 1px black solid;
   }
-
 
 }
 
