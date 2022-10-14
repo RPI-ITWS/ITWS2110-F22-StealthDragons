@@ -129,6 +129,9 @@ body {
 .active-thumbnail{
     opacity: 1;
 }
+.product-btn{
+  width: 100%;
+}
 /* Changed Bootstrap Styling */
 a.nav-link,
 a.dropdown-item {
