@@ -1,194 +1,210 @@
 /*Root element with variables to use throughout enter website*/
 :root {
-    /*colors*/
-    --RPI-Red: rgb(226, 35, 27);
-    --RPI-Dark-Red: rgb(153, 0, 0);
-    --RPI-Dark-Gray: rgb(54, 54, 54);
-    --RPI-Gray: rgb(84, 88, 90);
-    --RPI-Light-Gray: rgb(158, 162, 162);
-    --RPI-Black: rgb(0, 0, 0);
-    --RPI-White: rgb(255, 255, 255);
-    /*typography*/
-    --fs-caption: 0.75rem;
-    --fs-body: 1rem;
-    --fs-body-large: 1.25rem;
-    --fs-head: 1.5rem;
-    --fs-head-large: 2rem;
-    --fs-head-xl: 4rem;
-    /*fonts*/
-    --body-font: 'Open Sans', sans-serif;
-    --title-font: 'Inter', sans-serif;
-    --nav-font: 'Inter', sans-serif;
+  /*colors*/
+  --RPI-Red: rgb(226, 35, 27);
+  --RPI-Dark-Red: rgb(153, 0, 0);
+  --RPI-Dark-Gray: rgb(54, 54, 54);
+  --RPI-Gray: rgb(84, 88, 90);
+  --RPI-Light-Gray: rgb(158, 162, 162);
+  --RPI-Black: rgb(0, 0, 0);
+  --RPI-White: rgb(255, 255, 255);
+  /*typography*/
+  --fs-caption: 0.75rem;
+  --fs-body: 1rem;
+  --fs-body-large: 1.25rem;
+  --fs-head: 1.5rem;
+  --fs-head-large: 2rem;
+  --fs-head-xl: 4rem;
+  /*fonts*/
+  --body-font: "Open Sans", sans-serif;
+  --title-font: "Inter", sans-serif;
+  --nav-font: "Inter", sans-serif;
 }
 
 /*basic body styling*/
 body {
-    min-width: 100vw;
-    min-height: 100vh;
-    margin: 0;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-kerning: normal;
-    text-rendering: optimizeLegibility;
-    text-decoration-skip-ink: auto;
-    image-rendering: auto;
-    -webkit-line-break: normal;
-    -moz-line-break: normal;
-    -ms-line-break: normal;
-    line-break: normal;
-    orphans: 3;
-    widows: 3;
-    hanging-punctuation: first allow-end last;
+  min-width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+  text-decoration-skip-ink: auto;
+  image-rendering: auto;
+  -webkit-line-break: normal;
+  -moz-line-break: normal;
+  -ms-line-break: normal;
+  line-break: normal;
+  orphans: 3;
+  widows: 3;
+  hanging-punctuation: first allow-end last;
+  background: rgb(245, 245, 245);
+}
+
+.custom-card {
+  border-radius: 20px;
+}
+
+.center-button {
+  text-align: center;
+}
+
+.each-input {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .RL-Logo {
-    width: 15rem;
+  width: 15rem;
 }
 
 .nav-btn {
-    padding-left: 2rem;
-    padding-right: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .search-bar {
-    border: none;
-    border-bottom: 1px solid black;
+  border: none;
+  border-bottom: 1px solid black;
 }
 
 .carousel-img {
-    height: 25rem;
-    opacity: 0.5;
-    width: 100%;
+  height: 25rem;
+  opacity: 0.5;
+  width: 100%;
 }
 
 /* Text */
-.sec-head-1, .sec-head-2, .card-subtitle, .card-title{
-    font-family: var(--title-font);
+.sec-head-1,
+.sec-head-2,
+.card-subtitle,
+.card-title {
+  font-family: var(--title-font);
 }
 
-.sec-head-2{
-    font-size: var(--fs-head);
+.sec-head-2 {
+  font-size: var(--fs-head);
 }
 
-.sec-head-1{
-    font-size: var(--fs-head-large);
+.sec-head-1 {
+  font-size: var(--fs-head-large);
 }
 
-.sale-card{
-    text-decoration: none;
-    color: initial;
+.sale-card {
+  text-decoration: none;
+  color: initial;
 }
 
-.sale-card:hover, .sale-card:focus{
-    color: var(--RPI-Dark-Red);
+.sale-card:hover,
+.sale-card:focus {
+  color: var(--RPI-Dark-Red);
 }
 
-.view-all{
-    color: var(--RPI-Dark-Red);
-    text-decoration: none;
+.view-all {
+  color: var(--RPI-Dark-Red);
+  text-decoration: none;
 }
 
-
-.view-all:hover, .view-all:focus{
-    color: var(--RPI-Light-Gray);
+.view-all:hover,
+.view-all:focus {
+  color: var(--RPI-Light-Gray);
 }
-
 
 /* Changed Bootstrap Styling */
 a.nav-link,
 a.dropdown-item {
-    font-size: var(--body-font);
-    font-family: var(--nav-font);
+  font-size: var(--body-font);
+  font-family: var(--nav-font);
+  color: black;
 }
 
 a.dropdown-item:active {
-    background-color: var(--RPI-Dark-Gray);
+  background-color: var(--RPI-Dark-Gray);
 }
 
 .btn.btn-primary {
-    background-color: var(--RPI-Dark-Red);
-    border-color: var(--RPI-Dark-Red);
-    font-family: var(--nav-font);
-    font-size: var(--fs-body);
+  background-color: var(--RPI-Dark-Red);
+  border-color: var(--RPI-Dark-Red);
+  font-family: var(--nav-font);
+  font-size: var(--fs-body);
 }
 
 .btn.btn-primary:hover,
 .btn.btn-primary:focus {
-    background-color: var(--RPI-White);
-    border-color: var(--RPI-Dark-Red);
-    color: var(--RPI-Dark-Red);
-    box-shadow: none;
+  background-color: var(--RPI-White);
+  border-color: var(--RPI-Dark-Red);
+  color: var(--RPI-Dark-Red);
+  box-shadow: none;
 }
 
-.card-text{
-    font-family: var(--body-font);
-    font-size: var(--fs-body);
+.card-text {
+  font-family: var(--body-font);
+  font-size: var(--fs-body);
 }
 
-.card-subtitle{
-    font-size: var(--fs-caption);
+.card-subtitle {
+  font-size: var(--fs-caption);
 }
 
-.card-title{
-    font-size: var(--fs-body-large);
+.card-title {
+  font-size: var(--fs-body-large);
 }
-
 
 /*media queries for changing screen sizes*/
 /* Galaxy Fold */
 @media only screen and (min-width: 280px) {
-    :root {
-        font-size: 75%;
-    }
+  :root {
+    font-size: 75%;
+  }
 }
 
 /* sm */
 @media only screen and (min-width: 576px) {
-    :root {
-        font-size: 90%;
-    }
+  :root {
+    font-size: 90%;
+  }
 }
 
 /* md */
 @media only screen and (min-width: 768px) {
-    :root {
-        font-size: 95%;
-    }
-
+  :root {
+    font-size: 95%;
+  }
 }
 
 /* lg */
 @media only screen and (min-width: 992px) {
-    :root {
-        font-size: 100%;
-    }
+  :root {
+    font-size: 100%;
+  }
 
-    .black-line {
-        border-left: 1px black solid;
-    }
+  .black-line {
+    border-left: 1px black solid;
+  }
 
-    .nav-x-padding {
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
+  .nav-x-padding {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 
-    .search-bar {
-        padding-right: 10rem;
-    }
-
+  .search-bar {
+    padding-right: 10rem;
+  }
 }
 
 /* xl */
 @media only screen and (min-width: 1200px) {
-    :root {
-        font-size: 105%;
-    }
+  :root {
+    font-size: 105%;
+  }
 }
 
 /* xxl */
 @media only screen and (min-width: 1400px) {
-    :root {
-        font-size: 115%;
-    }
+  :root {
+    font-size: 115%;
+  }
 }
