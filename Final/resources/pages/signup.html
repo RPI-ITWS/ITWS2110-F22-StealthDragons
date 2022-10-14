@@ -72,8 +72,8 @@
             ></button>
           </div>
           <div class="offcanvas-body">
-            <ul class="navbar-nav justify-content-between pt-2">
-              <li class="nav-item dropdown nav-x-padding">
+            <ul class="navbar-nav flex-fill justify-content-between pt-2">
+              <li class="nav-item dropdown ps-3">
                 <a
                   class="nav-link dropdown-toggle"
                   role="button"
@@ -89,20 +89,26 @@
                 </ul>
               </li>
               <form class="d-flex ms-lg-auto" role="search">
-                <button class="btn btn-primary mx-1" type="submit">
-                  <i class="bi bi-search"></i>
-                </button>
-                <input
-                  class="search-bar me-5"
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                />
+                <div class="input-group">
+                  <button
+                    class="btn btn-primary input-group-text"
+                    type="submit"
+                  >
+                    <i class="bi bi-search"></i>
+                  </button>
+                  <input
+                    class="form-control"
+                    size="35"
+                    type="search"
+                    placeholder="Search"
+                    aria-label="Search"
+                  />
+                </div>
               </form>
               <li class="nav-item ms-lg-auto">
                 <a class="nav-link" href="#">Sign Up</a>
               </li>
-              <li class="nav-item pe-2 nav-x-padding">
+              <li class="nav-item pe-2">
                 <a
                   class="nav-link"
                   href="#"
@@ -113,7 +119,7 @@
                 >
               </li>
               <li class="nav-item black-line"></li>
-              <li class="nav-item nav-x-padding">
+              <li class="nav-item ps-3">
                 <a class="btn btn-primary nav-btn" href="#" role="button"
                   >Sell</a
                 >
