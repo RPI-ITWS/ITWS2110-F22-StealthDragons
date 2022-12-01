@@ -29,7 +29,7 @@ try {
     <!-- Site Nav Bar -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <!-- Site logo -->
-        <a href="#" class="navbar-brand"><img class="RL-Logo" src="resources/images/Rensselear-List-Logo.png"
+        <a href="index.php" class="navbar-brand"><img class="RL-Logo" src="resources/images/Rensselear-List-Logo.png"
                 alt="Rensselaer List Logo" /></a>
         <!-- Nav button for mobile  -->
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#RL-Navbar"
@@ -81,7 +81,7 @@ try {
                         $stmt->execute([$rcsid, 0]);
                     }
                     $_SESSION["user"] = $rcsid;
-                    echo $_SESSION["user"];
+                    echo "<i class='bi bi-person-circle'></i>" . " " . $_SESSION["user"];
                 }
                 ?>
                         </a>
