@@ -1,129 +1,11 @@
 <!DOCTYPE html>
 <html lang="en-US">
 
-<head>
-  <!--meta tags-->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A platform for RPI students to buy and sell items." />
-  <!-- Latest compiled and minified bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.0/font/bootstrap-icons.css" />
-  <!--Fonts and CSS-->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Open+Sans&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="resources/stylesheets/style.css" />
-  <!-- Bootstrap JavaScript Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"
-    defer></script>
-  <!-- custom js -->
-  <script src="resources/scripts/index.js" defer></script>
-  <title>Rensselaer List</title>
-</head>
+<?php include 'head.php' ?>
 
 <body>
-  <?php
-  session_start();
-  include_once("./CAS-1.4.0/CAS.php");
-  phpCAS::client(CAS_VERSION_2_0, 'cas.auth.rpi.edu', 443, '/cas');
+  <?php include 'header.php' ?>
 
-  // This is not recommended in the real world!
-  // But we don't have the apparatus to install our own certs...
-  phpCAS::setNoCasServerValidation();
-
-  if (!phpCAS::isAuthenticated()) {
-    header("Location: login.php");
-  }
-
-  // Vars for PDO connection
-  $host = "localhost";
-  $user = "phpmyadmin";
-  $pass = "chickenWingsandFries123!";
-  $dbname = "rensselaer_list";
-  // PDO Connection
-  try {
-    $dbconn = new PDO("mysql:host=$host; dbname=$dbname", $user, $pass);
-    $dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  } catch (PDOException $exception) {
-    echo $exception->getMessage();
-  }
-  ?>
-  <!-- Site Header -->
-  <header class="container-xxl">
-    <!-- Site Nav Bar -->
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <!-- Site logo -->
-      <a href="#" class="navbar-brand"><img class="RL-Logo" src="resources/images/Rensselear-List-Logo.png"
-          alt="Rensselaer List Logo" /></a>
-      <!-- Nav button for mobile  -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#RL-Navbar"
-        aria-controls="RL-Navbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <!-- Off Canvas Nav -->
-      <div class="offcanvas offcanvas-end" tabindex="-1" id="RL-Navbar">
-        <div class="offcanvas-header">
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-          <ul class="navbar-nav flex-fill justify-content-between pt-2">
-            <li class="nav-item dropdown ps-3">
-              <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">Browse</a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a href="resources/pages/browse.html" class="dropdown-item">All</a>
-                </li>
-                <li><a href="#" class="dropdown-item">New Items</a></li>
-                <li><a href="#" class="dropdown-item">By Category</a></li>
-                <li><a href="#" class="dropdown-item">Top Listings</a></li>
-              </ul>
-            </li>
-            <li class="nav-item ms-lg-auto">
-              <form role="search">
-                <div class="input-group">
-                  <button class="btn btn-primary input-group-text" type="submit">
-                    <i class="bi bi-search"></i>
-                  </button>
-                  <input class="form-control" size="35" type="search" placeholder="Search" aria-label="Search" />
-                </div>
-              </form>
-            </li>
-            <li class="nav-item ms-lg-auto">
-              <a class="nav-link" href="#">
-                <?php
-                if (phpCAS::isAuthenticated()) {
-                  $rcsid = phpCAS::getUser();
-                  $query = "SELECT * FROM users WHERE rcsid = :rcsid;";
-                  $stmt = $dbconn->prepare($query);
-                  $stmt->execute(['rcsid'=>$rcsid]);
-                  $user = $stmt->fetch(PDO::FETCH_ASSOC);
-                  if(isset($user) && empty($user)){
-                    $query = "INSERT INTO users(rcsid, admin) VALUES (?,?);";
-                    $stmt = $dbconn->prepare($query);
-                    $stmt->execute([$rcsid, 0]);
-                  }
-                  $_SESSION["user"] = $rcsid;
-                  echo $_SESSION["user"];
-                }
-                ?>
-              </a>
-            </li>
-            <li class="nav-item pe-2">
-              <a class="nav-link" href="logout.php">Logout</a>
-            </li>
-            <li class="nav-item black-line"></li>
-            <li class="nav-item ps-3">
-              <a class="btn btn-primary nav-btn" href="resources/pages/list-item.php" role="button">Sell</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
   <!-- Top Items of RL with carousel  -->
   <section class="container-xxl py-5">
     <h2 class="sec-head-1 pb-3">Top Items</h2>
@@ -140,7 +22,7 @@
             class="d-block w-100 carousel-img" alt="..." />
           <div class="carousel-caption d-none d-md-block">
             <h5>Spongebob Chair</h5>
-            <a href="resources/pages/product-page.html" class="btn btn-primary">View Item</a>
+            <a href="product-page.php" class="btn btn-primary">View Item</a>
           </div>
         </div>
         <div class="carousel-item">
