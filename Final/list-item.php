@@ -237,18 +237,18 @@
         $new_file_path1 = $new_file_paths[0];
         $new_file_path2 = $new_file_paths[1];
         $new_file_path3 = $new_file_paths[2];
-        $query = "INSERT INTO items (rcsid, title, price, condition, category, subcategory1, subcategory2, date_posted, item_description, image1, image2, image3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        $query = "INSERT INTO items(rcsid, title, price, item_condition, category, subcategory1, subcategory2, date_posted, item_description, image1, image2, image3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         $stmt = $dbconn->prepare($query);
         $stmt->execute([$rcsid, $title, $price, $condition, $category, $subcategory, $subcategory_2, $date, $description, $new_file_path1, $new_file_path2, $new_file_path3]);
       } elseif (count($new_file_paths) == 2) {
         $new_file_path1 = $new_file_paths[0];
         $new_file_path2 = $new_file_paths[1];
-        $query = "INSERT INTO items (rcsid, title, price, condition, category, subcategory1, subcategory2, date_posted, item_description, image1, image2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        $query = "INSERT INTO items(rcsid, title, price, item_condition, category, subcategory1, subcategory2, date_posted, item_description, image1, image2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         $stmt = $dbconn->prepare($query);
         $stmt->execute([$rcsid, $title, $price, $condition, $category, $subcategory, $subcategory_2, $date, $description, $new_file_path1, $new_file_path2]);
       } else {
         $new_file_path1 = $new_file_paths[0];
-        $query = "INSERT INTO items (rcsid, title, price, condition, category, subcategory1, subcategory2, date_posted, item_description, image1, image2, image3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        $query = "INSERT INTO items(rcsid, title, price, item_condition, category, subcategory1, subcategory2, date_posted, item_description, image1, image2, image3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         $stmt = $dbconn->prepare($query);
         $stmt->execute([$rcsid, $title, $price, $condition, $category, $subcategory, $subcategory_2, $date, $description, $new_file_path1]);
       }
