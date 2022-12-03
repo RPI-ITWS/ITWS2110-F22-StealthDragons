@@ -83,26 +83,27 @@
                 <div class="card-body">
                   <div class="row justify-content-center">
                     <div class="col">
-                      <form>
+                      <form action="list-item.php" method="post" enctype="multipart/form-data">
                         <!-- Title of item -->
                         <div class="input-group py-2">
                           <span class="input-group-text">
                             <i class="bi bi-card-text"></i>
                           </span>
-                          <input type="text" class="form-control" placeholder="Title" required />
+                          <input name="post-item-title" type="text" class="form-control" placeholder="Title" required />
                         </div>
                         <!-- Price of item -->
                         <div class="input-group py-2">
                           <span class="input-group-text">
                             <i class="bi bi-tags"></i></span>
-                          <input type="email" class="form-control" placeholder="Price" required />
+                          <input name="post-item-price" type="number" min="1" max="999999" class="form-control"
+                            placeholder="Price" required />
                         </div>
                         <!-- Condition of item -->
                         <div class="input-group py-2">
                           <span class="input-group-text">
                             <i class="bi bi-search-heart"></i>
                           </span>
-                          <select name="condition" id="condition" class="form-select" required>
+                          <select name="post-item-condition" id="condition" class="form-select" required>
                             <option selected disabled>Select Condition of Item</option>
                             <option value="new">New</option>
                             <option value="like-new">Like New</option>
@@ -111,12 +112,13 @@
                             <option value="poor">Poor</option>
                           </select>
                         </div>
+                        <!-- Category -->
                         <div class="d-flex flex-row">
                           <div class="input-group py-2">
                             <span class="input-group-text">
                               <i class="bi bi-basket-fill"></i>
                             </span>
-                            <select name="category" id="category" class="form-select" required>
+                            <select name="post-item-category" id="category" class="form-select" required>
                               <option selected disabled>Select Category</option>
                               <?php
                               try {
@@ -133,59 +135,45 @@
 
                                 }
                               } catch (PDOException $e) {
-                                echo "<script> alert(Error: " . $e->getMessage() . ")</script>";
+                                echo "<script> alert('Error: " . $e->getMessage() . "')</script>";
                               }
                               ?>
                             </select>
                           </div>
+                          <!-- Subcategory -->
                           <div class="input-group py-2">
                             <span class="input-group-text">
                               <i class="bi bi-basket-fill"></i>
                             </span>
-                            <select name="subcategory" id="subcategory-1" class="form-select">
+                            <select name="post-item-subcategory" id="subcategory-1" class="form-select" required>
                               <option selected disabled>Select Subcategory</option>
-
                             </select>
                           </div>
+                          <!-- Subcategory -->
                           <div class="input-group py-2">
                             <span class="input-group-text">
                               <i class="bi bi-basket-fill"></i>
                             </span>
-                            <select name="subcategory-2" id="subcategory-2" class="form-select">
+                            <select name="post-item-subcategory-2" id="subcategory-2" class="form-select" required>
                               <option selected disabled>Select Subcategory</option>
-                              <?php
-                              if (isset($_POST["subcategory1"])) {
-                                $selected_subcategory_id = $_POST['subcategory1'];
-                                try {
-                                  $query = "SELECT subcategory2, id FROM subcategories2 WHERE subcategoryid = $selected_subcategory_id";
-                                  $stmt = $dbconn->prepare($query);
-                                  $stmt->execute();
-                                  foreach ($stmt as $data) {
-                              ?>
-                              <option value="<?php echo $data['id'] ?>">
-                                <?php echo $data['subcategory2'] ?>
-                              </option>
-                              <?php
-                                  }
-                                } catch (PDOException $e) {
-                                  echo "<script> alert(Error: " . $e->getMessage() . ")</script>";
-                                }
-                              }
-                              ?>
                             </select>
                           </div>
                         </div>
+                        <!-- Description -->
                         <div class="input-group py-2">
                           <span class="input-group-text"><i class="bi bi-pencil-square"></i></span>
-                          <textarea class="form-control" name="description" id="description" maxlength="100"
-                            style="resize: none;" placeholder="Description" required></textarea>
+                          <textarea class="form-control" name="post-item-description" id="post-item-description"
+                            maxlength="100" style="resize: none;" placeholder="Description" required></textarea>
                         </div>
+                        <!-- Images -->
                         <label for="uploadimg" class="form-label">Upload Up to Three Images</label>
                         <div class="input-group py-2">
-                          <input class="form-control" type="file" id="uploadimg" accept="image/jpg" multiple />
+                          <input class="form-control" type="file" name="post-item-uploadimgs[]" accept="image/jpg"
+                            multiple required />
                         </div>
+                        <!-- Submit Button -->
                         <div class="center-button py-4">
-                          <button type="button" class="btn btn-primary">
+                          <button type="submit" name="post-item" class="btn btn-primary">
                             List your Item!
                           </button>
                         </div>
@@ -200,46 +188,75 @@
       </div>
     </div>
   </div>
+  <?php
+  try {
+    if (isset($_POST["post-item"])) {
 
+      $rcsid = phpCAS::getUser();
+      $title = htmlspecialchars(trim($_POST['post-item-title']));
+      $price = htmlspecialchars(trim($_POST['post-item-price']));
+      $condition = htmlspecialchars(trim($_POST['post-item-condition']));
+      $category = htmlspecialchars(trim($_POST['post-item-category']));
+      $subcategory = htmlspecialchars(trim($_POST['post-item-subcategory']));
+      $subcategory_2 = htmlspecialchars(trim($_POST['post-item-subcategory-2']));
+      $date = date("Y-m-d H:i:s");
+      $description = htmlspecialchars(trim($_POST['post-item-description']));
+      $file_array = $_FILES['post-item-uploadimgs'];
+      $new_file_paths = array();
+      if (!empty(array_filter($file_array['name']))) {
+        $i = 0;
+        while ($i < 4 && $i < count($file_array['name'])) {
+          $file_name = $file_array['name'][$i];
+          $file_tmp_location = $file_array['tmp_name'][$i];
+          $file_size = $file_array['size'][$i];
+          $file_error = $file_array['error'][$i];
+          $file_type = $file_array['type'][$i];
+          if ($file_error === 0) {
+            if ($file_size < 1000000) {
+              $new_file_name = uniqid('', true) . ".jpg";
+              $new_file_location = 'resources/images/' . $new_file_name;
+              move_uploaded_file($file_tmp_location, $new_file_location);
+              $new_file_paths[$i] = $new_file_location;
+            } else {
+              echo "<script> alert('The file size was too large.')</script>";
+              exit();
+            }
+          } else {
+            // echo "<script> alert('There was an error uploading your file.')</script>";
+            echo "<script> alert('There was an error uploading your file.')</script>";
+            exit();
+          }
+          $i++;
+        }
+      } else {
+        echo "<script> alert('No Files Uploaded.')</script>";
+        exit();
+      }
 
-
-
-
-  <!-- Modal For Signing in -->
-  <div class="modal fade" id="log-in-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="log-in-modal-label" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5 sec-head-2" id="log-in-modal-label">
-            Welcome Back
-          </h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="mb-3">
-              <label for="email-input" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="email-input" />
-            </div>
-            <label for="password-input" class="form-label">Password</label>
-            <div class="mb-3 input-group">
-              <input type="password" class="form-control" id="password-input" />
-              <button class="input-group-text bg-transparent" onclick="togglePassword()">
-                <i class="bi bi-eye-slash" id="toggle-password"></i>
-              </button>
-            </div>
-            <button type="submit" class="btn btn-primary">Log In</button>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <a class="modal-footer-link" href="#">Sign Up</a>
-          <span>|</span>
-          <a class="modal-footer-link" href="#">Forgot Password?</a>
-        </div>
-      </div>
-    </div>
-  </div>
+      if (count($new_file_paths) == 3) {
+        $new_file_path1 = $new_file_paths[0];
+        $new_file_path2 = $new_file_paths[1];
+        $new_file_path3 = $new_file_paths[2];
+        $query = "INSERT INTO items (rcsid, title, price, condition, category, subcategory1, subcategory2, date_posted, item_description, image1, image2, image3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        $stmt = $dbconn->prepare($query);
+        $stmt->execute([$rcsid, $title, $price, $condition, $category, $subcategory, $subcategory_2, $date, $description, $new_file_path1, $new_file_path2, $new_file_path3]);
+      } elseif (count($new_file_paths) == 2) {
+        $new_file_path1 = $new_file_paths[0];
+        $new_file_path2 = $new_file_paths[1];
+        $query = "INSERT INTO items (rcsid, title, price, condition, category, subcategory1, subcategory2, date_posted, item_description, image1, image2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        $stmt = $dbconn->prepare($query);
+        $stmt->execute([$rcsid, $title, $price, $condition, $category, $subcategory, $subcategory_2, $date, $description, $new_file_path1, $new_file_path2]);
+      } else {
+        $new_file_path1 = $new_file_paths[0];
+        $query = "INSERT INTO items (rcsid, title, price, condition, category, subcategory1, subcategory2, date_posted, item_description, image1, image2, image3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        $stmt = $dbconn->prepare($query);
+        $stmt->execute([$rcsid, $title, $price, $condition, $category, $subcategory, $subcategory_2, $date, $description, $new_file_path1]);
+      }
+    }
+  } catch (PDOException $e) {
+    echo "Error: " . $e;
+  }
+  ?>
   <!-- Site Footer -->
   <footer></footer>
 </body>
