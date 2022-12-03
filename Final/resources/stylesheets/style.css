@@ -75,17 +75,17 @@ body {
   height: 25rem;
 }
 
-.seller-dash-pill{
+.seller-dash-pill {
   background-color: white;
   border-radius: 1rem;
 
 }
 
-.seller-dash-pill:hover{
+.seller-dash-pill:hover {
   cursor: pointer;
 }
 
-.sell-img{
+.sell-img {
   max-height: 10rem;
 }
 
@@ -96,6 +96,7 @@ body {
 .card-title {
   font-family: var(--title-font);
 }
+
 .body-text {
   font-family: var(--body-font);
   font-size: var(--fs-body);
@@ -162,10 +163,18 @@ body {
   width: 100%;
 }
 
-.sub-text{
+.sub-text {
   font-family: var(--body-font);
   font-size: var(--fs-caption);
 
+}
+
+select option:hover,
+select option:active,
+select option:focus,
+select option:checked {
+  background-color: var(--RPI-Dark-Red);
+  color: white;
 }
 
 /* Changed Bootstrap Styling */
@@ -209,7 +218,9 @@ button.dropdown-item:active {
 }
 
 .form-control:focus,
-.form-control:active {
+.form-control:active,
+.form-select:focus,
+.form-select:active {
   box-shadow: none;
   border-color: var(--RPI-Dark-Red);
 }
@@ -231,6 +242,11 @@ button.dropdown-item:active {
 .card-img-top {
   height: 10rem;
 }
+
+.dropdown-menu {
+  --bs-dropdown-link-active-bg: var(--RPI-Dark-Red);
+}
+
 
 /*media queries for changing screen sizes*/
 /* Galaxy Fold */

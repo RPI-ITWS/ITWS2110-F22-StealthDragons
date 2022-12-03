@@ -1,29 +1,74 @@
-function togglePassword() {
-    let x = document.getElementById("password-input");
-    let iconToggle = document.querySelector("#toggle-password")
-    if (x.type === "password") {
-      x.type = "text";
-    } else {
-      x.type = "password";
-    }
-    iconToggle.classList.toggle("bi-eye");
-}
-
+// Cycle through product images
 //https://www.youtube.com/watch?v=Y36QpYcnbQY
 let thumbnails = document.getElementsByClassName('inactive-thumbnail')
 
 let activeImg = document.getElementsByClassName('active-thumbnail')
 
-for (var i=0; i < thumbnails.length; i++){
-    
-    thumbnails[i].addEventListener('mouseover', function(){
+for (var i = 0; i < thumbnails.length; i++) {
 
-        if(activeImg.length > 0){
-            activeImg[0].classList.remove('active-thumbnail')
-        }
+  thumbnails[i].addEventListener('mouseover', function () {
 
-        this.classList.add('active-thumbnail')
-        document.getElementById('current-img').src = this.src
+    if (activeImg.length > 0) {
+      activeImg[0].classList.remove('active-thumbnail')
+    }
 
-    })
+    this.classList.add('active-thumbnail')
+    document.getElementById('current-img').src = this.src
+
+  })
+}
+
+let categorySelector = document.getElementById("category");
+let subcategory1Selector = document.getElementById("subcategory-1");
+let subcategory2Selector = document.getElementById("subcategory-2");
+categorySelector.addEventListener("change", async function () {
+  let categoryValue = categorySelector.value;
+  let formData = new FormData();
+  formData.append('category', categoryValue);
+  let fetchReponse = await fetch("./subcategories.php", {
+    method: "POST",
+    credentials: "same-origin",
+    mode: "same-origin",
+    body: formData,
+  });
+  let jsonData = await fetchReponse.json();
+  replaceSubcategory1(jsonData);
+});
+
+subcategory1Selector.addEventListener("change", async function () {
+  let subcategoryValue = subcategory1Selector.value;
+  let formData = new FormData();
+  formData.append('subcategory', subcategoryValue);
+  let fetchReponse = await fetch("./subcategories2.php", {
+    method: "POST",
+    credentials: "same-origin",
+    mode: "same-origin",
+    body: formData,
+  });
+  let jsonData = await fetchReponse.json();
+  replaceSubcategory2(jsonData);
+});
+
+function replaceSubcategory1(data) {
+  subcategory1Selector.replaceChildren();
+  subcategory2Selector.replaceChildren();
+  subcategory1Selector.insertAdjacentHTML("beforeend", '<option selected disabled>Select Subcategory</option>');
+  subcategory2Selector.insertAdjacentHTML("beforeend", '<option selected disabled>Select Subcategory</option>');
+  for (let i = 0; i < data.length; i++) {
+    let scID = String(data[i]["id"]);
+    let scSC = String(data[i]["subcategory1"]);
+    let scHTML = '<option value="' + scID + '">' + scSC + '</option>';
+    subcategory1Selector.insertAdjacentHTML("beforeend", scHTML);
+  };
+}
+
+function replaceSubcategory2(data) {
+  subcategory2Selector.replaceChildren();
+  subcategory2Selector.insertAdjacentHTML("beforeend", '<option selected disabled>Select Subcategory</option>');
+  for (let i = 0; i < data.length; i++) {
+    let scID = String(data[i]["id"]);
+    let scSC = String(data[i]["subcategory2"]);
+    let scHTML = '<option value="' + scID + '">' + scSC + '</option>';
+    subcategory2Selector.insertAdjacentHTML("beforeend", scHTML);
+  };
 }

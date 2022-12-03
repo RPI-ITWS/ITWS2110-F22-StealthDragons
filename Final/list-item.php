@@ -6,8 +6,12 @@
   <?php include 'header.php' ?>
 
   <section class="container-xxl">
-    <h2 class="sec-head-1 text-center pt-5">Seller Dashboard <button class="btn btn-success float-end"
-        data-bs-toggle="modal" data-bs-target="#listing-modal">Create Listing</button></h2>
+    <h2 class="sec-head-1 text-center pt-5">Seller Dashboard
+    </h2>
+    <div class="text-end">
+      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#listing-modal">Create
+        Listing</button>
+    </div>
     <div class="seller-dash-pill row p-3 my-3">
       <h3 class="sec-head-2">Pending Sales</h3>
       <div class="col">
@@ -69,7 +73,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="listing-modal">Sell an Item</h5>
+          <h5 class="modal-title" id="listing-modal">List an Item</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -80,38 +84,105 @@
                   <div class="row justify-content-center">
                     <div class="col">
                       <form>
-
-                        <label for="uploadFiles" class="form-label">Upload Images</label>
-
-                        <div class="input-group py-2">
-                          <input class="form-control" type="file" id="uploadFiles" multiple />
-                        </div>
-
+                        <!-- Title of item -->
                         <div class="input-group py-2">
                           <span class="input-group-text">
                             <i class="bi bi-card-text"></i>
                           </span>
-                          <input type="text" class="form-control" placeholder="Title" />
+                          <input type="text" class="form-control" placeholder="Title" required />
                         </div>
-
+                        <!-- Price of item -->
                         <div class="input-group py-2">
                           <span class="input-group-text">
                             <i class="bi bi-tags"></i></span>
-                          <input type="email" class="form-control" placeholder="Price" />
+                          <input type="email" class="form-control" placeholder="Price" required />
                         </div>
-
+                        <!-- Condition of item -->
                         <div class="input-group py-2">
                           <span class="input-group-text">
-                            <i class="bi bi-basket-fill"></i>
+                            <i class="bi bi-search-heart"></i>
                           </span>
-                          <input type="text" class="form-control" placeholder="Category" />
+                          <select name="condition" id="condition" class="form-select" required>
+                            <option selected disabled>Select Condition of Item</option>
+                            <option value="new">New</option>
+                            <option value="like-new">Like New</option>
+                            <option value="good">Good</option>
+                            <option value="fair">Fair</option>
+                            <option value="poor">Poor</option>
+                          </select>
                         </div>
+                        <div class="d-flex flex-row">
+                          <div class="input-group py-2">
+                            <span class="input-group-text">
+                              <i class="bi bi-basket-fill"></i>
+                            </span>
+                            <select name="category" id="category" class="form-select" required>
+                              <option selected disabled>Select Category</option>
+                              <?php
+                              try {
+                                $query = "SELECT category, id FROM categories";
+                                $stmt = $dbconn->prepare($query);
+                                $stmt->execute();
+                                foreach ($stmt as $data) {
+                              ?>
+                              <option value="<?php echo $data['id'] ?>">
+                                <?php echo $data['category'] ?>
+                              </option>
 
+                              <?php
+
+                                }
+                              } catch (PDOException $e) {
+                                echo "<script> alert(Error: " . $e->getMessage() . ")</script>";
+                              }
+                              ?>
+                            </select>
+                          </div>
+                          <div class="input-group py-2">
+                            <span class="input-group-text">
+                              <i class="bi bi-basket-fill"></i>
+                            </span>
+                            <select name="subcategory" id="subcategory-1" class="form-select">
+                              <option selected disabled>Select Subcategory</option>
+
+                            </select>
+                          </div>
+                          <div class="input-group py-2">
+                            <span class="input-group-text">
+                              <i class="bi bi-basket-fill"></i>
+                            </span>
+                            <select name="subcategory-2" id="subcategory-2" class="form-select">
+                              <option selected disabled>Select Subcategory</option>
+                              <?php
+                              if (isset($_POST["subcategory1"])) {
+                                $selected_subcategory_id = $_POST['subcategory1'];
+                                try {
+                                  $query = "SELECT subcategory2, id FROM subcategories2 WHERE subcategoryid = $selected_subcategory_id";
+                                  $stmt = $dbconn->prepare($query);
+                                  $stmt->execute();
+                                  foreach ($stmt as $data) {
+                              ?>
+                              <option value="<?php echo $data['id'] ?>">
+                                <?php echo $data['subcategory2'] ?>
+                              </option>
+                              <?php
+                                  }
+                                } catch (PDOException $e) {
+                                  echo "<script> alert(Error: " . $e->getMessage() . ")</script>";
+                                }
+                              }
+                              ?>
+                            </select>
+                          </div>
+                        </div>
                         <div class="input-group py-2">
-                          <span class="input-group-text">
-                            <i class="bi bi-hash"></i>
-                          </span>
-                          <input type="text" class="form-control" placeholder="Tags" />
+                          <span class="input-group-text"><i class="bi bi-pencil-square"></i></span>
+                          <textarea class="form-control" name="description" id="description" maxlength="100"
+                            style="resize: none;" placeholder="Description" required></textarea>
+                        </div>
+                        <label for="uploadimg" class="form-label">Upload Up to Three Images</label>
+                        <div class="input-group py-2">
+                          <input class="form-control" type="file" id="uploadimg" accept="image/jpg" multiple />
                         </div>
                         <div class="center-button py-4">
                           <button type="button" class="btn btn-primary">
