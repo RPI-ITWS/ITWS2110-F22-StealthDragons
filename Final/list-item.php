@@ -25,7 +25,7 @@
         </div>
       </div>
     </div>
-    <div class="seller-dash-pill row p-3">
+    <div class="seller-dash-pill p-3">
       <h3 class="sec-head-2">Current Listings</h3>
       <?php
       try {
@@ -37,39 +37,39 @@
           $datetime = strtotime($row['date_posted']);
           $date = date('Y-m-d', $datetime);
       ?>
-      <div class="col">
-        <div class="card my-2">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-3">
-                <img src="<?php echo $row['image1'] ?>" class="img-thumbnail sell-img" alt="...">
-              </div>
-              <div class="col">
-                <h4 class="body-large"><strong>
-                    <?php echo $row['title'] ?>
-                  </strong></h4>
-                <p class="body-text">
-                  $
-                  <?php echo $row['price'] ?>
-                </p>
-                <p class="sub-text">
-                  Posted:
-                  <?php echo $date ?>
-                </p>
-                <p class="sub-text">
-                  Clicks on listing
-                  <?php echo 1 #add clicks when added to db ?>
-                </p>
-                <form action="list-item.php" method="post" class="d-inline-block me-2">
-                  <button name="delete-btn" class="btn btn-danger" value="<?php echo $row['id'] ?>">Remove Item</button>
-                </form>
-                <!-- Note: When modifying the database at all use post method as it more secure -->
-                <button class="btn btn-secondary">Edit Listing</button>
-              </div>
+
+      <div class="card my-2">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-3">
+              <img src="<?php echo $row['image1'] ?>" class="img-thumbnail sell-img" alt="...">
+            </div>
+            <div class="col">
+              <h4 class="body-large"><strong>
+                  <?php echo $row['title'] ?>
+                </strong></h4>
+              <p class="body-text">
+                $
+                <?php echo $row['price'] ?>
+              </p>
+              <p class="sub-text">
+                Posted:
+                <?php echo $date ?>
+              </p>
+              <p class="sub-text">
+                Clicks on listing
+                <?php echo 1 #add clicks when added to db ?>
+              </p>
+              <form action="list-item.php" method="post" class="d-inline-block me-2">
+                <button name="delete-btn" class="btn btn-danger" value="<?php echo $row['id'] ?>">Remove Item</button>
+              </form>
+              <!-- Note: When modifying the database at all use post method as it more secure -->
+              <button class="btn btn-secondary">Edit Listing</button>
             </div>
           </div>
         </div>
       </div>
+
       <?php
         }
       } catch (PDOException $e) {
