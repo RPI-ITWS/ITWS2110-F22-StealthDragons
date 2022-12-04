@@ -27,45 +27,68 @@
     </div>
     <div class="seller-dash-pill row p-3">
       <h3 class="sec-head-2">Current Listings</h3>
+      <?php
+      try {
+        $query = "SELECT * FROM items WHERE rcsid = :rcsid";
+        $stmt = $dbconn->prepare($query);
+        $stmt->bindValue(':rcsid', $_SESSION['user']);
+        $stmt->execute();
+        foreach ($stmt as $row) {
+          $datetime = strtotime($row['date_posted']);
+          $date = date('Y-m-d', $datetime);
+      ?>
       <div class="col">
         <div class="card my-2">
           <div class="card-body">
             <div class="row">
               <div class="col-3">
-                <img class="img-thumbnail sell-img"
-                  src="https://ashleyfurniture.scene7.com/is/image/AshleyFurniture/B600001175_1?$AFHS-PDP-Zoomed$"
-                  alt="">
+                <img src="<?php echo $row['image1'] ?>" class="img-thumbnail sell-img" alt="...">
               </div>
               <div class="col">
-                <h4 class="body-large"><strong>Spongebob Chair</strong></h4>
-                <p class="body-text">$200</p>
-                <p class="sub-text">Posted 10/14/2022</p>
-                <p class="sub-text">Clicks on listing: <strong>10</strong></p>
-                <button class="btn btn-danger">Remove Item</button>
-                <button class="btn btn-secondary ms-2">Edit Listing</button>
+                <h4 class="body-large"><strong>
+                    <?php echo $row['title'] ?>
+                  </strong></h4>
+                <p class="body-text">
+                  $
+                  <?php echo $row['price'] ?>
+                </p>
+                <p class="sub-text">
+                  Posted:
+                  <?php echo $date ?>
+                </p>
+                <p class="sub-text">
+                  Clicks on listing
+                  <?php echo 1 #add clicks when added to db ?>
+                </p>
+                <form action="list-item.php" method="post" class="d-inline-block me-2">
+                  <button name="delete-btn" class="btn btn-danger" value="<?php echo $row['id'] ?>">Remove Item</button>
+                </form>
+                <!-- Note: When modifying the database at all use post method as it more secure -->
+                <button class="btn btn-secondary">Edit Listing</button>
               </div>
             </div>
           </div>
         </div>
-        <div class="col">
-          <div class="card my-2">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-3">
-                  <img class="img-thumbnail sell-img" src="resources/images/textbook2.jpg" alt="">
-                </div>
-                <div class="col">
-                  <h4 class="body-large"><strong>Electrical Engineering Textbooks</strong></h4>
-                  <p class="body-text">$30</p>
-                  <p class="sub-text">Posted 10/14/2022</p>
-                  <p class="sub-text">Clicks on listing: <strong>100</strong></p>
-                  <button class="btn btn-danger">Remove Item</button>
-                  <button class="btn btn-secondary ms-2">Edit Listing</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      </div>
+      <?php
+        }
+      } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+      }
+      if (isset($_POST['delete-btn'])) {
+        $itemid = $_POST['delete-btn'];
+        try {
+          $query = "DELETE FROM items WHERE id = :itemid";
+          $stmt = $dbconn->prepare($query);
+          $stmt->bindValue(':itemid', $itemid);
+          $stmt->execute();
+          header("Location: list-item.php");
+        } catch (PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+      }
+      ?>
+    </div>
   </section>
 
 
@@ -214,7 +237,7 @@
           if ($file_error === 0) {
             if ($file_size < 1000000) {
               $new_file_name = uniqid('', true) . ".jpg";
-              $new_file_location = 'resources/images/' . $new_file_name;
+              $new_file_location = '/resources/images/' . $new_file_name;
               move_uploaded_file($file_tmp_location, $new_file_location);
               $new_file_paths[$i] = $new_file_location;
             } else {
@@ -240,17 +263,20 @@
         $query = "INSERT INTO items(rcsid, title, price, item_condition, category, subcategory1, subcategory2, date_posted, item_description, image1, image2, image3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         $stmt = $dbconn->prepare($query);
         $stmt->execute([$rcsid, $title, $price, $condition, $category, $subcategory, $subcategory_2, $date, $description, $new_file_path1, $new_file_path2, $new_file_path3]);
+        header("Location: list-item.php");
       } elseif (count($new_file_paths) == 2) {
         $new_file_path1 = $new_file_paths[0];
         $new_file_path2 = $new_file_paths[1];
         $query = "INSERT INTO items(rcsid, title, price, item_condition, category, subcategory1, subcategory2, date_posted, item_description, image1, image2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         $stmt = $dbconn->prepare($query);
+        header("Location: list-item.php");
         $stmt->execute([$rcsid, $title, $price, $condition, $category, $subcategory, $subcategory_2, $date, $description, $new_file_path1, $new_file_path2]);
       } else {
         $new_file_path1 = $new_file_paths[0];
         $query = "INSERT INTO items(rcsid, title, price, item_condition, category, subcategory1, subcategory2, date_posted, item_description, image1, image2, image3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         $stmt = $dbconn->prepare($query);
         $stmt->execute([$rcsid, $title, $price, $condition, $category, $subcategory, $subcategory_2, $date, $description, $new_file_path1]);
+        header("Location: list-item.php");
       }
     }
   } catch (PDOException $e) {
