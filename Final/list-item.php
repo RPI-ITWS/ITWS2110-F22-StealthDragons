@@ -28,6 +28,7 @@
     <div class="seller-dash-pill p-3">
       <h3 class="sec-head-2">Current Listings</h3>
       <?php
+
       try {
         $query = "SELECT * FROM items WHERE rcsid = :rcsid";
         $stmt = $dbconn->prepare($query);
@@ -60,9 +61,8 @@
                 Clicks on listing
                 <?php echo 1 #add clicks when added to db ?>
               </p>
-              <form action="list-item.php" method="post" class="d-inline-block me-2">
-                <button name="delete-btn" class="btn btn-danger" value="<?php echo $row['id'] ?>">Remove Item</button>
-              </form>
+              <button data-id="<?php echo $row['id'] ?>" class="btn btn-danger remove-listing-btn" data-bs-toggle="modal" data-bs-target="#remove-listing-modal">Remove
+                Item</button>
               <!-- Note: When modifying the database at all use post method as it more secure -->
               <button class="btn btn-secondary">Edit Listing</button>
             </div>
@@ -75,21 +75,44 @@
       } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
       }
-      if (isset($_POST['delete-btn'])) {
-        $itemid = $_POST['delete-btn'];
+      if (isset($_POST['delete-lisitng'])) {
+        $itemid = $_POST['delete-lisitng'];
         try {
           $query = "DELETE FROM items WHERE id = :itemid";
           $stmt = $dbconn->prepare($query);
           $stmt->bindValue(':itemid', $itemid);
           $stmt->execute();
-          header("Location: {$_SERVER['REQUEST_URI']}", true, 303 );
+          header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
         } catch (PDOException $e) {
           echo "Error: " . $e->getMessage();
         }
       }
+
       ?>
     </div>
   </section>
+  <div class="modal fade" tabindex="-1" id="remove-listing-modal" aria-labelledby="remove-listing-modal"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirm Removal</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to remove this listing? This action is not reversible.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <form action="list-item.php" method="post">
+            <input type="hidden" name="delete-lisitng" id="delete-listing"/>
+            <button type="submit" class="btn btn-danger">Remove Listing</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <div class="modal fade" id="listing-modal" tabindex="-1" aria-labelledby="listing-modal" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -262,20 +285,20 @@
         $query = "INSERT INTO items(rcsid, title, price, item_condition, category, subcategory1, subcategory2, date_posted, item_description, image1, image2, image3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         $stmt = $dbconn->prepare($query);
         $stmt->execute([$rcsid, $title, $price, $condition, $category, $subcategory, $subcategory_2, $date, $description, $new_file_path1, $new_file_path2, $new_file_path3]);
-        header("Location: {$_SERVER['REQUEST_URI']}", true, 303 );
+        header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
       } elseif (count($new_file_paths) == 2) {
         $new_file_path1 = $new_file_paths[0];
         $new_file_path2 = $new_file_paths[1];
         $query = "INSERT INTO items(rcsid, title, price, item_condition, category, subcategory1, subcategory2, date_posted, item_description, image1, image2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         $stmt = $dbconn->prepare($query);
-        header("Location: {$_SERVER['REQUEST_URI']}", true, 303 );
+        header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
         $stmt->execute([$rcsid, $title, $price, $condition, $category, $subcategory, $subcategory_2, $date, $description, $new_file_path1, $new_file_path2]);
       } else {
         $new_file_path1 = $new_file_paths[0];
         $query = "INSERT INTO items(rcsid, title, price, item_condition, category, subcategory1, subcategory2, date_posted, item_description, image1) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         $stmt = $dbconn->prepare($query);
         $stmt->execute([$rcsid, $title, $price, $condition, $category, $subcategory, $subcategory_2, $date, $description, $new_file_path1]);
-        header("Location: {$_SERVER['REQUEST_URI']}", true, 303 );
+        header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
       }
     }
   } catch (PDOException $e) {

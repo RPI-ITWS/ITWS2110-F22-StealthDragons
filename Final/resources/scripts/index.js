@@ -72,3 +72,14 @@ function replaceSubcategory2(data) {
     subcategory2Selector.insertAdjacentHTML("beforeend", scHTML);
   };
 }
+
+let removeListBtn = document.getElementsByClassName("remove-listing-btn");
+
+if (removeListBtn.length > 0) {
+  for (let i = 0; i < removeListBtn.length; i++) {
+    removeListBtn[i].addEventListener("click", function () {
+      let itemID = this.getAttribute("data-id");
+      document.getElementById("delete-listing").value = itemID;
+    });
+  }
+}

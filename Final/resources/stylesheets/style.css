@@ -177,6 +177,10 @@ select option:checked {
   color: white;
 }
 
+.item-id {
+  display: none;
+}
+
 /* Changed Bootstrap Styling */
 a.nav-link,
 a.dropdown-item {
