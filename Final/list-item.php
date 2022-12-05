@@ -9,7 +9,7 @@
     <h2 class="sec-head-1 text-center pt-5">Seller Dashboard
     </h2>
     <div class="text-end">
-      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#listing-modal">Create
+      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#listing-modal" onclick="setToCreate()">Create
         Listing</button>
     </div>
     <div class="seller-dash-pill row p-3 my-3">
@@ -64,7 +64,16 @@
                 <button name="delete-btn" class="btn btn-danger" value="<?php echo $row['id'] ?>">Remove Item</button>
               </form>
               <!-- Note: When modifying the database at all use post method as it more secure -->
-              <button class="btn btn-secondary">Edit Listing</button>
+              <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#listing-modal" onclick="setToEdit(this)" id="<?php echo $row['id'] ?>" value="<?php echo $row['id'] ?>">Edit Listing</button>
+              <div class="d-none">
+                <input type="text" class="form-control" id="title-<?php echo $row['id'] ?>" value="<?php echo $row['title'] ?>"> 
+                <input type="text" class="form-control" id="price-<?php echo $row['id'] ?>" value="<?php echo $row['price'] ?>"> 
+                <input type="text" class="form-control" id="item_condition-<?php echo $row['id'] ?>" value="<?php echo $row['item_condition'] ?>">
+                <input type="text" class="form-control" id="category-<?php echo $row['id'] ?>" value="<?php echo $row['category'] ?>">
+                <input type="text" class="form-control" id="subcategory1-<?php echo $row['id'] ?>" value="<?php echo $row['subcategory1'] ?>">
+                <input type="text" class="form-control" id="subcategory2-<?php echo $row['id'] ?>" value="<?php echo $row['subcategory2'] ?>">
+                <input type="text" class="form-control" id="item_description-<?php echo $row['id'] ?>" value="<?php echo $row['item_description'] ?>">
+              </div>
             </div>
           </div>
         </div>
@@ -96,7 +105,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="listing-modal">List an Item</h5>
+          <h5 class="modal-title list-item-modal" id="listing-modal"></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -112,13 +121,13 @@
                           <span class="input-group-text">
                             <i class="bi bi-card-text"></i>
                           </span>
-                          <input name="post-item-title" type="text" class="form-control" placeholder="Title" required />
+                          <input id="post-item-title" name="post-item-title" type="text" class="form-control" placeholder="Title" required />
                         </div>
                         <!-- Price of item -->
                         <div class="input-group py-2">
                           <span class="input-group-text">
                             <i class="bi bi-tags"></i></span>
-                          <input name="post-item-price" type="number" min="1" max="999999" class="form-control"
+                          <input id="post-item-price" name="post-item-price" type="number" min="1" max="999999" class="form-control"
                             placeholder="Price" required />
                         </div>
                         <!-- Condition of item -->
@@ -127,7 +136,7 @@
                             <i class="bi bi-search-heart"></i>
                           </span>
                           <select name="post-item-condition" id="condition" class="form-select" required>
-                            <option selected disabled>Select Condition of Item</option>
+                            <option value="select-condition" selected disabled>Select Condition of Item</option>
                             <option value="new">New</option>
                             <option value="like-new">Like New</option>
                             <option value="good">Good</option>
@@ -195,10 +204,12 @@
                             multiple required />
                         </div>
                         <!-- Submit Button -->
-                        <div class="center-button py-4">
-                          <button type="submit" name="post-item" class="btn btn-primary">
-                            List your Item!
+                        <div class="center-button py-4" id="submit-button-div">
+                          <button type="submit" name="post-item" class="btn btn-primary" id="list-or-edit-button">
                           </button>
+                        </div>
+                        <div class="d-none">
+                          <input type="text" class="form-control" name="id-placeholder-row" id="id-placeholder-row" value="<?php echo $row['id'] ?>"> 
                         </div>
                       </form>
                     </div>
@@ -267,15 +278,89 @@
       } elseif (count($new_file_paths) == 2) {
         $new_file_path1 = $new_file_paths[0];
         $new_file_path2 = $new_file_paths[1];
-        $query = "INSERT INTO items(rcsid, title, price, item_condition, category, subcategory1, subcategory2, date_posted, item_description, image1, image2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        $query = "INSERT INTO items(rcsid, title, price,   item_condition, category, subcategory1, subcategory2, date_posted, item_description, image1, image2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         $stmt = $dbconn->prepare($query);
         header("Location: list-item.php");
         $stmt->execute([$rcsid, $title, $price, $condition, $category, $subcategory, $subcategory_2, $date, $description, $new_file_path1, $new_file_path2]);
       } else {
         $new_file_path1 = $new_file_paths[0];
-        $query = "INSERT INTO items(rcsid, title, price, item_condition, category, subcategory1, subcategory2, date_posted, item_description, image1, image2, image3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        $query = "INSERT INTO items(rcsid, title, price, item_condition, category, subcategory1, subcategory2, date_posted, item_description, image1) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         $stmt = $dbconn->prepare($query);
         $stmt->execute([$rcsid, $title, $price, $condition, $category, $subcategory, $subcategory_2, $date, $description, $new_file_path1]);
+        header("Location: list-item.php");
+      }
+    }
+  } catch (PDOException $e) {
+    echo "Error: " . $e;
+  }
+  ?>
+
+<?php
+  try {
+    if (isset($_POST["edit-item"])) {
+
+      $rcsid = phpCAS::getUser();
+      $title = htmlspecialchars(trim($_POST['post-item-title']));
+      $price = htmlspecialchars(trim($_POST['post-item-price']));
+      $condition = htmlspecialchars(trim($_POST['post-item-condition']));
+      $category = htmlspecialchars(trim($_POST['post-item-category']));
+      $subcategory = htmlspecialchars(trim($_POST['post-item-subcategory']));
+      $subcategory_2 = htmlspecialchars(trim($_POST['post-item-subcategory-2']));
+      $rowID = htmlspecialchars(trim($_POST['id-placeholder-row']));
+      $date = date("Y-m-d H:i:s");
+      $description = htmlspecialchars(trim($_POST['post-item-description']));
+      $file_array = $_FILES['post-item-uploadimgs'];
+      $new_file_paths = array();
+      if (!empty(array_filter($file_array['name']))) {
+        $i = 0;
+        while ($i < 4 && $i < count($file_array['name'])) {
+          $file_name = $file_array['name'][$i];
+          $file_tmp_location = $file_array['tmp_name'][$i];
+          $file_size = $file_array['size'][$i];
+          $file_error = $file_array['error'][$i];
+          $file_type = $file_array['type'][$i];
+          if ($file_error === 0) {
+            if ($file_size < 1000000) {
+              $new_file_name = uniqid('', true) . ".jpg";
+              $new_file_location = '/resources/images/' . $new_file_name;
+              move_uploaded_file($file_tmp_location, $new_file_location);
+              $new_file_paths[$i] = $new_file_location;
+            } else {
+              echo "<script> alert('The file size was too large.')</script>";
+              exit();
+            }
+          } else {
+            // echo "<script> alert('There was an error uploading your file.')</script>";
+            echo "<script> alert('There was an error uploading your file.')</script>";
+            exit();
+          }
+          $i++;
+        }
+      } else {
+        echo "<script> alert('No Files Uploaded.')</script>";
+        exit();
+      }
+
+      if (count($new_file_paths) == 3) {
+        $new_file_path1 = $new_file_paths[0];
+        $new_file_path2 = $new_file_paths[1];
+        $new_file_path3 = $new_file_paths[2];
+        $query = "UPDATE items SET title = '$title', price = '$price', item_condition = '$condition', category = '$category', subcategory1 = '$subcategory', subcategory2 = '$subcategory_2', item_description = '$description', image1 = '$new_file_path1', image2 = '$new_file_path2', image3 = '$new_file_path3' WHERE id = '$rowID';";
+        $stmt = $dbconn->prepare($query);
+        $stmt->execute();
+        header("Location: list-item.php");
+      } elseif (count($new_file_paths) == 2) {
+        $new_file_path1 = $new_file_paths[0];
+        $new_file_path2 = $new_file_paths[1];
+        $query = "UPDATE items SET title = '$title', price = '$price', item_condition = '$condition', category = '$category', subcategory1 = '$subcategory', subcategory2 = '$subcategory_2', item_description = '$description', image1 = '$new_file_path1', image2 = '$new_file_path2' WHERE id = '$rowID';";
+        $stmt = $dbconn->prepare($query);
+        header("Location: list-item.php");
+        $stmt->execute();
+      } else {
+        $new_file_path1 = $new_file_paths[0];
+        $query = "UPDATE items SET title = '$title', price = '$price', item_condition = '$condition', category = '$category', subcategory1 = '$subcategory', subcategory2 = '$subcategory_2', item_description = '$description', image1 = '$new_file_path1' WHERE id = '$rowID';";
+        $stmt = $dbconn->prepare($query);
+        $stmt->execute();
         header("Location: list-item.php");
       }
     }
