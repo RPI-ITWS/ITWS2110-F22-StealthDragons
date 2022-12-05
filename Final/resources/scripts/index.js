@@ -18,34 +18,36 @@ for (var i = 0; i < thumbnails.length; i++) {
 let categorySelector = document.getElementById("category");
 let subcategory1Selector = document.getElementById("subcategory-1");
 let subcategory2Selector = document.getElementById("subcategory-2");
-categorySelector.addEventListener("change", async function () {
-  let categoryValue = categorySelector.value;
-  let formData = new FormData();
-  formData.append("category", categoryValue);
-  let fetchReponse = await fetch("./subcategories.php", {
-    method: "POST",
-    credentials: "same-origin",
-    mode: "same-origin",
-    body: formData,
+if (categorySelector != null) {
+  categorySelector.addEventListener("change", async function () {
+    let categoryValue = categorySelector.value;
+    let formData = new FormData();
+    formData.append("category", categoryValue);
+    let fetchReponse = await fetch("./subcategories.php", {
+      method: "POST",
+      credentials: "same-origin",
+      mode: "same-origin",
+      body: formData,
+    });
+    let jsonData = await fetchReponse.json();
+    replaceSubcategory1(jsonData);
   });
-  let jsonData = await fetchReponse.json();
-  replaceSubcategory1(jsonData);
-});
-
-subcategory1Selector.addEventListener("change", async function () {
-  let subcategoryValue = subcategory1Selector.value;
-  let formData = new FormData();
-  formData.append("subcategory", subcategoryValue);
-  let fetchReponse = await fetch("./subcategories2.php", {
-    method: "POST",
-    credentials: "same-origin",
-    mode: "same-origin",
-    body: formData,
+}
+if (subcategory1Selector != null) {
+  subcategory1Selector.addEventListener("change", async function () {
+    let subcategoryValue = subcategory1Selector.value;
+    let formData = new FormData();
+    formData.append("subcategory", subcategoryValue);
+    let fetchReponse = await fetch("./subcategories2.php", {
+      method: "POST",
+      credentials: "same-origin",
+      mode: "same-origin",
+      body: formData,
+    });
+    let jsonData = await fetchReponse.json();
+    replaceSubcategory2(jsonData);
   });
-  let jsonData = await fetchReponse.json();
-  replaceSubcategory2(jsonData);
-});
-
+}
 function replaceSubcategory1(data) {
   subcategory1Selector.replaceChildren();
   subcategory2Selector.replaceChildren();

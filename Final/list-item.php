@@ -12,7 +12,7 @@
       <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#listing-modal" onclick="setToCreate()">Create
         Listing</button>
     </div>
-    <div class="seller-dash-pill row p-3 my-3">
+    <div class="seller-dash-pill row p-3 my-3 mx-0">
       <h3 class="sec-head-2">Pending Sales</h3>
       <div class="col">
         <div class="card">
@@ -144,7 +144,7 @@
                           <span class="input-group-text">
                             <i class="bi bi-card-text"></i>
                           </span>
-                          <input id="post-item-title" name="post-item-title" type="text" class="form-control" placeholder="Title" required />
+                          <input id="post-item-title" name="post-item-title" type="text" class="form-control" placeholder="Title"  maxlength = "15" required />
                         </div>
                         <!-- Price of item -->
                         <div class="input-group py-2">
