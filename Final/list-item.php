@@ -43,7 +43,7 @@
         <div class="card-body">
           <div class="row">
             <div class="col-3">
-              <img src="<?php echo $row['image1'] ?>" class="img-thumbnail sell-img" alt="...">
+              <img src=".<?php echo $row['image1'] ?>" class="img-thumbnail sell-img" alt="...">
             </div>
             <div class="col">
               <h4 class="body-large"><strong>
@@ -61,7 +61,8 @@
                 Clicks on listing
                 <?php echo 1 #add clicks when added to db ?>
               </p>
-              <button data-id="<?php echo $row['id'] ?>" class="btn btn-danger remove-listing-btn" data-bs-toggle="modal" data-bs-target="#remove-listing-modal">Remove
+              <button data-id="<?php echo $row['id'] ?>" class="btn btn-danger remove-listing-btn"
+                data-bs-toggle="modal" data-bs-target="#remove-listing-modal">Remove
                 Item</button>
               <!-- Note: When modifying the database at all use post method as it more secure -->
               <button class="btn btn-secondary">Edit Listing</button>
@@ -82,7 +83,7 @@
           $stmt = $dbconn->prepare($query);
           $stmt->bindValue(':itemid', $itemid);
           $stmt->execute();
-          header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+          header("Location: {$_SERVER['REQUEST_URI']}?submit-form=true", true, 303);
         } catch (PDOException $e) {
           echo "Error: " . $e->getMessage();
         }
@@ -105,7 +106,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <form action="list-item.php" method="post">
-            <input type="hidden" name="delete-lisitng" id="delete-listing"/>
+            <input type="hidden" name="delete-lisitng" id="delete-listing" />
             <button type="submit" class="btn btn-danger">Remove Listing</button>
           </form>
         </div>
@@ -250,28 +251,34 @@
       $new_file_paths = array();
       if (!empty(array_filter($file_array['name']))) {
         $i = 0;
+        define('SITE_ROOT', realpath(dirname(__FILE__)));
         while ($i < 4 && $i < count($file_array['name'])) {
           $file_name = $file_array['name'][$i];
-          $file_tmp_location = $file_array['tmp_name'][$i];
           $file_size = $file_array['size'][$i];
           $file_error = $file_array['error'][$i];
           $file_type = $file_array['type'][$i];
-          if ($file_error === 0) {
-            if ($file_size < 1000000) {
-              $new_file_name = uniqid('', true) . ".jpg";
-              $new_file_location = '/resources/images/' . $new_file_name;
-              move_uploaded_file($file_tmp_location, $new_file_location);
-              $new_file_paths[$i] = $new_file_location;
-            } else {
-              echo "<script> alert('The file size was too large.')</script>";
-              exit();
-            }
-          } else {
-            // echo "<script> alert('There was an error uploading your file.')</script>";
-            echo "<script> alert('There was an error uploading your file.')</script>";
+          $check_file = mime_content_type($file_array['tmp_name'][$i]);
+          if ($check_file !== "image/jpeg" && $check_file !== "image/png") {
+            echo "<script> alert('Error: File type not supported. Please upload a JPEG/JPG file.')</script>";
             exit();
           }
+          if ($file_error !== 0) {
+            echo "<script> alert('Error: There was an error uploading your file.')</script>";
+            exit();
+          }
+          if ($file_size > 1000000) {
+            echo "<script> alert('Error: The file size was too large.')</script>";
+            exit();
+          }
+          $new_file_name = uniqid('', true) . ".jpeg";
+          $new_file_location = '/resources/images/' . $new_file_name;
+          $file_moved = move_uploaded_file($file_array['tmp_name'][$i], SITE_ROOT . $new_file_location);
+          $new_file_paths[$i] = $new_file_location;
           $i++;
+          if ($file_moved == false) {
+            echo "<script> alert('Error: There was an error uploading your file to the server.')</script>";
+            exit();
+          }
         }
       } else {
         echo "<script> alert('No Files Uploaded.')</script>";
@@ -291,8 +298,8 @@
         $new_file_path2 = $new_file_paths[1];
         $query = "INSERT INTO items(rcsid, title, price, item_condition, category, subcategory1, subcategory2, date_posted, item_description, image1, image2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         $stmt = $dbconn->prepare($query);
-        header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
         $stmt->execute([$rcsid, $title, $price, $condition, $category, $subcategory, $subcategory_2, $date, $description, $new_file_path1, $new_file_path2]);
+        header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
       } else {
         $new_file_path1 = $new_file_paths[0];
         $query = "INSERT INTO items(rcsid, title, price, item_condition, category, subcategory1, subcategory2, date_posted, item_description, image1) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
