@@ -86,23 +86,45 @@
                   <div class=\"col\">
                     <form method=\"post\">
                       <input type=\"hidden\" name=\"delete-lisitng\" id=\"delete-listing\" />
-                      <button type=\"submit\" class=\"btn btn-danger\">ADMIN TOOL: Remove Listing</button>
+                      <button type=\"submit\" class=\"btn btn-danger w-100\">ADMIN TOOL: Remove Listing</button>
                     </form>
                   </div>
+                  <div class=\"col\">
+                  <form method=\"post\">
+                    <input type=\"hidden\" name=\"ban-user\" id=\"ban-user\" />
+                    <button type=\"submit\" class=\"btn btn-danger w-100\">Ban User</button>
+                  </form>
+                  </div>
                 </div>
+                
                 ";
+                echo "
+                <p class=\"body-text py-1\">
+                  <strong class=\"pe-3\">Item Poster's RCSID: </strong>
+                ";
+                echo ucwords($row['rcsid']); 
+                echo "</p>";
             }
           }
           if (isset($_POST['delete-lisitng'])) {
             $itemid = $_GET['item_ref'];
             try {
               $query = "DELETE FROM items WHERE id = :itemid";
-              echo "<p>" . $query . "</p>";
               $stmt = $dbconn->prepare($query);
               $stmt->bindValue(':itemid', $itemid);
               $stmt->execute();
               $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final2/Final/index.php";
               echo("<script>location.href = '$redirect_URI';</script>");
+            } catch (PDOException $e) {
+              echo "Error: " . $e->getMessage();
+            }
+          }
+          if (isset($_POST['ban-user'])) {
+            try {
+              $query = "UPDATE users SET ban = 1 WHERE rcsid = :rcsid";
+              $stmt = $dbconn->prepare($query);
+              $stmt->bindValue(':rcsid', $row['rcsid']);
+              $stmt->execute();
             } catch (PDOException $e) {
               echo "Error: " . $e->getMessage();
             }

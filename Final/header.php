@@ -80,6 +80,9 @@ try {
                         $stmt = $dbconn->prepare($query);
                         $stmt->execute([$rcsid, 0]);
                     }
+                    if($user['ban'] == true) {
+                        header("Location: banned.php");
+                    }
                     $_SESSION["user"] = $rcsid;
                     echo "<i class='bi bi-person-circle'></i>" . " " . $_SESSION["user"];
                 }
