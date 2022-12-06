@@ -91,16 +91,17 @@
         $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid";
         if (isset($_POST['search'])) {
           $search = htmlspecialchars(trim($_POST['search']));
-          $strSQL = " WHERE title LIKE ? ";
-          $params[] = '%'. $search. '%';
+          $strSQL = " AND title LIKE ? ";
+          $params[] = '%' . $search . '%';
           $_SESSION['search'] = $search;
-        }else{
-          if(isset($_SESSION['search']) && strlen($_SESSION['search']) > 0){
+        } else {
+          if (isset($_SESSION['search']) && strlen($_SESSION['search']) > 0) {
             $search = $_SESSION['search'];
-            $strSQL .= " WHERE title LIKE ? ";
-            $params[] = '%'. $search. '%';
+            $strSQL .= " AND title LIKE ? ";
+            $params[] = '%' . $search . '%';
           }
         }
+        $query .= $strSQL;
         if (isset($_GET['sort'])) {
           if ($_GET['sort'] == 'price-low') {
             $query .= " ORDER BY price ASC";
