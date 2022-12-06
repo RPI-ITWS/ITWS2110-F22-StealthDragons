@@ -86,7 +86,51 @@
             <li><a class="dropdown-item" href="#">Recent</a></li>
           </ul>
         </div>
-        <div class="row py-2">
+        <?php 
+        $query = "SELECT * FROM items WHERE sold = 0"; 
+        $stmt = $dbconn->prepare($query);
+        $stmt->execute();
+        $numCols = 0; 
+        $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+        foreach ($stmt as $row) {
+          if($numCols == 0) {
+            echo "<div class=\"row py-2\">";
+          }
+          $new_URI_path = "/iit/Final2/Final/product-page.php?item_ref=".$row['id'];
+          $product_URI = $host_URI.$new_URI_path;
+
+
+        ?>
+        <div class="col-md">
+          <a href="<?php echo $product_URI?>" class="sale-card">
+            <div class="card h-100">
+              <img src=.<?php echo $row['image1'] ?> class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text">
+                  <?php echo $row['title'] ?>
+                </p>
+                <h6 class="card-subtitle"> Price</h6>
+                <h6 class="card-title">
+                  $<?php echo $row['price'] ?>
+                </h6>
+              </div>
+            </div>
+          </a>
+        </div>
+        <?php 
+          $numCols = $numCols + 1; 
+          if($numCols == 5) {
+            $numCols = 0; 
+          }
+        }
+        if($numCols != 0 ) {
+          for(; $numCols < 5; $numCols++) {
+            echo "<div class=\"col-md\"></div>";
+          }
+        }
+
+        ?>
+        <!--  <div class="row py-2">
           <div class="col-md">
             <a href="#" class="sale-card">
               <div class="card">
@@ -335,7 +379,7 @@
               </div>
             </a>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>

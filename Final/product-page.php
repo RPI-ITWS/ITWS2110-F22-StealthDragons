@@ -15,7 +15,7 @@
     $stmt->bindValue(':id', $item_id);
     $stmt->execute();
     $row = $stmt->fetch();
-    if ($row["rcsid"] != $_SESSION['user'] || !isset($_GET['item_ref']) || $stmt->rowCount() == 0) {
+    if ( /* $row["rcsid"] != $_SESSION['user'] || */ !isset($_GET['item_ref']) || $stmt->rowCount() == 0) {
       echo '<script>alert("Page Not Found")</script>';
       exit();
     } else {
