@@ -43,7 +43,9 @@
           } else {
             echo '<div class="carousel-item">';
           } ?>
-        <img src=.<?php echo $row['image1'] ?> class="d-block w-100 carousel-img" alt="...">
+        <div class="d-flex justify-content-center">
+          <img src=.<?php echo $row['image1'] ?> class="d-block w-50 carousel-img" alt="...">
+        </div>
         <div class="carousel-caption d-block">
           <h5>
             <?php echo $row['title'] ?>
