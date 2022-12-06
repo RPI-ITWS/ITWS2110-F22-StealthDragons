@@ -11,12 +11,12 @@
     <h2 class="sec-head-1">Browse</h2>
     <div class="row">
       <div class="col-3 pt-4">
-        <h3 class="body-text">Filter By</h3>
-        <form action="">
+        <h3 class="body-text"><b>Filter By</b></h3>
+        <form action="" method="post">
           <!-- Category -->
           <h3 class="body-text">Category</h3>
-          <div class="d-flex flex-row" id="category-div">
-            <div class="input-group py-2">
+          <div id="category-div">
+            <div class="input-group py-2 div w-100">
               <span class="input-group-text">
                 <i class="bi bi-basket-fill"></i>
               </span>
@@ -39,7 +39,7 @@
               </select>
             </div>
             <!-- Subcategory -->
-            <div class="input-group py-2" id="subcat1-div">
+            <div class="input-group py-2 w-100" id="subcat1-div">
               <span class="input-group-text">
                 <i class="bi bi-basket-fill"></i>
               </span>
@@ -48,7 +48,7 @@
               </select>
             </div>
             <!-- Subcategory -->
-            <div class="input-group py-2" id="subcat2-div">
+            <div class="input-group py-2 w-100" id="subcat2-div">
               <span class="input-group-text">
                 <i class="bi bi-basket-fill"></i>
               </span>
@@ -57,6 +57,7 @@
               </select>
             </div>
           </div>
+          <h3 class="body-text">Condition</h3>
           <div class="input-group py-2">
             <span class="input-group-text">
               <i class="bi bi-search-heart"></i>
@@ -71,7 +72,7 @@
             </select>
           </div>
           <div class="center-button py-4" id="submit-button-div">
-            <button type="submit" name="filters" class="btn btn-primary" id="filters">
+            <button type="submit" name="filters-submit" class="btn btn-primary" id="filters-submit">
               Apply Filters
             </button>
           </div>
@@ -91,21 +92,47 @@
           </ul>
         </div>
         <?php
-        $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid";
+        $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != ?";
+        $params = array($_SESSION['user']);
+        if (isset($_POST['filters-submit'])) {
+          if (isset($_POST['filter-item-category'])) {
+            $category = $_POST['filter-item-category'];
+            $query .= " AND category = ?";
+            $params[] = $category;
+          }
+
+          if (isset($_POST['filter-item-subcategory'])) {
+            $subcategory = $_POST['filter-item-subcategory'];
+            $query .= " AND subcategory1 = ?";
+            $params[] = $subcategory;
+          }
+
+          if (isset($_POST['filter-item-subcategory-2'])) {
+            $subcategory2 = $_POST['filter-item-subcategory-2'];
+            $query .= " AND subcategory2 = ?";
+            $params[] = $subcategory2;
+
+          }
+
+          if (isset($_POST['post-item-condition'])) {
+            $condition = $_POST['post-item-condition'];
+            $query .= " AND item_condition = ?";
+            $params[] = $condition;
+          }
+        }
         if (isset($_POST['search-items'])) {
           $search = htmlspecialchars(trim($_POST['search-items']));
-          $strSQL = " AND title LIKE ? ";
+          $query .= " AND title LIKE ? ";
           $params[] = '%' . $search . '%';
           $_SESSION['search-items'] = $search;
         } else {
           if (isset($_SESSION['search-items']) && strlen($_SESSION['search-items']) > 0) {
             $search = $_SESSION['search-items'];
-            $strSQL .= " AND title LIKE ? ";
+            $query .= " AND title LIKE ? ";
             $params[] = '%' . $search . '%';
           }
-
         }
-        $query .= $strSQL;
+
         if (isset($_GET['sort'])) {
           if ($_GET['sort'] == 'price-low') {
             $query .= " ORDER BY price ASC";
@@ -119,8 +146,7 @@
         }
 
         $stmt = $dbconn->prepare($query);
-        $stmt->bindValue(':rcsid', $_SESSION['user']);
-        $stmt->execute();
+        $stmt->execute($params);
         $numCols = 0;
         $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
         foreach ($stmt as $row) {
