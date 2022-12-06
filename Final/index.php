@@ -19,12 +19,12 @@
       <div class="carousel-inner">
         <?php
         if (isset($_GET['item_sold_msg'])) {
-          $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final2/Final/index.php";
+          $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/index.php";
           echo '<script>alert("The seller will email you shortly to arrange payment and pickup!")</script>';
           echo '<script>window.location.href = "' . $redirect_URI . '"</script>';
         }
         if (isset($_GET['offer_msg'])) {
-          $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final2/Final/index.php";
+          $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/index.php";
           echo '<script>alert("Your offer has been sent to the seller!")</script>';
           echo '<script>window.location.href = "' . $redirect_URI . '"</script>';
         }
@@ -35,7 +35,7 @@
         $count = 0;
         $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
         foreach ($stmt as $row) {
-          $new_URI_path = "/iit/Final2/Final/product-page.php?item_ref=".$row['id'];
+          $new_URI_path = "/ITWS2110-F22-StealthDragons/Final/product-page.php?item_ref=".$row['id'];
           $product_URI = $host_URI.$new_URI_path;
           $count++;
           if ($count == 1) {
@@ -79,7 +79,7 @@
       $stmt->execute();
       $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
       foreach ($stmt as $row) {
-        $new_URI_path = "/iit/Final2/Final/product-page.php?item_ref=".$row['id'];
+        $new_URI_path = "/ITWS2110-F22-StealthDragons/Final/product-page.php?item_ref=".$row['id'];
         $product_URI = $host_URI.$new_URI_path;
       ?>
       <div class="col-md">
@@ -115,7 +115,7 @@
       $stmt->execute();
       $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
       foreach ($stmt as $row) {
-        $new_URI_path = "/iit/Final2/Final/product-page.php?item_ref=".$row['id'];
+        $new_URI_path = "/ITWS2110-F22-StealthDragons/Final/product-page.php?item_ref=".$row['id'];
         $product_URI = $host_URI.$new_URI_path;
       ?>
       <div class="col-md">
@@ -151,7 +151,7 @@
       $stmt->execute();
       $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
       foreach ($stmt as $row) {
-        $new_URI_path = "/iit/Final2/Final/product-page.php?item_ref=".$row['id'];
+        $new_URI_path = "/ITWS2110-F22-StealthDragons/Final/product-page.php?item_ref=".$row['id'];
         $product_URI = $host_URI.$new_URI_path;
       ?>
       <div class="col-md">
@@ -187,7 +187,7 @@
       $stmt->execute();
       $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
       foreach ($stmt as $row) {
-        $new_URI_path = "/iit/Final2/Final/product-page.php?item_ref=".$row['id'];
+        $new_URI_path = "/ITWS2110-F22-StealthDragons/Final/product-page.php?item_ref=".$row['id'];
         $product_URI = $host_URI.$new_URI_path;
       ?>
       <div class="col-md">

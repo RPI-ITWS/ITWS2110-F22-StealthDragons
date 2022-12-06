@@ -115,7 +115,7 @@
               $stmt = $dbconn->prepare($query);
               $stmt->bindValue(':itemid', $itemid);
               $stmt->execute();
-              $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final2/Final/index.php";
+              $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/index.php";
               echo("<script>location.href = '$redirect_URI';</script>");
             } catch (PDOException $e) {
               echo "Error: " . $e->getMessage();
@@ -236,7 +236,7 @@
       $item_sold_add_stmt->bindValue(':buyer_id', $_SESSION['user']);
       $item_sold_add_stmt->bindValue(':price', $row['price']);
       $item_sold_add_stmt->execute();
-      $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final/index.php?item_sold_msg=true";
+      $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/index.php?item_sold_msg=true";
       echo ("<script>location.href = '$redirect_URI';</script>");
     }
     if (isset($_POST['offer-item'])) {
@@ -246,7 +246,7 @@
       $offer_stmt->bindValue(':buyer_id', $_SESSION['user']);
       $offer_stmt->bindValue(':price', $_POST['offer-price']);
       $offer_stmt->execute();
-      $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final/index.php?offer_msg=true";
+      $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/index.php?offer_msg=true";
       echo ("<script>location.href = '$redirect_URI';</script>");
     }
 

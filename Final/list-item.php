@@ -234,7 +234,7 @@
         $stmt->bindValue(':itemid', $itemid);
         $stmt->execute();
         $stmt2 = $dbconn->prepare($query2);
-        $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final2/Final/list-item.php";
+        $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/list-item.php";
         echo ("<script>location.href = '$redirect_URI';</script>");
       }
       if (isset($_POST['relist-lisitng'])) {
@@ -247,7 +247,7 @@
         $stmt2->bindValue(':itemid', $itemid);
         $stmt->execute();
         $stmt2->execute();
-        $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final2/Final/list-item.php";
+        $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/list-item.php";
         echo ("<script>location.href = '$redirect_URI';</script>");
       }
       if (isset($_POST['accept-offer'])) {
@@ -266,7 +266,7 @@
         $stmt->execute();
         $stmt2->execute();
         $stmt3->execute();
-        $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final2/Final/list-item.php";
+        $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/list-item.php";
         echo ("<script>location.href = '$redirect_URI';</script>");
       }
       if (isset($_POST['decline-offer'])) {
@@ -277,7 +277,7 @@
         $stmt->bindValue(':itemid', $itemid);
         $stmt->bindValue(':offererid', $offerer_id);
         $stmt->execute();
-        $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final2/Final/list-item.php";
+        $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/list-item.php";
         echo ("<script>location.href = '$redirect_URI';</script>");
       }
       ?>
@@ -552,7 +552,7 @@
       $query = "INSERT INTO items(rcsid, title, price, item_condition, category, subcategory1, subcategory2, date_posted, item_description, image1, image2, image3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
       $stmt = $dbconn->prepare($query);
       $stmt->execute([$rcsid, $title, $price, $condition, $category, $subcategory, $subcategory_2, $date, $description, $new_file_path1, $new_file_path2, $new_file_path3]);
-      $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final2/Final/list-item.php";
+      $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/list-item.php";
       echo ("<script>location.href = '$redirect_URI';</script>");
     } elseif (count($new_file_paths) == 2) {
       $new_file_path1 = $new_file_paths[0];
@@ -560,14 +560,14 @@
       $query = "INSERT INTO items(rcsid, title, price,   item_condition, category, subcategory1, subcategory2, date_posted, item_description, image1, image2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
       $stmt = $dbconn->prepare($query);
       $stmt->execute([$rcsid, $title, $price, $condition, $category, $subcategory, $subcategory_2, $date, $description, $new_file_path1, $new_file_path2]);
-      $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final2/Final/list-item.php";
+      $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/list-item.php";
       echo ("<script>location.href = '$redirect_URI';</script>");
     } else {
       $new_file_path1 = $new_file_paths[0];
       $query = "INSERT INTO items(rcsid, title, price, item_condition, category, subcategory1, subcategory2, date_posted, item_description, image1) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
       $stmt = $dbconn->prepare($query);
       $stmt->execute([$rcsid, $title, $price, $condition, $category, $subcategory, $subcategory_2, $date, $description, $new_file_path1]);
-      $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final2/Final/list-item.php";
+      $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/list-item.php";
       echo ("<script>location.href = '$redirect_URI';</script>");
     }
   }
@@ -626,14 +626,14 @@
       $query = "UPDATE items SET title = '$title', price = '$price', item_condition = '$condition', category = '$category', subcategory1 = '$subcategory', subcategory2 = '$subcategory_2', item_description = '$description', image1 = '$new_file_path1', image2 = '$new_file_path2', image3 = '$new_file_path3' WHERE id = '$rowID';";
       $stmt = $dbconn->prepare($query);
       $stmt->execute();
-      $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final2/Final/list-item.php";
+      $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/list-item.php";
       echo ("<script>location.href = '$redirect_URI';</script>");
     } elseif (count($new_file_paths) == 2) {
       $new_file_path1 = $new_file_paths[0];
       $new_file_path2 = $new_file_paths[1];
       $query = "UPDATE items SET title = '$title', price = '$price', item_condition = '$condition', category = '$category', subcategory1 = '$subcategory', subcategory2 = '$subcategory_2', item_description = '$description', image1 = '$new_file_path1', image2 = '$new_file_path2' WHERE id = '$rowID';";
       $stmt = $dbconn->prepare($query);
-      $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final2/Final/list-item.php";
+      $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/list-item.php";
       echo ("<script>location.href = '$redirect_URI';</script>");
       $stmt->execute();
     } else {
@@ -641,7 +641,7 @@
       $query = "UPDATE items SET title = '$title', price = '$price', item_condition = '$condition', category = '$category', subcategory1 = '$subcategory', subcategory2 = '$subcategory_2', item_description = '$description', image1 = '$new_file_path1' WHERE id = '$rowID';";
       $stmt = $dbconn->prepare($query);
       $stmt->execute();
-      $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final2/Final/list-item.php";
+      $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/list-item.php";
       echo ("<script>location.href = '$redirect_URI';</script>");
     }
   }
