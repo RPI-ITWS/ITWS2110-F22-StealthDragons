@@ -91,6 +91,14 @@ function setToCreate() {
   document.getElementById("post-item-price").value = "";
   document.getElementById("condition").value = "select-condition";
   document.getElementById("post-item-description").value = "";
+  document.getElementById("category").classList.remove("d-none");
+  document.getElementById("subcategory-1").classList.remove("d-none");
+  document.getElementById("subcategory-2").classList.remove("d-none");
+  document.getElementById("image-up-label").classList.remove("d-none");
+  document.getElementById("image-up-input").classList.remove("d-none");
+  document.getElementById("category-div").classList.remove("d-none");
+  document.getElementById("subcat1-div").classList.remove("d-none");
+  document.getElementById("subcat2-div").classList.remove("d-none");
 }
 
 function setToEdit(thisElement) {
@@ -110,15 +118,15 @@ function setToEdit(thisElement) {
   ).value;
   document.getElementById("post-item-description").value =
     document.getElementById("item_description-" + rowid).value;
-  // document.getElementById("category").value = document.getElementById(
-  //   "category-" + rowid
-  // ).value;
-  // document.getElementById("subcategory-1").value = document.getElementById(
-  //   "subcategory1-" + rowid
-  // ).value;
-  // document.getElementById("subcategory-2").value = document.getElementById(
-  //   "subcategory2-" + rowid
-  // ).value;
+
+  document.getElementById("category").classList.add("d-none");
+  document.getElementById("subcategory-1").classList.add("d-none");
+  document.getElementById("subcategory-2").classList.add("d-none");
+  document.getElementById("image-up-label").classList.add("d-none");
+  document.getElementById("image-up-input").classList.add("d-none");
+  document.getElementById("category-div").classList.add("d-none");
+  document.getElementById("subcat1-div").classList.add("d-none");
+  document.getElementById("subcat2-div").classList.add("d-none");
 }
 
 let removeListBtn = document.getElementsByClassName("remove-listing-btn");

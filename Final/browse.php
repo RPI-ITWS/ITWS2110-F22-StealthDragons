@@ -86,256 +86,51 @@
             <li><a class="dropdown-item" href="#">Recent</a></li>
           </ul>
         </div>
-        <div class="row py-2">
-          <div class="col-md">
-            <a href="#" class="sale-card">
-              <div class="card">
-                <img src="resources/images/new1.jpg" class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">Sitting/Standing Desk</p>
-                  <h6 class="card-subtitle">Price</h6>
-                  <h6 class="card-title">$79</h6>
-                </div>
+        <?php 
+        $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid"; 
+        $stmt = $dbconn->prepare($query);
+        $stmt->bindValue(':rcsid', $_SESSION['user']);
+        $stmt->execute();
+        $numCols = 0; 
+        $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+        foreach ($stmt as $row) {
+          if($numCols == 0) {
+            echo "<div class=\"row py-2\">";
+          }
+          $new_URI_path = "/iit/Final2/Final/product-page.php?item_ref=".$row['id'];
+          $product_URI = $host_URI.$new_URI_path;
+
+
+        ?>
+        <div class="col-md">
+          <a href="<?php echo $product_URI?>" class="sale-card">
+            <div class="card h-100">
+              <img src=.<?php echo $row['image1'] ?> class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text">
+                  <?php echo $row['title'] ?>
+                </p>
+                <h6 class="card-subtitle"> Price</h6>
+                <h6 class="card-title">
+                  $<?php echo $row['price'] ?>
+                </h6>
               </div>
-            </a>
-          </div>
-          <div class="col-md">
-            <a href="#" class="sale-card">
-              <div class="card">
-                <img src="resources/images/new2.jpg" class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">Spice Rack Organizer</p>
-                  <h6 class="card-subtitle">Price</h6>
-                  <h6 class="card-title">$30</h6>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-md">
-            <a href="#" class="sale-card">
-              <div class="card">
-                <img src="resources/images/new3.jpg" class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">Dirt Devil Vacuum</p>
-                  <h6 class="card-subtitle">Price</h6>
-                  <h6 class="card-title">$5</h6>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-md">
-            <a href="#" class="sale-card">
-              <div class="card">
-                <img src="resources/images/new4.jpg" class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">Portable Mini-Fridge</p>
-                  <h6 class="card-subtitle">Price</h6>
-                  <h6 class="card-title">$25</h6>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-md">
-            <a href="#" class="sale-card">
-              <div class="card">
-                <img src="resources/images/new5.jpg" class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">Quilted Curtains</p>
-                  <h6 class="card-subtitle">Price</h6>
-                  <h6 class="card-title">$35</h6>
-                </div>
-              </div>
-            </a>
-          </div>
+            </div>
+          </a>
         </div>
-        <div class="row py-2">
-          <div class="col-md">
-            <a href="#" class="sale-card">
-              <div class="card">
-                <img src="resources/images/textbook1.jpg" class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">
-                    Technician Automotive Repair Textbooks
-                  </p>
-                  <h6 class="card-subtitle">Price</h6>
-                  <h6 class="card-title">$60</h6>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-md">
-            <a href="#" class="sale-card">
-              <div class="card">
-                <img src="resources/images/textbook2.jpg" class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">Electrical Engineering Textbooks</p>
-                  <h6 class="card-subtitle">Price</h6>
-                  <h6 class="card-title">$30</h6>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-md">
-            <a href="#" class="sale-card">
-              <div class="card">
-                <img src="resources/images/textbook3.jpg" class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">Medical Textbooks Mint</p>
-                  <h6 class="card-subtitle">Price</h6>
-                  <h6 class="card-title">$45</h6>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-md">
-            <a href="#" class="sale-card">
-              <div class="card">
-                <img src="resources/images/textbook4.jpg" class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">Various Textbooks Good Condition</p>
-                  <h6 class="card-subtitle">Price</h6>
-                  <h6 class="card-title">$10</h6>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-md">
-            <a href="#" class="sale-card">
-              <div class="card">
-                <img src="resources/images/textbook5.jpg" class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">Two Reading Textbooks</p>
-                  <h6 class="card-subtitle">Price</h6>
-                  <h6 class="card-title">$10</h6>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div class="row py-2">
-          <div class="col-md">
-            <a href="#" class="sale-card">
-              <div class="card">
-                <img src="resources/images/feat1.jpg" class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">Bose Speaker Set</p>
-                  <h6 class="card-subtitle">Price</h6>
-                  <h5 class="card-title">$20</h5>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-md">
-            <a href="#" class="sale-card">
-              <div class="card">
-                <img src="resources/images/feat2.jpg" class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">Roku Express</p>
-                  <h6 class="card-subtitle">Price</h6>
-                  <h5 class="card-title">$55</h5>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-md">
-            <a href="#" class="sale-card">
-              <div class="card">
-                <img src="resources/images/feat3.jpg" class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">Kindle Fire Tablet</p>
-                  <h6 class="card-subtitle">Price</h6>
-                  <h5 class="card-title">$45</h5>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-md">
-            <a href="#" class="sale-card">
-              <div class="card">
-                <img src="resources/images/feat4.jpg" class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">Gen. 3 AirPods</p>
-                  <h6 class="card-subtitle">Price</h6>
-                  <h5 class="card-title">$150</h5>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-md">
-            <a href="#" class="sale-card">
-              <div class="card">
-                <img src="resources/images/feat5.jpg" class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">Vinyl Record Player</p>
-                  <h6 class="card-subtitle">Price</h6>
-                  <h5 class="card-title">$50</h5>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div class="row py-2">
-          <div class="col-md">
-            <a href="#" class="sale-card">
-              <div class="card">
-                <img src="resources/images/new1.jpg" class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">Sitting/Standing Desk</p>
-                  <h6 class="card-subtitle">Price</h6>
-                  <h6 class="card-title">$79</h6>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-md">
-            <a href="#" class="sale-card">
-              <div class="card">
-                <img src="resources/images/new2.jpg" class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">Spice Rack Organizer</p>
-                  <h6 class="card-subtitle">Price</h6>
-                  <h6 class="card-title">$30</h6>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-md">
-            <a href="#" class="sale-card">
-              <div class="card">
-                <img src="resources/images/new3.jpg" class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">Dirt Devil Vacuum</p>
-                  <h6 class="card-subtitle">Price</h6>
-                  <h6 class="card-title">$5</h6>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-md">
-            <a href="#" class="sale-card">
-              <div class="card">
-                <img src="resources/images/new4.jpg" class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">Portable Mini-Fridge</p>
-                  <h6 class="card-subtitle">Price</h6>
-                  <h6 class="card-title">$25</h6>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-md">
-            <a href="#" class="sale-card">
-              <div class="card">
-                <img src="resources/images/new5.jpg" class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <p class="card-text">Quilted Curtains</p>
-                  <h6 class="card-subtitle">Price</h6>
-                  <h6 class="card-title">$35</h6>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
+        <?php 
+          $numCols = $numCols + 1; 
+          if($numCols == 5) {
+            $numCols = 0; 
+          }
+        }
+        if($numCols != 0 ) {
+          for(; $numCols < 5; $numCols++) {
+            echo "<div class=\"col-md\"></div>";
+          }
+        }
+
+        ?>
       </div>
     </div>
   </section>

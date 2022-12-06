@@ -28,14 +28,14 @@
           echo '<script>alert("Your offer has been sent to the seller!")</script>';
           echo '<script>window.location.href = "' . $redirect_URI . '"</script>';
         }
-        $query = "SELECT * FROM items WHERE rcsid != :rcsid ORDER BY id DESC LIMIT 3";
+        $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid ORDER BY id DESC LIMIT 3";
         $stmt = $dbconn->prepare($query);
         $stmt->bindValue(':rcsid', $_SESSION['user']);
         $stmt->execute();
         $count = 0;
         $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
         foreach ($stmt as $row) {
-          $new_URI_path = "/iit/Final/product-page.php?item_ref=".$row['id'];
+          $new_URI_path = "/iit/Final2/Final/product-page.php?item_ref=".$row['id'];
           $product_URI = $host_URI.$new_URI_path;
           $count++;
           if ($count == 1) {
@@ -71,14 +71,17 @@
     <h3 class="sec-head-2 pb-3">New Items</h3>
     <div class="row">
       <?php
-      $query = "SELECT * FROM items WHERE rcsid = :rcsid ORDER BY id DESC LIMIT 5";
+      $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid ORDER BY date_posted DESC LIMIT 5";
       $stmt = $dbconn->prepare($query);
       $stmt->bindValue(':rcsid', $_SESSION['user']);
       $stmt->execute();
+      $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
       foreach ($stmt as $row) {
+        $new_URI_path = "/iit/Final2/Final/product-page.php?item_ref=".$row['id'];
+        $product_URI = $host_URI.$new_URI_path;
       ?>
       <div class="col-md">
-        <a href="" class="sale-card">
+        <a href="<?php echo $product_URI?>" class="sale-card">
           <div class="card h-100">
             <img src=.<?php echo $row['image1'] ?> class="card-img-top" alt="...">
             <div class="card-body">
@@ -104,14 +107,17 @@
     <h3 class="sec-head-2 pb-3">Top Listings</h3>
     <div class="row">
     <?php
-      $query = "SELECT * FROM items WHERE rcsid = :rcsid ORDER BY id DESC LIMIT 5";
+      $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid ORDER BY item_views DESC LIMIT 5";
       $stmt = $dbconn->prepare($query);
       $stmt->bindValue(':rcsid', $_SESSION['user']);
       $stmt->execute();
+      $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
       foreach ($stmt as $row) {
+        $new_URI_path = "/iit/Final2/Final/product-page.php?item_ref=".$row['id'];
+        $product_URI = $host_URI.$new_URI_path;
       ?>
       <div class="col-md">
-        <a href="" class="sale-card">
+        <a href="<?php echo $product_URI?>" class="sale-card">
           <div class="card h-100">
             <img src=.<?php echo $row['image1'] ?> class="card-img-top" alt="...">
             <div class="card-body">
@@ -137,14 +143,17 @@
     <h3 class="sec-head-2 pb-3">Featured Items</h3>
     <div class="row">
     <?php
-      $query = "SELECT * FROM items WHERE rcsid = :rcsid ORDER BY id DESC LIMIT 5";
+      $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid LIMIT 5";
       $stmt = $dbconn->prepare($query);
       $stmt->bindValue(':rcsid', $_SESSION['user']);
       $stmt->execute();
+      $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
       foreach ($stmt as $row) {
+        $new_URI_path = "/iit/Final2/Final/product-page.php?item_ref=".$row['id'];
+        $product_URI = $host_URI.$new_URI_path;
       ?>
       <div class="col-md">
-        <a href="" class="sale-card">
+        <a href="<?php echo $product_URI?>" class="sale-card">
           <div class="card h-100">
             <img src=.<?php echo $row['image1'] ?> class="card-img-top" alt="...">
             <div class="card-body">
@@ -170,14 +179,17 @@
     <h3 class="sec-head-2 pb-3">Textbooks</h3>
     <div class="row">
     <?php
-      $query = "SELECT * FROM items WHERE rcsid = :rcsid ORDER BY id DESC LIMIT 5";
+      $query = "SELECT * FROM items WHERE sold = 0 AND category = 2 AND rcsid != :rcsid LIMIT 5";
       $stmt = $dbconn->prepare($query);
       $stmt->bindValue(':rcsid', $_SESSION['user']);
       $stmt->execute();
+      $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
       foreach ($stmt as $row) {
+        $new_URI_path = "/iit/Final2/Final/product-page.php?item_ref=".$row['id'];
+        $product_URI = $host_URI.$new_URI_path;
       ?>
       <div class="col-md">
-        <a href="" class="sale-card">
+        <a href="<?php echo $product_URI?>" class="sale-card">
           <div class="card h-100">
             <img src=.<?php echo $row['image1'] ?> class="card-img-top" alt="...">
             <div class="card-body">
