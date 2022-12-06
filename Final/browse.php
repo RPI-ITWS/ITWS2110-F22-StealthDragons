@@ -81,13 +81,26 @@
             Sort By
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Price Lowest</a></li>
-            <li><a class="dropdown-item" href="#">Price Highest</a></li>
-            <li><a class="dropdown-item" href="#">Recent</a></li>
+            <li><a class="dropdown-item" href="browse.php?sort=price-low">Price Lowest</a></li>
+            <li><a class="dropdown-item" href="browse.php?sort=price-high">Price Highest</a></li>
+            <li><a class="dropdown-item" href="browse.php?sort=recent">Recent</a></li>
+            <li><a class="dropdown-item" href="browse.php?sort=oldest">Oldest</a></li>
           </ul>
         </div>
-        <?php 
+        <?php
         $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid"; 
+        if (isset($_GET['sort'])) {
+          if($_GET['sort'] == 'price-low') {
+            $query .= " ORDER BY price ASC";
+          } else if ($_GET['sort'] == 'price-high') {
+            $query .= " ORDER BY price DESC";
+          } else if ($_GET['sort'] == 'recent') {
+            $query .= " ORDER BY date_posted DESC";
+          } else if ($_GET['sort'] == 'oldest') {
+            $query .= " ORDER BY date_posted ASC";
+          }
+        }
+        
         $stmt = $dbconn->prepare($query);
         $stmt->bindValue(':rcsid', $_SESSION['user']);
         $stmt->execute();
@@ -102,6 +115,7 @@
 
 
         ?>
+
         <div class="col-md">
           <a href="<?php echo $product_URI?>" class="sale-card">
             <div class="card h-100">
