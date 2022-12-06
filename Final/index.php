@@ -23,7 +23,10 @@
         $stmt->bindValue(':rcsid', $_SESSION['user']);
         $stmt->execute();
         $count = 0;
+        $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
         foreach ($stmt as $row) {
+          $new_URI_path = "/iit/Final/product-page.php?item_ref=".$row['id'];
+          $product_URI = $host_URI.$new_URI_path;
           $count++;
           if ($count == 1) {
             echo '<div class="carousel-item active">';
@@ -35,7 +38,7 @@
           <h5>
             <?php echo $row['title'] ?>
           </h5>
-          <a href="product-page.php" class="btn btn-primary">View Item</a>
+          <a href="<?php echo $product_URI?>" class="btn btn-primary">View Item</a>
         </div>
 
         <?php

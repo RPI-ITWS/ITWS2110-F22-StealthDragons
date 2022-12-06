@@ -4,17 +4,18 @@ let thumbnails = document.getElementsByClassName("inactive-thumbnail");
 
 let activeImg = document.getElementsByClassName("active-thumbnail");
 
-for (var i = 0; i < thumbnails.length; i++) {
-  thumbnails[i].addEventListener("mouseover", function () {
-    if (activeImg.length > 0) {
-      activeImg[0].classList.remove("active-thumbnail");
-    }
+if (thumbnails.length > 0) {
+  for (var i = 0; i < thumbnails.length; i++) {
+    thumbnails[i].addEventListener("mouseover", function () {
+      if (activeImg.length > 0) {
+        activeImg[0].classList.remove("active-thumbnail");
+      }
 
-    this.classList.add("active-thumbnail");
-    document.getElementById("current-img").src = this.src;
-  });
+      this.classList.add("active-thumbnail");
+      document.getElementById("current-img").src = this.src;
+    });
+  }
 }
-
 let categorySelector = document.getElementById("category");
 let subcategory1Selector = document.getElementById("subcategory-1");
 let subcategory2Selector = document.getElementById("subcategory-2");

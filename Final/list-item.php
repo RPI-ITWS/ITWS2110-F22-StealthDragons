@@ -9,7 +9,8 @@
     <h2 class="sec-head-1 text-center pt-5">Seller Dashboard
     </h2>
     <div class="text-end">
-      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#listing-modal" onclick="setToCreate()">Create
+      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#listing-modal"
+        onclick="setToCreate()">Create
         Listing</button>
     </div>
     <div class="seller-dash-pill row p-3 my-3 mx-0">
@@ -36,14 +37,16 @@
         $stmt->execute();
         foreach ($stmt as $row) {
           $datetime = strtotime($row['date_posted']);
-          $date = date('Y-m-d', $datetime);
+          $date = date('m-d-Y', $datetime);
       ?>
 
       <div class="card my-2">
         <div class="card-body">
           <div class="row">
-            <div class="col-3">
-              <img src=".<?php echo $row['image1'] ?>" class="img-thumbnail sell-img" alt="...">
+            <div class="col-3 sell-img-col-div">
+              <div class="ratio ratio-1x1">
+                <img src=".<?php echo $row['image1'] ?>" class="img-thumbnail sell-img" alt="...">
+              </div>
             </div>
             <div class="col">
               <h4 class="body-large"><strong>
@@ -65,15 +68,24 @@
                 data-bs-toggle="modal" data-bs-target="#remove-listing-modal">Remove
                 Item</button>
               <!-- Note: When modifying the database at all use post method as it more secure -->
-              <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#listing-modal" onclick="setToEdit(this)" id="<?php echo $row['id'] ?>" value="<?php echo $row['id'] ?>">Edit Listing</button>
+              <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#listing-modal"
+                onclick="setToEdit(this)" id="<?php echo $row['id'] ?>" value="<?php echo $row['id'] ?>">Edit
+                Listing</button>
               <div class="d-none">
-                <input type="text" class="form-control" id="title-<?php echo $row['id'] ?>" value="<?php echo $row['title'] ?>"> 
-                <input type="text" class="form-control" id="price-<?php echo $row['id'] ?>" value="<?php echo $row['price'] ?>"> 
-                <input type="text" class="form-control" id="item_condition-<?php echo $row['id'] ?>" value="<?php echo $row['item_condition'] ?>">
-                <input type="text" class="form-control" id="category-<?php echo $row['id'] ?>" value="<?php echo $row['category'] ?>">
-                <input type="text" class="form-control" id="subcategory1-<?php echo $row['id'] ?>" value="<?php echo $row['subcategory1'] ?>">
-                <input type="text" class="form-control" id="subcategory2-<?php echo $row['id'] ?>" value="<?php echo $row['subcategory2'] ?>">
-                <input type="text" class="form-control" id="item_description-<?php echo $row['id'] ?>" value="<?php echo $row['item_description'] ?>">
+                <input type="text" class="form-control" id="title-<?php echo $row['id'] ?>"
+                  value="<?php echo $row['title'] ?>">
+                <input type="text" class="form-control" id="price-<?php echo $row['id'] ?>"
+                  value="<?php echo $row['price'] ?>">
+                <input type="text" class="form-control" id="item_condition-<?php echo $row['id'] ?>"
+                  value="<?php echo $row['item_condition'] ?>">
+                <input type="text" class="form-control" id="category-<?php echo $row['id'] ?>"
+                  value="<?php echo $row['category'] ?>">
+                <input type="text" class="form-control" id="subcategory1-<?php echo $row['id'] ?>"
+                  value="<?php echo $row['subcategory1'] ?>">
+                <input type="text" class="form-control" id="subcategory2-<?php echo $row['id'] ?>"
+                  value="<?php echo $row['subcategory2'] ?>">
+                <input type="text" class="form-control" id="item_description-<?php echo $row['id'] ?>"
+                  value="<?php echo $row['item_description'] ?>">
               </div>
             </div>
           </div>
@@ -144,14 +156,15 @@
                           <span class="input-group-text">
                             <i class="bi bi-card-text"></i>
                           </span>
-                          <input id="post-item-title" name="post-item-title" type="text" class="form-control" placeholder="Title"  maxlength = "15" required />
+                          <input id="post-item-title" name="post-item-title" type="text" class="form-control"
+                            placeholder="Title" maxlength="15" required />
                         </div>
                         <!-- Price of item -->
                         <div class="input-group py-2">
                           <span class="input-group-text">
                             <i class="bi bi-tags"></i></span>
-                          <input id="post-item-price" name="post-item-price" type="number" min="1" max="999999" class="form-control"
-                            placeholder="Price" required />
+                          <input id="post-item-price" name="post-item-price" type="number" min="1" max="999999"
+                            class="form-control" placeholder="Price" required />
                         </div>
                         <!-- Condition of item -->
                         <div class="input-group py-2">
@@ -232,7 +245,8 @@
                           </button>
                         </div>
                         <div class="d-none">
-                          <input type="text" class="form-control" name="id-placeholder-row" id="id-placeholder-row" value="<?php echo $row['id'] ?>"> 
+                          <input type="text" class="form-control" name="id-placeholder-row" id="id-placeholder-row"
+                            value="<?php echo $row['id'] ?>">
                         </div>
                       </form>
                     </div>
@@ -324,79 +338,79 @@
   }
   ?>
 
-<?php
-  try {
-    if (isset($_POST["edit-item"])) {
+  <?php
+try {
+  if (isset($_POST["edit-item"])) {
 
-      $rcsid = phpCAS::getUser();
-      $title = htmlspecialchars(trim($_POST['post-item-title']));
-      $price = htmlspecialchars(trim($_POST['post-item-price']));
-      $condition = htmlspecialchars(trim($_POST['post-item-condition']));
-      $category = htmlspecialchars(trim($_POST['post-item-category']));
-      $subcategory = htmlspecialchars(trim($_POST['post-item-subcategory']));
-      $subcategory_2 = htmlspecialchars(trim($_POST['post-item-subcategory-2']));
-      $rowID = htmlspecialchars(trim($_POST['id-placeholder-row']));
-      $date = date("Y-m-d H:i:s");
-      $description = htmlspecialchars(trim($_POST['post-item-description']));
-      $file_array = $_FILES['post-item-uploadimgs'];
-      $new_file_paths = array();
-      if (!empty(array_filter($file_array['name']))) {
-        $i = 0;
-        while ($i < 4 && $i < count($file_array['name'])) {
-          $file_name = $file_array['name'][$i];
-          $file_tmp_location = $file_array['tmp_name'][$i];
-          $file_size = $file_array['size'][$i];
-          $file_error = $file_array['error'][$i];
-          $file_type = $file_array['type'][$i];
-          if ($file_error === 0) {
-            if ($file_size < 1000000) {
-              $new_file_name = uniqid('', true) . ".jpg";
-              $new_file_location = '/resources/images/' . $new_file_name;
-              move_uploaded_file($file_tmp_location, $new_file_location);
-              $new_file_paths[$i] = $new_file_location;
-            } else {
-              echo "<script> alert('The file size was too large.')</script>";
-              exit();
-            }
+    $rcsid = phpCAS::getUser();
+    $title = htmlspecialchars(trim($_POST['post-item-title']));
+    $price = htmlspecialchars(trim($_POST['post-item-price']));
+    $condition = htmlspecialchars(trim($_POST['post-item-condition']));
+    $category = htmlspecialchars(trim($_POST['post-item-category']));
+    $subcategory = htmlspecialchars(trim($_POST['post-item-subcategory']));
+    $subcategory_2 = htmlspecialchars(trim($_POST['post-item-subcategory-2']));
+    $rowID = htmlspecialchars(trim($_POST['id-placeholder-row']));
+    $date = date("Y-m-d H:i:s");
+    $description = htmlspecialchars(trim($_POST['post-item-description']));
+    $file_array = $_FILES['post-item-uploadimgs'];
+    $new_file_paths = array();
+    if (!empty(array_filter($file_array['name']))) {
+      $i = 0;
+      while ($i < 4 && $i < count($file_array['name'])) {
+        $file_name = $file_array['name'][$i];
+        $file_tmp_location = $file_array['tmp_name'][$i];
+        $file_size = $file_array['size'][$i];
+        $file_error = $file_array['error'][$i];
+        $file_type = $file_array['type'][$i];
+        if ($file_error === 0) {
+          if ($file_size < 1000000) {
+            $new_file_name = uniqid('', true) . ".jpg";
+            $new_file_location = '/resources/images/' . $new_file_name;
+            move_uploaded_file($file_tmp_location, $new_file_location);
+            $new_file_paths[$i] = $new_file_location;
           } else {
-            // echo "<script> alert('There was an error uploading your file.')</script>";
-            echo "<script> alert('There was an error uploading your file.')</script>";
+            echo "<script> alert('The file size was too large.')</script>";
             exit();
           }
-          $i++;
+        } else {
+          // echo "<script> alert('There was an error uploading your file.')</script>";
+          echo "<script> alert('There was an error uploading your file.')</script>";
+          exit();
         }
-      } else {
-        echo "<script> alert('No Files Uploaded.')</script>";
-        exit();
+        $i++;
       }
-
-      if (count($new_file_paths) == 3) {
-        $new_file_path1 = $new_file_paths[0];
-        $new_file_path2 = $new_file_paths[1];
-        $new_file_path3 = $new_file_paths[2];
-        $query = "UPDATE items SET title = '$title', price = '$price', item_condition = '$condition', category = '$category', subcategory1 = '$subcategory', subcategory2 = '$subcategory_2', item_description = '$description', image1 = '$new_file_path1', image2 = '$new_file_path2', image3 = '$new_file_path3' WHERE id = '$rowID';";
-        $stmt = $dbconn->prepare($query);
-        $stmt->execute();
-        header("Location: list-item.php");
-      } elseif (count($new_file_paths) == 2) {
-        $new_file_path1 = $new_file_paths[0];
-        $new_file_path2 = $new_file_paths[1];
-        $query = "UPDATE items SET title = '$title', price = '$price', item_condition = '$condition', category = '$category', subcategory1 = '$subcategory', subcategory2 = '$subcategory_2', item_description = '$description', image1 = '$new_file_path1', image2 = '$new_file_path2' WHERE id = '$rowID';";
-        $stmt = $dbconn->prepare($query);
-        header("Location: list-item.php");
-        $stmt->execute();
-      } else {
-        $new_file_path1 = $new_file_paths[0];
-        $query = "UPDATE items SET title = '$title', price = '$price', item_condition = '$condition', category = '$category', subcategory1 = '$subcategory', subcategory2 = '$subcategory_2', item_description = '$description', image1 = '$new_file_path1' WHERE id = '$rowID';";
-        $stmt = $dbconn->prepare($query);
-        $stmt->execute();
-        header("Location: list-item.php");
-      }
+    } else {
+      echo "<script> alert('No Files Uploaded.')</script>";
+      exit();
     }
-  } catch (PDOException $e) {
-    echo "Error: " . $e;
+
+    if (count($new_file_paths) == 3) {
+      $new_file_path1 = $new_file_paths[0];
+      $new_file_path2 = $new_file_paths[1];
+      $new_file_path3 = $new_file_paths[2];
+      $query = "UPDATE items SET title = '$title', price = '$price', item_condition = '$condition', category = '$category', subcategory1 = '$subcategory', subcategory2 = '$subcategory_2', item_description = '$description', image1 = '$new_file_path1', image2 = '$new_file_path2', image3 = '$new_file_path3' WHERE id = '$rowID';";
+      $stmt = $dbconn->prepare($query);
+      $stmt->execute();
+      header("Location: list-item.php");
+    } elseif (count($new_file_paths) == 2) {
+      $new_file_path1 = $new_file_paths[0];
+      $new_file_path2 = $new_file_paths[1];
+      $query = "UPDATE items SET title = '$title', price = '$price', item_condition = '$condition', category = '$category', subcategory1 = '$subcategory', subcategory2 = '$subcategory_2', item_description = '$description', image1 = '$new_file_path1', image2 = '$new_file_path2' WHERE id = '$rowID';";
+      $stmt = $dbconn->prepare($query);
+      header("Location: list-item.php");
+      $stmt->execute();
+    } else {
+      $new_file_path1 = $new_file_paths[0];
+      $query = "UPDATE items SET title = '$title', price = '$price', item_condition = '$condition', category = '$category', subcategory1 = '$subcategory', subcategory2 = '$subcategory_2', item_description = '$description', image1 = '$new_file_path1' WHERE id = '$rowID';";
+      $stmt = $dbconn->prepare($query);
+      $stmt->execute();
+      header("Location: list-item.php");
+    }
   }
-  ?>
+} catch (PDOException $e) {
+  echo "Error: " . $e;
+}
+?>
   <!-- Site Footer -->
   <footer></footer>
 </body>

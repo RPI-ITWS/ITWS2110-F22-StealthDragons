@@ -138,11 +138,6 @@ body {
   color: var(--RPI-Light-Gray);
 }
 
-.main-product {
-  height: 60%;
-  width: 100%;
-}
-
 .inactive-thumbnail {
   opacity: 0.2;
 }
@@ -179,6 +174,10 @@ select option:checked {
 
 .item-id {
   display: none;
+}
+
+.sell-img-col-div{
+  max-height: 200px;
 }
 
 /* Changed Bootstrap Styling */

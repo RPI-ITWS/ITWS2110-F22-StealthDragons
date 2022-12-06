@@ -6,33 +6,65 @@
   <?php include 'header.php' ?>
   <!-- product details section -->
   <section class="container-xxl pt-5">
-    <h2 class="sec-head-1 pb-3">Spongebob Chair</h2>
-    <div class="row">
+    <?php
+    $item_id = $_GET['item_ref'];
+    $query = "SELECT items.*, categories.category AS c, subcategories1.subcategory1 AS sc1, subcategories2.subcategory2 as sc2
+    FROM items, categories, subcategories1, subcategories2
+    WHERE items.id = :id and categories.id = items.category and subcategories1.id = items.subcategory1 and subcategories2.id = items.subcategory2 LIMIT 1";
+    $stmt = $dbconn->prepare($query);
+    $stmt->bindValue(':id', $item_id);
+    $stmt->execute();
+    $row = $stmt->fetch();
+    if ($row["rcsid"] != $_SESSION['user'] || !isset($_GET['item_ref']) || $stmt->rowCount() == 0) {
+      echo '<script>alert("Page Not Found")</script>';
+      exit();
+    } else {
+      $add_item_query = "UPDATE items SET item_views = Coalesce(item_views,0) + 1 WHERE id = :id";
+      $add_item_stmt = $dbconn->prepare($add_item_query);
+      $add_item_stmt->bindValue(':id', $item_id);
+      $add_item_stmt->execute();
+    ?>
+    <h2 class="sec-head-1 pb-3">
+      <?php echo $row['title'] ?>
+    </h2>
+    <div class="row pb-5">
       <div class="col-md">
-        <img
-          src="https://secure.img1-cg.wfcdn.com/im/16817007/c_crop-h680-w680%5Ecompr-r85/1127/112745653/default_name.jpg"
-          alt="Current Product" id="current-img" class="rounded main-product mb-4" />
-        <div class="row">
-          <div class="col">
-            <img
-              src="https://secure.img1-cg.wfcdn.com/im/16817007/c_crop-h680-w680%5Ecompr-r85/1127/112745653/default_name.jpg"
-              alt="" class="img-thumbnail rounded inactive-thumbnail active-thumbnail" />
+        <div class="ratio ratio-1x1 mb-4">
+          <img src=".<?php echo $row['image1'] ?>" alt="Current Product" id="current-img"
+            class="rounded main-product" />
+        </div>
+        <div class="row w-100 m-auto">
+          <div class="col ratio ratio-1x1">
+            <img src=".<?php
+      echo $row['image1'];
+            ?>" alt="" class="img-thumbnail rounded inactive-thumbnail active-thumbnail" />
           </div>
-          <div class="col">
-            <img
-              src="https://secure.img1-cg.wfcdn.com/im/66981137/c_crop-h680-w680%5Ecompr-r85/2046/204656991/default_name.jpg"
-              alt="" class="img-thumbnail rounded inactive-thumbnail" />
+          <div class="col ratio ratio-1x1">
+            <img src=".<?php
+      if (!is_null($row['image2'])) {
+        echo $row['image2'];
+      } else {
+        echo $row['image1'];
+      }
+            ?>" alt="" class="img-thumbnail rounded inactive-thumbnail" />
           </div>
-          <div class="col">
-            <img
-              src="https://secure.img1-cg.wfcdn.com/im/80960585/c_crop-h680-w680%5Ecompr-r85/1133/113328372/default_name.jpg"
-              alt="" class="img-thumbnail rounded inactive-thumbnail" />
+          <div class="col ratio ratio-1x1">
+            <img src=".<?php
+      if (!is_null($row['image3'])) {
+        echo $row['image3'];
+      } else {
+        echo $row['image1'];
+      }
+            ?>" alt="" class="img-thumbnail rounded inactive-thumbnail" />
           </div>
         </div>
       </div>
       <div class="col-md ms-5">
         <h3 class="sec-head-1 pb-1">Listed Price</h3>
-        <h2 class="sec-head-2"><strong>$200</strong></h2>
+        <h2 class="sec-head-2"><strong>
+            $
+            <?php echo $row['price'] ?>
+          </strong></h2>
         <div class="row py-4">
           <div class="col">
             <button class="btn btn-success product-btn">Buy Now</button>
@@ -43,131 +75,71 @@
         </div>
         <div>
           <p class="body-text py-1">
-            <strong class="pe-3">Condition</strong> Used Like New
+            <strong class="pe-3">Condition</strong>
+            <?php echo ucwords($row['item_condition']) ?>
           </p>
           <p class="body-text py-1">
-            <strong class="pe-3">Category</strong> Furniture, Seating, Chairs
+            <strong class="pe-3">Category</strong>
+            <?php echo $row['c'] ?>,
+            <?php echo $row['sc1'] ?>,
+            <?php echo $row['sc2'] ?>
           </p>
           <p class="body-text py-1">
-            <strong class="pe-3">Tags</strong> #chair #spongebob #super
-          </p>
-          <p class="body-text py-1">
-            <strong class="pe-3">Posted</strong> 10/14/2022
+            <strong class="pe-3">Posted</strong>
+            <?php
+      $datetime = strtotime($row['date_posted']);
+      $date = date('m-d-Y', $datetime);
+      echo $date;
+            ?>
           </p>
           <p class="body-large strong pt-1">
             <strong class="pe-3">Description</strong>
           </p>
           <p class="body-text">
-            This is a super cool Spongebob chair. It is comfy and is good for
-            gaming. Price is solid.
+            <?php echo $row['item_description'] ?>
           </p>
         </div>
       </div>
     </div>
   </section>
+  <?php
+    }
+
+    ?>
   <!-- Similar Items Section -->
   <section class="container-xxl pb-5">
     <h3 class="sec-head-2 pb-3">Similar Items</h3>
     <div class="row">
+      <?php
+    $query = "SELECT * FROM items WHERE rcsid = :rcsid ORDER BY id DESC LIMIT 5";
+    $stmt = $dbconn->prepare($query);
+    $stmt->bindValue(':rcsid', $_SESSION['user']);
+    $stmt->execute();
+    foreach ($stmt as $row) {
+    ?>
       <div class="col-md">
-        <a href="#" class="sale-card">
-          <div class="card">
-            <img src="resources/images/top1.jpg" class="card-img-top" alt="..." />
+        <a href="" class="sale-card">
+          <div class="card h-100">
+            <img src=.<?php echo $row['image1'] ?> class="card-img-top" alt="...">
             <div class="card-body">
-              <p class="card-text">Hutch and Cabinet</p>
-              <h6 class="card-subtitle">Price</h6>
-              <h6 class="card-title">$225</h6>
+              <p class="card-text">
+                <?php echo $row['title'] ?>
+              </p>
+              <h6 class="card-subtitle"> Price</h6>
+              <h6 class="card-title">
+                $
+                <?php echo $row['price'] ?>
+              </h6>
             </div>
           </div>
         </a>
       </div>
-      <div class="col-md">
-        <a href="#" class="sale-card">
-          <div class="card">
-            <img src="resources/images/top2.jpg" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <p class="card-text">Oakwood Dresser</p>
-              <h6 class="card-subtitle">Price</h6>
-              <h6 class="card-title">$80</h6>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="col-md">
-        <a href="#" class="sale-card">
-          <div class="card">
-            <img src="resources/images/top3.jpg" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <p class="card-text">Love-Seat</p>
-              <h6 class="card-subtitle">Price</h6>
-              <h6 class="card-title">$230</h6>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="col-md">
-        <a href="#" class="sale-card">
-          <div class="card">
-            <img src="resources/images/top4.jpg" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <p class="card-text">Bassett Plush Sofa</p>
-              <h6 class="card-subtitle">Price</h6>
-              <h6 class="card-title">$300</h6>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="col-md">
-        <a href="#" class="sale-card">
-          <div class="card">
-            <img src="resources/images/top5.jpg" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <p class="card-text">Black Nightstand Table</p>
-              <h6 class="card-subtitle">Price</h6>
-              <h6 class="card-title">$30</h6>
-            </div>
-          </div>
-        </a>
-      </div>
+      <?php
+    }
+      ?>
       <a href="#" class="view-all pt-2">View All <i class="bi bi-arrow-right-square"></i></a>
     </div>
   </section>
-
-  <!-- Modal For Signing in -->
-  <div class="modal fade" id="log-in-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="log-in-modal-label" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5 sec-head-2" id="log-in-modal-label">
-            Welcome Back
-          </h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="mb-3">
-              <label for="email-input" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="email-input" />
-            </div>
-            <label for="password-input" class="form-label">Password</label>
-            <div class="mb-3 input-group">
-              <input type="password" class="form-control" id="password-input" />
-              <button class="input-group-text bg-transparent" onclick="togglePassword()">
-                <i class="bi bi-eye-slash" id="toggle-password"></i>
-              </button>
-            </div>
-            <button type="submit" class="btn btn-primary">Log In</button>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <a class="modal-footer-link" href="#">Sign Up</a>
-          <span>|</span>
-          <a class="modal-footer-link" href="#">Forgot Password?</a>
-        </div>
-      </div>
-    </div>
-  </div>
   <!-- Site Footer -->
   <footer></footer>
 </body>
