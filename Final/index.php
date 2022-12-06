@@ -18,7 +18,7 @@
       </div>
       <div class="carousel-inner">
         <?php
-        $query = "SELECT * FROM items WHERE rcsid = :rcsid ORDER BY id DESC LIMIT 3";
+        $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid ORDER BY id DESC LIMIT 3";
         $stmt = $dbconn->prepare($query);
         $stmt->bindValue(':rcsid', $_SESSION['user']);
         $stmt->execute();
@@ -61,7 +61,7 @@
     <h3 class="sec-head-2 pb-3">New Items</h3>
     <div class="row">
       <?php
-      $query = "SELECT * FROM items WHERE rcsid = :rcsid ORDER BY id DESC LIMIT 5";
+      $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid ORDER BY date_posted DESC LIMIT 5";
       $stmt = $dbconn->prepare($query);
       $stmt->bindValue(':rcsid', $_SESSION['user']);
       $stmt->execute();
@@ -94,7 +94,7 @@
     <h3 class="sec-head-2 pb-3">Top Listings</h3>
     <div class="row">
     <?php
-      $query = "SELECT * FROM items WHERE rcsid = :rcsid ORDER BY id DESC LIMIT 5";
+      $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid ORDER BY item_views DESC LIMIT 5";
       $stmt = $dbconn->prepare($query);
       $stmt->bindValue(':rcsid', $_SESSION['user']);
       $stmt->execute();
@@ -127,7 +127,7 @@
     <h3 class="sec-head-2 pb-3">Featured Items</h3>
     <div class="row">
     <?php
-      $query = "SELECT * FROM items WHERE rcsid = :rcsid ORDER BY id DESC LIMIT 5";
+      $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid LIMIT 5";
       $stmt = $dbconn->prepare($query);
       $stmt->bindValue(':rcsid', $_SESSION['user']);
       $stmt->execute();
@@ -160,7 +160,7 @@
     <h3 class="sec-head-2 pb-3">Textbooks</h3>
     <div class="row">
     <?php
-      $query = "SELECT * FROM items WHERE rcsid = :rcsid ORDER BY id DESC LIMIT 5";
+      $query = "SELECT * FROM items WHERE sold = 0 AND category = 2 AND rcsid != :rcsid LIMIT 5";
       $stmt = $dbconn->prepare($query);
       $stmt->bindValue(':rcsid', $_SESSION['user']);
       $stmt->execute();
