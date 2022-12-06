@@ -76,9 +76,9 @@ try {
                     $stmt->execute(['rcsid' => $rcsid]);
                     $user = $stmt->fetch(PDO::FETCH_ASSOC);
                     if (isset($user) && empty($user)) {
-                        $query = "INSERT INTO users(rcsid, admin) VALUES (?,?);";
+                        $query = "INSERT INTO users(rcsid) VALUES (?);";
                         $stmt = $dbconn->prepare($query);
-                        $stmt->execute([$rcsid, 0]);
+                        $stmt->execute([$rcsid]);
                     }
                     if($user['ban'] == true) {
                         header("Location: banned.php");
