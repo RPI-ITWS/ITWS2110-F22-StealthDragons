@@ -13,7 +13,6 @@
       <div class="col-3 pt-4">
         <h3 class="body-text">Filter By</h3>
         <form action="">
-          <label for="uploadimg" class="form-label" id="image-up-label">Upload Up to Three Images</label>
           <!-- Category -->
           <h3 class="body-text">Category</h3>
           <div class="d-flex flex-row" id="category-div">
@@ -104,6 +103,7 @@
             $strSQL .= " AND title LIKE ? ";
             $params[] = '%' . $search . '%';
           }
+
         }
         $query .= $strSQL;
         if (isset($_GET['sort'])) {
