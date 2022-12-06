@@ -81,29 +81,55 @@
             Sort By
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Price Lowest</a></li>
-            <li><a class="dropdown-item" href="#">Price Highest</a></li>
-            <li><a class="dropdown-item" href="#">Recent</a></li>
+            <li><a class="dropdown-item" href="browse.php?sort=price-low">Price Lowest</a></li>
+            <li><a class="dropdown-item" href="browse.php?sort=price-high">Price Highest</a></li>
+            <li><a class="dropdown-item" href="browse.php?sort=recent">Recent</a></li>
+            <li><a class="dropdown-item" href="browse.php?sort=oldest">Oldest</a></li>
           </ul>
         </div>
-        <?php 
-        $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid"; 
+        <?php
+        $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid";
+        if (isset($_POST['search'])) {
+          $search = htmlspecialchars(trim($_POST['search']));
+          $strSQL = " WHERE title LIKE ? ";
+          $params[] = '%'. $search. '%';
+          $_SESSION['search'] = $search;
+        }else{
+          if(isset($_SESSION['search']) && strlen($_SESSION['search']) > 0){
+            $search = $_SESSION['search'];
+            $strSQL .= " WHERE title LIKE ? ";
+            $params[] = '%'. $search. '%';
+          }
+        }
+        if (isset($_GET['sort'])) {
+          if ($_GET['sort'] == 'price-low') {
+            $query .= " ORDER BY price ASC";
+          } else if ($_GET['sort'] == 'price-high') {
+            $query .= " ORDER BY price DESC";
+          } else if ($_GET['sort'] == 'recent') {
+            $query .= " ORDER BY date_posted DESC";
+          } else if ($_GET['sort'] == 'oldest') {
+            $query .= " ORDER BY date_posted ASC";
+          }
+        }
+
         $stmt = $dbconn->prepare($query);
         $stmt->bindValue(':rcsid', $_SESSION['user']);
         $stmt->execute();
-        $numCols = 0; 
+        $numCols = 0;
         $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
         foreach ($stmt as $row) {
-          if($numCols == 0) {
+          if ($numCols == 0) {
             echo "<div class=\"row py-2\">";
           }
-          $new_URI_path = "/iit/Final2/Final/product-page.php?item_ref=".$row['id'];
-          $product_URI = $host_URI.$new_URI_path;
+          $new_URI_path = "/iit/Final2/Final/product-page.php?item_ref=" . $row['id'];
+          $product_URI = $host_URI . $new_URI_path;
 
 
         ?>
+
         <div class="col-md">
-          <a href="<?php echo $product_URI?>" class="sale-card">
+          <a href="<?php echo $product_URI ?>" class="sale-card">
             <div class="card h-100">
               <img src=.<?php echo $row['image1'] ?> class="card-img-top" alt="...">
               <div class="card-body">
@@ -112,20 +138,21 @@
                 </p>
                 <h6 class="card-subtitle"> Price</h6>
                 <h6 class="card-title">
-                  $<?php echo $row['price'] ?>
+                  $
+                  <?php echo $row['price'] ?>
                 </h6>
               </div>
             </div>
           </a>
         </div>
-        <?php 
-          $numCols = $numCols + 1; 
-          if($numCols == 5) {
-            $numCols = 0; 
+        <?php
+          $numCols = $numCols + 1;
+          if ($numCols == 5) {
+            $numCols = 0;
           }
         }
-        if($numCols != 0 ) {
-          for(; $numCols < 5; $numCols++) {
+        if ($numCols != 0) {
+          for (; $numCols < 5; $numCols++) {
             echo "<div class=\"col-md\"></div>";
           }
         }

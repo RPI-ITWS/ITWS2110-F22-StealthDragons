@@ -56,12 +56,12 @@ try {
                         </ul>
                     </li>
                     <li class="nav-item ms-lg-auto">
-                        <form role="search">
+                        <form role="search" action="browse.php" method="post">
                             <div class="input-group">
                                 <button class="btn btn-primary input-group-text" type="submit">
                                     <i class="bi bi-search"></i>
                                 </button>
-                                <input class="form-control" size="35" type="search" placeholder="Search"
+                                <input class="form-control" size="35" type="search" placeholder="Search" name="search-items"
                                     aria-label="Search" />
                             </div>
                         </form>
