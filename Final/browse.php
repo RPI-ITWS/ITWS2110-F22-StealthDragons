@@ -5,74 +5,78 @@
 
 <body>
   <?php include 'header.php' ?>
+  <?php ?>
   <!-- Section Browse Section -->
   <section class="container-xxl pt-5 pb-3">
     <h2 class="sec-head-1">Browse</h2>
     <div class="row">
       <div class="col-3 pt-4">
         <h3 class="body-text">Filter By</h3>
-        <div class="accordion accordion-flush pt-2" id="accordionFlushExample">
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingOne">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                Category
-              </button>
-            </h2>
-            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
-              data-bs-parent="#accordionFlushExample">
-              <div class="accordion-body">NUll</div>
+        <form action="">
+          <label for="uploadimg" class="form-label" id="image-up-label">Upload Up to Three Images</label>
+          <!-- Category -->
+          <h3 class="body-text">Category</h3>
+          <div class="d-flex flex-row" id="category-div">
+            <div class="input-group py-2">
+              <span class="input-group-text">
+                <i class="bi bi-basket-fill"></i>
+              </span>
+              <select name="filter-item-category" id="category" class="form-select" required>
+                <option selected disabled>Select Category</option>
+                <?php
+                $query = "SELECT category, id FROM categories";
+                $stmt = $dbconn->prepare($query);
+                $stmt->execute();
+                foreach ($stmt as $data) {
+                ?>
+                <option value="<?php echo $data['id'] ?>">
+                  <?php echo $data['category'] ?>
+                </option>
+
+                <?php
+
+                }
+                ?>
+              </select>
+            </div>
+            <!-- Subcategory -->
+            <div class="input-group py-2" id="subcat1-div">
+              <span class="input-group-text">
+                <i class="bi bi-basket-fill"></i>
+              </span>
+              <select name="filter-item-subcategory" id="subcategory-1" class="form-select" required>
+                <option selected disabled>Select Subcategory</option>
+              </select>
+            </div>
+            <!-- Subcategory -->
+            <div class="input-group py-2" id="subcat2-div">
+              <span class="input-group-text">
+                <i class="bi bi-basket-fill"></i>
+              </span>
+              <select name="filter-item-subcategory-2" id="subcategory-2" class="form-select" required>
+                <option selected disabled>Select Subcategory</option>
+              </select>
             </div>
           </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingTwo">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                Condition
-              </button>
-            </h2>
-            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
-              data-bs-parent="#accordionFlushExample">
-              <div class="accordion-body">NUll</div>
-            </div>
+          <div class="input-group py-2">
+            <span class="input-group-text">
+              <i class="bi bi-search-heart"></i>
+            </span>
+            <select name="post-item-condition" id="condition" class="form-select" required>
+              <option value="select-condition" selected disabled>Select Condition of Item</option>
+              <option value="new">New</option>
+              <option value="like-new">Like New</option>
+              <option value="good">Good</option>
+              <option value="fair">Fair</option>
+              <option value="poor">Poor</option>
+            </select>
           </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingThree">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                Price
-              </button>
-            </h2>
-            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
-              data-bs-parent="#accordionFlushExample">
-              <div class="accordion-body">NULL</div>
-            </div>
+          <div class="center-button py-4" id="submit-button-div">
+            <button type="submit" name="filters" class="btn btn-primary" id="filters">
+              Apply Filters
+            </button>
           </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingFour">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-                Payment Method
-              </button>
-            </h2>
-            <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour"
-              data-bs-parent="#accordionFlushExample">
-              <div class="accordion-body">NULL</div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingFive">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
-                Tags
-              </button>
-            </h2>
-            <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive"
-              data-bs-parent="#accordionFlushExample">
-              <div class="accordion-body">NULL</div>
-            </div>
-          </div>
-        </div>
+        </form>
       </div>
       <div class="col">
         <div class="dropdown d-flex justify-content-end py-2">
@@ -89,14 +93,14 @@
         </div>
         <?php
         $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid";
-        if (isset($_POST['search'])) {
-          $search = htmlspecialchars(trim($_POST['search']));
+        if (isset($_POST['search-items'])) {
+          $search = htmlspecialchars(trim($_POST['search-items']));
           $strSQL = " AND title LIKE ? ";
           $params[] = '%' . $search . '%';
-          $_SESSION['search'] = $search;
+          $_SESSION['search-items'] = $search;
         } else {
-          if (isset($_SESSION['search']) && strlen($_SESSION['search']) > 0) {
-            $search = $_SESSION['search'];
+          if (isset($_SESSION['search-items']) && strlen($_SESSION['search-items']) > 0) {
+            $search = $_SESSION['search-items'];
             $strSQL .= " AND title LIKE ? ";
             $params[] = '%' . $search . '%';
           }
