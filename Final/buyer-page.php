@@ -12,7 +12,7 @@
             <div class="col-md">
                 <h3 class="body-large">Purchases</h3>
                 <?php
-                $query = "SELECT sold.item_id, sold.price, items.*  FROM sold, items WHERE sold.buyer_id = :user AND sold.item_id = items.id";
+                $query = "SELECT sold.item_id, sold.purchase_price, items.*  FROM sold, items WHERE sold.buyer_id = :user AND sold.item_id = items.id";
                 $stmt = $dbconn->prepare($query);
                 $stmt->bindValue(':user', $_SESSION['user']);
                 $stmt->execute();
@@ -35,7 +35,7 @@
                                     </strong></h4>
                                 <p class="body-text">
                                     Purchase Amount: 
-                                    $<?php echo $row['price'] ?>
+                                    $<?php echo $row['purchase_price'] ?>
                                 </p>
                                 <p class="sub-text">
                                     Posted:
@@ -52,7 +52,7 @@
             <div class="col-md">
                 <h3 class="body-large">Offers</h3>
                 <?php
-                $query = "SELECT offers.offerer_id, offers.price, items.*  FROM offers, items WHERE offers.offerer_id = :user AND offers.item_id = items.id";
+                $query = "SELECT offers.offerer_id, offers.offer_price, items.*  FROM offers, items WHERE offers.offerer_id = :user AND offers.item_id = items.id";
                 $stmt = $dbconn->prepare($query);
                 $stmt->bindValue(':user', $_SESSION['user']);
                 $stmt->execute();
@@ -74,7 +74,7 @@
                                         <?php echo $row['title'] ?>
                                     </strong></h4>
                                 <p class="body-text">
-                                    Offer: $<?php echo $row['price'] ?>
+                                    Offer: $<?php echo $row['offer_price'] ?>
                                 </p>
                                 <p class="sub-text">
                                     Posted:
