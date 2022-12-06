@@ -67,7 +67,7 @@ try {
                         </form>
                     </li>
                     <li class="nav-item ms-lg-auto">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="buyer-page.php">
                             <?php
                 if (phpCAS::isAuthenticated()) {
                     $rcsid = phpCAS::getUser();

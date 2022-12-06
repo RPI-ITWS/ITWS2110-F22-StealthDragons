@@ -18,6 +18,16 @@
       </div>
       <div class="carousel-inner">
         <?php
+        if (isset($_GET['item_sold_msg'])) {
+          $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final/index.php";
+          echo '<script>alert("The seller will email you shortly to arrange payment and pickup!")</script>';
+          echo '<script>window.location.href = "' . $redirect_URI . '"</script>';
+        }
+        if (isset($_GET['offer_msg'])) {
+          $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final/index.php";
+          echo '<script>alert("Your offer has been sent to the seller!")</script>';
+          echo '<script>window.location.href = "' . $redirect_URI . '"</script>';
+        }
         $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid ORDER BY id DESC LIMIT 3";
         $stmt = $dbconn->prepare($query);
         $stmt->bindValue(':rcsid', $_SESSION['user']);
@@ -201,7 +211,7 @@
     </div>
   </section>
   <!-- Site Footer -->
-  <footer></footer>
+  <?php include 'footer.php' ?>
 </body>
 
 </html>

@@ -139,3 +139,41 @@ if (removeListBtn.length > 0) {
     });
   }
 }
+
+let relistListBtn = document.getElementsByClassName("relist-item-btn");
+
+if (relistListBtn.length > 0) {
+  for (let i = 0; i < relistListBtn.length; i++) {
+    relistListBtn[i].addEventListener("click", function () {
+      let itemID = this.getAttribute("data-id");
+      document.getElementById("relist-listing").value = itemID;
+    });
+  }
+}
+
+let acceptOfferBtn = document.getElementsByClassName("accept-offer-btn");
+
+if (acceptOfferBtn.length > 0) {
+  for (let i = 0; i < acceptOfferBtn.length; i++) {
+    acceptOfferBtn[i].addEventListener("click", function () {
+      let itemID = this.getAttribute("data-id");
+      let userID = this.getAttribute("data-id2");
+      document.getElementById("accept-offer").value = itemID;
+      document.getElementById("accept-offer-user").value = userID;
+    });
+  }
+}
+
+let declineOfferBtn = document.getElementsByClassName("decline-offer-btn");
+
+if (declineOfferBtn.length > 0) {
+  for (let i = 0; i < declineOfferBtn.length; i++) {
+    declineOfferBtn[i].addEventListener("click", function () {
+      let itemID = this.getAttribute("data-id");
+      let userID = this.getAttribute("data-id2");
+      document.getElementById("decline-offer").value = itemID;
+      document.getElementById("decline-offer-user").value = userID;
+    });
+  }
+}
+

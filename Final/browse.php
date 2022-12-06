@@ -171,7 +171,7 @@
     </div>
   </div>
   <!-- Site Footer -->
-  <footer></footer>
+  <?php include 'footer.php' ?>
 </body>
 
 </html>
