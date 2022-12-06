@@ -181,7 +181,7 @@
                           </select>
                         </div>
                         <!-- Category -->
-                        <div class="d-flex flex-row">
+                        <div class="d-flex flex-row" id="category-div">
                           <div class="input-group py-2">
                             <span class="input-group-text">
                               <i class="bi bi-basket-fill"></i>
@@ -209,7 +209,7 @@
                             </select>
                           </div>
                           <!-- Subcategory -->
-                          <div class="input-group py-2">
+                          <div class="input-group py-2" id = "subcat1-div">
                             <span class="input-group-text">
                               <i class="bi bi-basket-fill"></i>
                             </span>
@@ -218,7 +218,7 @@
                             </select>
                           </div>
                           <!-- Subcategory -->
-                          <div class="input-group py-2">
+                          <div class="input-group py-2" id = "subcat2-div">
                             <span class="input-group-text">
                               <i class="bi bi-basket-fill"></i>
                             </span>
@@ -234,8 +234,8 @@
                             maxlength="100" style="resize: none;" placeholder="Description" required></textarea>
                         </div>
                         <!-- Images -->
-                        <label for="uploadimg" class="form-label">Upload Up to Three Images</label>
-                        <div class="input-group py-2">
+                        <label for="uploadimg" class="form-label" id="image-up-label">Upload Up to Three Images</label>
+                        <div class="input-group py-2" id="image-up-input">
                           <input class="form-control" type="file" name="post-item-uploadimgs[]" accept="image/jpg"
                             multiple required />
                         </div>

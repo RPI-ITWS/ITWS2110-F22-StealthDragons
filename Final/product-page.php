@@ -86,7 +86,7 @@
                   <div class=\"col\">
                     <form method=\"post\">
                       <input type=\"hidden\" name=\"delete-lisitng\" id=\"delete-listing\" />
-                      <button type=\"submit\" class=\"btn btn-danger w-100\">ADMIN TOOL: Remove Listing</button>
+                      <button type=\"submit\" class=\"btn btn-danger w-100\">Remove Listing</button>
                     </form>
                   </div>
                   <div class=\"col\">
