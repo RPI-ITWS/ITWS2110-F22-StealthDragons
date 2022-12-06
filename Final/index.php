@@ -65,10 +65,13 @@
       $stmt = $dbconn->prepare($query);
       $stmt->bindValue(':rcsid', $_SESSION['user']);
       $stmt->execute();
+      $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
       foreach ($stmt as $row) {
+        $new_URI_path = "/iit/Final2/Final/product-page.php?item_ref=".$row['id'];
+        $product_URI = $host_URI.$new_URI_path;
       ?>
       <div class="col-md">
-        <a href="" class="sale-card">
+        <a href="<?php echo $product_URI?>" class="sale-card">
           <div class="card h-100">
             <img src=.<?php echo $row['image1'] ?> class="card-img-top" alt="...">
             <div class="card-body">
@@ -98,10 +101,13 @@
       $stmt = $dbconn->prepare($query);
       $stmt->bindValue(':rcsid', $_SESSION['user']);
       $stmt->execute();
+      $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
       foreach ($stmt as $row) {
+        $new_URI_path = "/iit/Final2/Final/product-page.php?item_ref=".$row['id'];
+        $product_URI = $host_URI.$new_URI_path;
       ?>
       <div class="col-md">
-        <a href="" class="sale-card">
+        <a href="<?php echo $product_URI?>" class="sale-card">
           <div class="card h-100">
             <img src=.<?php echo $row['image1'] ?> class="card-img-top" alt="...">
             <div class="card-body">
@@ -131,10 +137,13 @@
       $stmt = $dbconn->prepare($query);
       $stmt->bindValue(':rcsid', $_SESSION['user']);
       $stmt->execute();
+      $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
       foreach ($stmt as $row) {
+        $new_URI_path = "/iit/Final2/Final/product-page.php?item_ref=".$row['id'];
+        $product_URI = $host_URI.$new_URI_path;
       ?>
       <div class="col-md">
-        <a href="" class="sale-card">
+        <a href="<?php echo $product_URI?>" class="sale-card">
           <div class="card h-100">
             <img src=.<?php echo $row['image1'] ?> class="card-img-top" alt="...">
             <div class="card-body">
@@ -164,10 +173,13 @@
       $stmt = $dbconn->prepare($query);
       $stmt->bindValue(':rcsid', $_SESSION['user']);
       $stmt->execute();
+      $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
       foreach ($stmt as $row) {
+        $new_URI_path = "/iit/Final2/Final/product-page.php?item_ref=".$row['id'];
+        $product_URI = $host_URI.$new_URI_path;
       ?>
       <div class="col-md">
-        <a href="" class="sale-card">
+        <a href="<?php echo $product_URI?>" class="sale-card">
           <div class="card h-100">
             <img src=.<?php echo $row['image1'] ?> class="card-img-top" alt="...">
             <div class="card-body">
