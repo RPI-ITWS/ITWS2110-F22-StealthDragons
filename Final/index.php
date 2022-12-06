@@ -19,12 +19,12 @@
       <div class="carousel-inner">
         <?php
         if (isset($_GET['item_sold_msg'])) {
-          $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final/index.php";
+          $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final2/Final/index.php";
           echo '<script>alert("The seller will email you shortly to arrange payment and pickup!")</script>';
           echo '<script>window.location.href = "' . $redirect_URI . '"</script>';
         }
         if (isset($_GET['offer_msg'])) {
-          $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final/index.php";
+          $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final2/Final/index.php";
           echo '<script>alert("Your offer has been sent to the seller!")</script>';
           echo '<script>window.location.href = "' . $redirect_URI . '"</script>';
         }
@@ -43,7 +43,9 @@
           } else {
             echo '<div class="carousel-item">';
           } ?>
-        <img src=.<?php echo $row['image1'] ?> class="d-block w-100 carousel-img" alt="...">
+        <div class="d-flex justify-content-center">
+          <img src=.<?php echo $row['image1'] ?> class="d-block w-50 carousel-img" alt="...">
+        </div>
         <div class="carousel-caption d-block">
           <h5>
             <?php echo $row['title'] ?>

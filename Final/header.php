@@ -69,27 +69,27 @@ try {
                     <li class="nav-item ms-lg-auto">
                         <a class="nav-link" href="buyer-page.php">
                             <?php
-                            if (phpCAS::isAuthenticated()) {
-                                $rcsid = phpCAS::getUser();
-                                $query = "SELECT * FROM users WHERE rcsid = :rcsid;";
-                                $stmt = $dbconn->prepare($query);
-                                $stmt->execute(['rcsid' => $rcsid]);
-                                $user = $stmt->fetch(PDO::FETCH_ASSOC);
-                                if (isset($user) && empty($user)) {
-                                    $query = "INSERT INTO users(rcsid, admin) VALUES (?,?);";
-                                    $stmt = $dbconn->prepare($query);
-                                    $stmt->execute([$rcsid, 0]);
-                                }
-                                if ($user['ban'] == true) {
-                                    header("Location: banned.php");
-                                }
-                                $_SESSION["user"] = $rcsid;
-                                echo "<i class='bi bi-person-circle'></i>" . " " . $_SESSION["user"];
-                                if ($user['admin'] == true) {
-                                    echo "<span class=\"text-danger\"> [ADMIN]</span>";
-                                }
-                            }
-                            ?>
+                if (phpCAS::isAuthenticated()) {
+                    $rcsid = phpCAS::getUser();
+                    $query = "SELECT * FROM users WHERE rcsid = :rcsid;";
+                    $stmt = $dbconn->prepare($query);
+                    $stmt->execute(['rcsid' => $rcsid]);
+                    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+                    if (isset($user) && empty($user)) {
+                        $query = "INSERT INTO users(rcsid) VALUES (?);";
+                        $stmt = $dbconn->prepare($query);
+                        $stmt->execute([$rcsid]);
+                    }
+                    if($user['ban'] == true) {
+                        header("Location: banned.php");
+                    }
+                    $_SESSION["user"] = $rcsid;
+                    echo "<i class='bi bi-person-circle'></i>" . " " . $_SESSION["user"];
+                    if($user['admin'] == true) {
+                        echo "<span class=\"text-danger\"> [ADMIN]</span>";
+                    }
+                }
+                ?>
                         </a>
                     </li>
                     <li class="nav-item pe-2">
