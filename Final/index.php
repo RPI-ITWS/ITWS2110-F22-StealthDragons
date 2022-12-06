@@ -25,7 +25,7 @@
         $count = 0;
         $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
         foreach ($stmt as $row) {
-          $new_URI_path = "/iit/Final/product-page.php?item_ref=".$row['id'];
+          $new_URI_path = "/iit/Final2/Final/product-page.php?item_ref=".$row['id'];
           $product_URI = $host_URI.$new_URI_path;
           $count++;
           if ($count == 1) {

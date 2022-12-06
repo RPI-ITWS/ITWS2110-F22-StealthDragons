@@ -73,6 +73,41 @@
             <button class="btn btn-secondary product-btn">Make Offer</button>
           </div>
         </div>
+        <?php 
+          if (phpCAS::isAuthenticated()) {
+            $query2 = "SELECT * FROM users WHERE rcsid = :rcsid AND admin = 1;";
+            $stmt2 = $dbconn->prepare($query2);
+            $stmt2->bindValue(':rcsid', $_SESSION['user']);
+            $stmt2->execute();
+            $row2 = $stmt2->fetch();
+            if ($row2['admin'] == true) {
+                echo "
+                <div class=\"row py-4\">
+                  <div class=\"col\">
+                    <form method=\"post\">
+                      <input type=\"hidden\" name=\"delete-lisitng\" id=\"delete-listing\" />
+                      <button type=\"submit\" class=\"btn btn-danger\">ADMIN TOOL: Remove Listing</button>
+                    </form>
+                  </div>
+                </div>
+                ";
+            }
+          }
+          if (isset($_POST['delete-lisitng'])) {
+            $itemid = $_GET['item_ref'];
+            try {
+              $query = "DELETE FROM items WHERE id = :itemid";
+              echo "<p>" . $query . "</p>";
+              $stmt = $dbconn->prepare($query);
+              $stmt->bindValue(':itemid', $itemid);
+              $stmt->execute();
+              $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final2/Final/index.php";
+              echo("<script>location.href = '$redirect_URI';</script>");
+            } catch (PDOException $e) {
+              echo "Error: " . $e->getMessage();
+            }
+          }
+        ?>
         <div>
           <p class="body-text py-1">
             <strong class="pe-3">Condition</strong>
