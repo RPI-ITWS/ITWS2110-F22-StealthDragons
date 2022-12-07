@@ -28,9 +28,9 @@
                 $stmt->execute();
                 foreach ($stmt as $data) {
                 ?>
-                <option value="<?php echo $data['id'] ?>">
-                  <?php echo $data['category'] ?>
-                </option>
+                  <option value="<?php echo $data['id'] ?>">
+                    <?php echo $data['category'] ?>
+                  </option>
 
                 <?php
 
@@ -80,8 +80,7 @@
       </div>
       <div class="col">
         <div class="dropdown d-flex justify-content-end py-2">
-          <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
+          <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Sort By
           </a>
           <ul class="dropdown-menu">
@@ -99,25 +98,52 @@
             $category = $_POST['filter-item-category'];
             $query .= " AND category = ?";
             $params[] = $category;
+            $_SESSION['category'];
+          } else {
+            if (isset($_SESSION['category']) && strlen($_SESSION['category']) > 0) {
+              $category = $_SESSION['category'];
+              $query .= " AND category = ?";
+              $params[] = $category;
+            }
           }
 
           if (isset($_POST['filter-item-subcategory'])) {
             $subcategory = $_POST['filter-item-subcategory'];
             $query .= " AND subcategory1 = ?";
             $params[] = $subcategory;
+            $_SESSION['subcategory1'];
+          } else {
+            if (isset($_SESSION['subcategory1']) && strlen($_SESSION['subcategory1']) > 0) {
+              $subcategory = $_SESSION['subcategory1'];
+              $query .= " AND subcategory1 = ?";
+              $params[] = $subcategory;
+            }
           }
 
           if (isset($_POST['filter-item-subcategory-2'])) {
             $subcategory2 = $_POST['filter-item-subcategory-2'];
             $query .= " AND subcategory2 = ?";
             $params[] = $subcategory2;
-
+            $_SESSION['subcategory2'];
+          } else {
+            if (isset($_SESSION['subcategory2']) && strlen($_SESSION['subcategory2']) > 0) {
+              $search = $_SESSION['subcategory2'];
+              $query .= " AND subcategory2 = ?";
+              $params[] = $subcategory2;
+            }
           }
 
           if (isset($_POST['post-item-condition'])) {
             $condition = $_POST['post-item-condition'];
             $query .= " AND item_condition = ?";
             $params[] = $condition;
+            $_SESSION['item_condition'] = $condition;
+          } else {
+            if (isset($_SESSION['item_condition']) && strlen($_SESSION['item_condition']) > 0) {
+              $search = $_SESSION['item_condition'];
+              $query .= " AND item_condition = ?";
+              $params[] = $condition;
+            }
           }
         }
         if (isset($_POST['search-items'])) {
@@ -159,23 +185,23 @@
 
         ?>
 
-        <div class="col-md">
-          <a href="<?php echo $product_URI ?>" class="sale-card">
-            <div class="card h-100">
-              <img src=.<?php echo $row['image1'] ?> class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text">
-                  <?php echo $row['title'] ?>
-                </p>
-                <h6 class="card-subtitle"> Price</h6>
-                <h6 class="card-title">
-                  $
-                  <?php echo $row['price'] ?>
-                </h6>
+          <div class="col-md">
+            <a href="<?php echo $product_URI ?>" class="sale-card">
+              <div class="card h-100">
+                <img src=.<?php echo $row['image1'] ?> class="card-img-top" alt="...">
+                <div class="card-body">
+                  <p class="card-text">
+                    <?php echo $row['title'] ?>
+                  </p>
+                  <h6 class="card-subtitle"> Price</h6>
+                  <h6 class="card-title">
+                    $
+                    <?php echo $row['price'] ?>
+                  </h6>
+                </div>
               </div>
-            </div>
-          </a>
-        </div>
+            </a>
+          </div>
         <?php
           $numCols = $numCols + 1;
           if ($numCols == 5) {
@@ -194,8 +220,7 @@
   </section>
 
   <!-- Modal For Signing in -->
-  <div class="modal fade" id="log-in-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="log-in-modal-label" aria-hidden="true">
+  <div class="modal fade" id="log-in-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="log-in-modal-label" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
