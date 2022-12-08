@@ -56,7 +56,7 @@ try {
                         </ul>
                     </li>
                     <li class="nav-item ms-lg-auto">
-                        <form role="search" action="browse.php" method="post">
+                        <form role="search" action="browse.php" method="get">
                             <div class="input-group">
                                 <button class="btn btn-primary input-group-text" type="submit">
                                     <i class="bi bi-search"></i>
