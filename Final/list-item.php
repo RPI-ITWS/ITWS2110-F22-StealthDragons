@@ -243,7 +243,7 @@
         $stmt2->bindValue(':itemid', $itemid);
         $stmt->execute();
         $stmt2->execute();
-        $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/list-item.php";
+        $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/list-item.php?item-relisted=true";
         echo ("<script>alert('Item Relisted');</script>");
         echo ("<script>location.href = '$redirect_URI';</script>");
       }
@@ -264,7 +264,7 @@
         $stmt->execute();
         $stmt2->execute();
         $stmt3->execute();
-        $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/list-item.php";
+        $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/list-item.php?item-sold=true";
         echo ("<script>alert('Offer Accepted');</script>");
         echo ("<script>location.href = '$redirect_URI';</script>");
       }
@@ -276,7 +276,7 @@
         $stmt->bindValue(':itemid', $itemid);
         $stmt->bindValue(':offererid', $offerer_id);
         $stmt->execute();
-        $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/list-item.php";
+        $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/list-item.php?offer-declined=true";
         echo ("<script>alert('Offer Declined');</script>");
         echo ("<script>location.href = '$redirect_URI';</script>");
       }
