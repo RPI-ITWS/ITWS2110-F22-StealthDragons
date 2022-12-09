@@ -254,7 +254,7 @@
     <h3 class="sec-head-2 pb-3">Similar Items</h3>
     <div class="row">
       <?php
-      $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid AND category = :c AND subcategory1 = :sc1 AND subcategory2 = :sc2 AND id != :item_id  LIMIT 5";
+      $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid AND category = :c AND subcategory1 = :sc1 AND id != :item_id  LIMIT 5";
       $stmt = $dbconn->prepare($query);
       $stmt->bindValue(':rcsid', $_SESSION['user']);
       $stmt->bindValue(':c', $row['c']);
