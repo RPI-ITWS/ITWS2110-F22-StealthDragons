@@ -7,6 +7,8 @@ Aaryaman Thuloj
 
 I helped design layout for a couple of the pages and also works with Bootstrap, CSS, and HTML in order to help finish the project, and me and Cian discussed design ideas throughout. I created the sign-up form and used Bootstrap elements to make it as aesthetically pleasing as possible. I also fixed the directories of all our files, as they were all mostly stored in the root, and made an organized resources folder for everything that we used in its own subfolder. I also fixed all the validation errors that we had on each page and our CSS file. I definitely am excited to start working on the backend of the site, as I love working with that aspect of website design. I also worked with Sam on designing our slides presentation, focusing on the readability for an audience and how it looks.
 
+I worked on a lot of backend for the final sprint. I added functionality to edit the key components listings, which is a part of the CRUD design guideline. I also implemented administrative features including admin accounts that have the ability to delete any listings and ban users. The ban functionality made it so that if you were banned, your RCSID was no longer allowed to access the website and you would be constantly redirected to a "banned" page with a message to contact an admin. I also wrote logic for the browse page that looped through the rows in our database and displayed all items not posted by the user and not sold. I helped write queries for a lot of our calls, and also implemented how items show up on the index page under their categories. I helped with database structure and some visual aspects such as fixing how images were displayed. I also helped with form validations and trying to prevent SQL injection and XSS attacks.
+
 Works Cited
 
 Item Page Picture Changer - https://www.youtube.com/watch?v=Y36QpYcnbQY
@@ -17,3 +19,4 @@ Bootstrap Docs used for bootstrap classes and Icons https://getbootstrap.com/doc
 
 Sort and filter (although get was used exclusively) - https://www.youtube.com/watch?v=vu9-IymiOAQ
 
+PHP Knowledge
