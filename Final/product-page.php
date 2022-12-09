@@ -15,7 +15,7 @@
     $stmt->bindValue(':id', $item_id);
     $stmt->execute();
     $row = $stmt->fetch();
-    if ( /* $row["rcsid"] != $_SESSION['user'] || */ !isset($_GET['item_ref']) || $stmt->rowCount() == 0) {
+    if ( $row["rcsid"] == $_SESSION['user'] ||  !isset($_GET['item_ref']) || $stmt->rowCount() == 0) {
       echo '<script>alert("Page Not Found")</script>';
       exit();
     } else {
@@ -177,8 +177,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <form action="" method="post">
-            <input type="hidden" name="purchase-item" id="purchase-item" value="<?php echo $item_id ?>" />
-            <button type="submit" class="btn btn-success">Purchase Item</button>
+            <button type="submit" class="btn btn-success" name="purchase-btn">Purchase Item</button>
           </form>
         </div>
       </div>
@@ -214,8 +213,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <input type="hidden" name="offer-item" id="offer-item" value="<?php echo $item_id ?>" />
-            <button type="submit" class="btn btn-success">Make Offer</button>
+            <button type="submit" class="btn btn-success" name="offer-btn">Make Offer</button>
           </div>
         </form>
       </div>
@@ -225,26 +223,26 @@
 
   <?php
     }
-    if (isset($_POST['purchase-item'])) {
+    if (isset($_POST['purchase-btn'])) {
       $item_sold_query = "UPDATE items SET sold = true WHERE id = :item_id";
       $item_sold_stmt = $dbconn->prepare($item_sold_query);
-      $item_sold_stmt->bindValue(':item_id', $_POST['purchase-item']);
+      $item_sold_stmt->bindValue(':item_id', $item_id);
       $item_sold_stmt->execute();
       $item_sold_add_query = "INSERT INTO sold(item_id, buyer_id, purchase_price) VALUES (:item_id, :buyer_id, :price)";
       $item_sold_add_stmt = $dbconn->prepare($item_sold_add_query);
-      $item_sold_add_stmt->bindValue(':item_id', $_POST['purchase-item']);
+      $item_sold_add_stmt->bindValue(':item_id', $item_id);
       $item_sold_add_stmt->bindValue(':buyer_id', $_SESSION['user']);
       $item_sold_add_stmt->bindValue(':price', $row['price']);
       $item_sold_add_stmt->execute();
       $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final/index.php?item_sold_msg=true";
       echo ("<script>location.href = '$redirect_URI';</script>");
     }
-    if (isset($_POST['offer-item'])) {
+    if (isset($item_id)) {
       $offer_query = "INSERT INTO offers(item_id, offerer_id, offer_price) VALUES (:item_id, :buyer_id, :price)";
       $offer_stmt = $dbconn->prepare($offer_query);
-      $offer_stmt->bindValue(':item_id', $_POST['offer-item']);
+      $offer_stmt->bindValue(':item_id', $item_id);
       $offer_stmt->bindValue(':buyer_id', $_SESSION['user']);
-      $offer_stmt->bindValue(':price', $_POST['offer-price']);
+      $offer_stmt->bindValue(':price', $item_id);
       $offer_stmt->execute();
       $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final/index.php?offer_msg=true";
       echo ("<script>location.href = '$redirect_URI';</script>");
@@ -256,9 +254,13 @@
     <h3 class="sec-head-2 pb-3">Similar Items</h3>
     <div class="row">
       <?php
-      $query = "SELECT * FROM items WHERE rcsid = :rcsid ORDER BY id DESC LIMIT 5";
+      $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid AND category = :c AND subcategory1 = :sc1 AND subcategory2 = :sc2 AND id != :item_id  LIMIT 5";
       $stmt = $dbconn->prepare($query);
       $stmt->bindValue(':rcsid', $_SESSION['user']);
+      $stmt->bindValue(':c', $row['c']);
+      $stmt->bindValue(':sc1', $row['sc1']);
+      $stmt->bindValue(':sc2', $row['sc2']);
+      $stmt->bindValue(':item_id', $item_id);
       $stmt->execute();
       foreach ($stmt as $row) {
       ?>

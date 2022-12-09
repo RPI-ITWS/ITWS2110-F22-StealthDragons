@@ -191,11 +191,7 @@
               </p>
               <p class="sub-text">
                 Clicks on listing
-                <?php if ($row['item_views'] == 0) {
-          echo "0";
-        } else {
-          echo $row['item_views'];
-        } ?>
+                <?php echo $row['item_views'] ?>
               </p>
               <button data-id="<?php echo $row['id'] ?>" class="btn btn-danger remove-listing-btn"
                 data-bs-toggle="modal" data-bs-target="#remove-listing-modal">Delete Listing</button>
@@ -518,7 +514,7 @@
         $file_error = $file_array['error'][$i];
         $file_type = $file_array['type'][$i];
         $check_file = mime_content_type($file_array['tmp_name'][$i]);
-        if ($check_file !== "image/jpeg" && $check_file !== "image/png") {
+        if ($check_file !== "image/jpeg") {
           echo "<script> alert('Error: File type not supported. Please upload a JPEG/JPG file.')</script>";
           exit();
         }

@@ -28,7 +28,7 @@
           echo '<script>alert("Your offer has been sent to the seller!")</script>';
           echo '<script>window.location.href = "' . $redirect_URI . '"</script>';
         }
-        $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid ORDER BY id DESC LIMIT 3";
+        $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid ORDER BY item_views DESC LIMIT 3";
         $stmt = $dbconn->prepare($query);
         $stmt->bindValue(':rcsid', $_SESSION['user']);
         $stmt->execute();
@@ -145,7 +145,7 @@
     <h3 class="sec-head-2 pb-3">Featured Items</h3>
     <div class="row">
     <?php
-      $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid LIMIT 5";
+      $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid ORDER BY RAND() LIMIT 5";
       $stmt = $dbconn->prepare($query);
       $stmt->bindValue(':rcsid', $_SESSION['user']);
       $stmt->execute();
