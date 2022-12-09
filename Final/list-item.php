@@ -661,7 +661,6 @@
     $stmt->bindValue(':item_condition', $condition);
     $stmt->bindValue(':item_description', $description);
     $stmt->bindValue(':id', $rowID);
-    echo("<script>alert('".$title.$priceInt.$condition.$rowID.$description."');</script>");
     $stmt->execute();
     $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/list-item.php?edited-item=true";
     echo ("<script>location.href = '$redirect_URI';</script>");
