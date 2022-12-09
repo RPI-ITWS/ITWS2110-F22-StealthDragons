@@ -9,6 +9,10 @@ I helped design layout for a couple of the pages and also works with Bootstrap, 
 
 I worked on a lot of backend for the final sprint. I added functionality to edit the key components listings, which is a part of the CRUD design guideline. I also implemented administrative features including admin accounts that have the ability to delete any listings and ban users. The ban functionality made it so that if you were banned, your RCSID was no longer allowed to access the website and you would be constantly redirected to a "banned" page with a message to contact an admin. I also wrote logic for the browse page that looped through the rows in our database and displayed all items not posted by the user and not sold. I helped write queries for a lot of our calls, and also implemented how items show up on the index page under their categories. I helped with database structure and some visual aspects such as fixing how images were displayed. I also helped with form validations and trying to prevent SQL injection and XSS attacks.
 
+Samuel Leung
+
+I was mainly in charge of how the database for the website was set up. I managed the database on phpmyadmin and created the design for the category tree used to store all the items in the website. I linked each of the categories to subcategories and made sure that Cian's API could use all the data properly. This proved to be a tedious task because we decided to use a 3-level category tree instead of a 2 level tree that Mercari and Craigslist uses. In addition, I also researched and compared our site to similar online sites such as Craigslist and Mercari to see how their sites are organized compared to ours. While I did not get to work on the website as extensively as Cian and Aaryaman because a lot of my time was spent on making the SQL queries to alter the category tables, I took a lot of time checking and learning the functionalities of the code that they wrote. We used my CAS account was used to test the non admin accounts and to check if we could ban a user. Then, I created a basic slides presentation with all the stuff that we wanted to present and had Aaryaman check it over before we presented. I worked with them to make sure we met all the criteria during the presentation.
+
 Works Cited
 
 Item Page Picture Changer - https://www.youtube.com/watch?v=Y36QpYcnbQY
@@ -18,5 +22,9 @@ CSS Structure and Media Queries inspired or taken from Cian Howell and Jerry Lu'
 Bootstrap Docs used for bootstrap classes and Icons https://getbootstrap.com/docs/5.2/getting-started/introduction/
 
 Sort and filter (although get was used exclusively) - https://www.youtube.com/watch?v=vu9-IymiOAQ
+
+Mercari - https://www.mercari.com/
+
+Craigslist - https://www.craigslist.org/
 
 PHP Knowledge
