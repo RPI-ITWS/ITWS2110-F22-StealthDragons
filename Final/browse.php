@@ -96,14 +96,29 @@
               }
               echo "&emsp;";
               if (isset($_GET['filter-item-category'])) {
-                echo " Category: " . $_GET['filter-item-category'];
+                $category_query = "SELECT category FROM categories WHERE id = :id";
+                $category_stmt = $dbconn->prepare($category_query);
+                $category_stmt->bindParam(':id', $_GET['filter-item-category']);
+                $category_stmt->execute();
+                $category_name = $category_stmt->fetch();
+                echo " Category: " . $category_name[0];
 
               }
               if (isset($_GET['filter-item-subcategory'])) {
-                echo "/" . $_GET['filter-item-subcategory'];
+                $subcategory_query = "SELECT subcategory1 FROM subcategories1 WHERE categoryid = :id";
+                $subcategory_stmt = $dbconn->prepare($subcategory_query);
+                $subcategory_stmt->bindParam(':id', $_GET['filter-item-subcategory']);
+                $subcategory_stmt->execute();
+                $subcategory_name = $subcategory_stmt->fetch();
+                echo "/" . $subcategory_name[0];
               }
               if (isset($_GET['filter-item-subcategory-2'])) {
-                echo "/" . $_GET['filter-item-subcategory-2'];
+                $subcategory2_query = "SELECT subcategory2 FROM subcategories2 WHERE subcategoryid = :id";
+                $subcategory2_stmt = $dbconn->prepare($subcategory2_query);
+                $subcategory2_stmt->bindParam(':id', $_GET['filter-item-subcategory-2']);
+                $subcategory2_stmt->execute();
+                $subcategory2_name = $subcategory2_stmt->fetch();
+                echo "/" . $subcategory2_name[0];
               }
               echo "&emsp;";
               if (isset($_GET['filter-item-condition'])) {
@@ -114,7 +129,23 @@
           </div>
           <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
-            Sort By
+            Sort By<?php if (isset($_GET['sort'])) {
+              if($_GET['sort'] == "price-low") {
+                echo ": Price Low to High";
+              }
+              if ($_GET['sort'] == "price-high") {
+                echo ": Price High to Low";
+              }
+              if ($_GET['sort'] == "date_posted-high") {
+                echo ": Newest";
+              }
+              if ($_GET['sort'] == "date_posted-low") {
+                echo ": Oldest";
+              }
+              if($_GET['sort'] == "item_views-high") {
+                echo ": Most Viewed";
+              }
+            }?>
           </a>
           <ul class="dropdown-menu">
             <!-- Sort price low -->

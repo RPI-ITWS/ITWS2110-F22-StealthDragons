@@ -50,9 +50,11 @@ try {
                             <li>
                                 <a href="browse.php" class="dropdown-item">All</a>
                             </li>
-                            <li><a href="#" class="dropdown-item">New Items</a></li>
-                            <li><a href="#" class="dropdown-item">By Category</a></li>
-                            <li><a href="#" class="dropdown-item">Top Listings</a></li>
+                            <li><a href="browse.php?sort=date_posted-high" class="dropdown-item">New Items</a></li>
+                            <li><a href="browse.php?sort=item_views-high" class="dropdown-item">Top Listings</a></li>
+                            <li><a href="browse.php?filter-item-category=2" class="dropdown-item">Textbooks</a></li>
+                            <li><a href="browse.php?filter-item-category=1" class="dropdown-item">Electronics</a></li>
+                            <li><a href="browse.php?filter-item-category=3" class="dropdown-item">Furniture</a></li>
                         </ul>
                     </li>
                     <li class="nav-item ms-lg-auto">
