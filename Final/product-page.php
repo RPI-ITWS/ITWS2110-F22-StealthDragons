@@ -257,8 +257,8 @@
       $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid AND category = :c AND subcategory1 = :sc1 AND id != :item_id  LIMIT 5";
       $stmt = $dbconn->prepare($query);
       $stmt->bindValue(':rcsid', $_SESSION['user']);
-      $stmt->bindValue(':c', $row['c']);
-      $stmt->bindValue(':sc1', $row['sc1']);
+      $stmt->bindValue(':c', $row['category']);
+      $stmt->bindValue(':sc1', $row['subcategory1']);
       $stmt->bindValue(':item_id', $item_id);
       $stmt->execute();
       $counter = 0; 
@@ -292,7 +292,7 @@
         }
       }
       ?>
-      <a href="#" class="view-all pt-2">View All <i class="bi bi-arrow-right-square"></i></a>
+      <a href="browse.php?filter-item-category=<?php echo $row['category']?>&filter-item-subcategory=<?php echo $row['subcategory1']?>" class="view-all pt-2">View All <i class="bi bi-arrow-right-square"></i></a>
     </div>
   </section>
   <!-- Site Footer -->

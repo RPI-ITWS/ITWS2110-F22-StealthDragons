@@ -110,7 +110,7 @@
         }
       }
       ?>
-      <a href="#" class="view-all pt-2">View All <i class="bi bi-arrow-right-square"></i></a>
+      <a href="browse.php?sort=date_posted-high" class="view-all pt-2">View All <i class="bi bi-arrow-right-square"></i></a>
     </div>
   </section>
   <!-- Top Listings Section -->
@@ -118,7 +118,7 @@
     <h3 class="sec-head-2 pb-3">Top Listings</h3>
     <div class="row">
     <?php
-      $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid ORDER BY item_views DESC LIMIT 5";
+      $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid ORDER BY item_views DESC LIMIT 5 OFFSET 3;";
       $stmt = $dbconn->prepare($query);
       $stmt->bindValue(':rcsid', $_SESSION['user']);
       $stmt->execute();
@@ -155,7 +155,7 @@
         }
       }
       ?>
-      <a href="#" class="view-all pt-2">View All <i class="bi bi-arrow-right-square"></i></a>
+      <a href="browse.php?sort=item_views-high" class="view-all pt-2">View All <i class="bi bi-arrow-right-square"></i></a>
     </div>
   </section>
   <!-- Featured Items Section -->
@@ -200,7 +200,7 @@
         }
       }
       ?>
-      <a href="#" class="view-all pt-2">View All <i class="bi bi-arrow-right-square"></i></a>
+      <a href="browse.php" class="view-all pt-2">View All <i class="bi bi-arrow-right-square"></i></a>
     </div>
   </section>
   <!-- Text Books Section -->
@@ -245,7 +245,7 @@
         }
       }
       ?>
-      <a href="#" class="view-all pt-2">View All <i class="bi bi-arrow-right-square"></i></a>
+      <a href="browse.php?filter-item-category=2" class="view-all pt-2">View All <i class="bi bi-arrow-right-square"></i></a>
     </div>
   </section>
   <!-- Site Footer -->
