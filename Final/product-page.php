@@ -265,7 +265,7 @@
       foreach ($stmt as $row) {
       ?>
       <div class="col-md">
-        <a href="" class="sale-card">
+        <a href="product-page.php?item_ref=<?php echo $row['id'] ?>" class="sale-card">
           <div class="card h-100">
             <img src=.<?php echo $row['image1'] ?> class="card-img-top" alt="...">
             <div class="card-body">
