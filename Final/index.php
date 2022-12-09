@@ -19,12 +19,12 @@
       <div class="carousel-inner">
         <?php
         if (isset($_GET['item_sold_msg'])) {
-          $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final2/Final/index.php";
+          $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final/index.php";
           echo '<script>alert("The seller will email you shortly to arrange payment and pickup!")</script>';
           echo '<script>window.location.href = "' . $redirect_URI . '"</script>';
         }
         if (isset($_GET['offer_msg'])) {
-          $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final2/Final/index.php";
+          $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final/index.php";
           echo '<script>alert("Your offer has been sent to the seller!")</script>';
           echo '<script>window.location.href = "' . $redirect_URI . '"</script>';
         }
@@ -35,7 +35,7 @@
         $count = 0;
         $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
         foreach ($stmt as $row) {
-          $new_URI_path = "/iit/Final2/Final/product-page.php?item_ref=".$row['id'];
+          $new_URI_path = "/iit/Final/product-page.php?item_ref=".$row['id'];
           $product_URI = $host_URI.$new_URI_path;
           $count++;
           if ($count == 1) {
@@ -78,8 +78,9 @@
       $stmt->bindValue(':rcsid', $_SESSION['user']);
       $stmt->execute();
       $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+      $counter = 0; 
       foreach ($stmt as $row) {
-        $new_URI_path = "/iit/Final2/Final/product-page.php?item_ref=".$row['id'];
+        $new_URI_path = "/iit/Final/product-page.php?item_ref=".$row['id'];
         $product_URI = $host_URI.$new_URI_path;
       ?>
       <div class="col-md">
@@ -99,6 +100,14 @@
         </a>
       </div>
       <?php
+        $counter = $counter + 1; 
+      }
+      if($counter < 5) {
+        for($i = $counter; $i < 5; $i++) {
+        ?>
+        <div class="col-md"></div>
+      <?php
+        }
       }
       ?>
       <a href="#" class="view-all pt-2">View All <i class="bi bi-arrow-right-square"></i></a>
@@ -114,8 +123,9 @@
       $stmt->bindValue(':rcsid', $_SESSION['user']);
       $stmt->execute();
       $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+      $counter2 = 0; 
       foreach ($stmt as $row) {
-        $new_URI_path = "/iit/Final2/Final/product-page.php?item_ref=".$row['id'];
+        $new_URI_path = "/iit/Final/product-page.php?item_ref=".$row['id'];
         $product_URI = $host_URI.$new_URI_path;
       ?>
       <div class="col-md">
@@ -135,6 +145,14 @@
         </a>
       </div>
       <?php
+        $counter2 = $counter2 + 1; 
+      }
+      if($counter2 < 5) {
+        for($j = $counter2; $j < 5; $j++) {
+        ?>
+        <div class="col-md"></div>
+      <?php
+        }
       }
       ?>
       <a href="#" class="view-all pt-2">View All <i class="bi bi-arrow-right-square"></i></a>
@@ -150,8 +168,9 @@
       $stmt->bindValue(':rcsid', $_SESSION['user']);
       $stmt->execute();
       $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+      $counter3 = 0; 
       foreach ($stmt as $row) {
-        $new_URI_path = "/iit/Final2/Final/product-page.php?item_ref=".$row['id'];
+        $new_URI_path = "/iit/Final/product-page.php?item_ref=".$row['id'];
         $product_URI = $host_URI.$new_URI_path;
       ?>
       <div class="col-md">
@@ -171,6 +190,14 @@
         </a>
       </div>
       <?php
+        $counter3 = $counter3 + 1; 
+      }
+      if($counter3 < 5) {
+        for($k = $counter3; $k < 5; $k++) {
+        ?>
+        <div class="col-md"></div>
+      <?php
+        }
       }
       ?>
       <a href="#" class="view-all pt-2">View All <i class="bi bi-arrow-right-square"></i></a>
@@ -186,8 +213,9 @@
       $stmt->bindValue(':rcsid', $_SESSION['user']);
       $stmt->execute();
       $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+      $counter4 = 0; 
       foreach ($stmt as $row) {
-        $new_URI_path = "/iit/Final2/Final/product-page.php?item_ref=".$row['id'];
+        $new_URI_path = "/iit/Final/product-page.php?item_ref=".$row['id'];
         $product_URI = $host_URI.$new_URI_path;
       ?>
       <div class="col-md">
@@ -207,6 +235,14 @@
         </a>
       </div>
       <?php
+        $counter4 = $counter4 + 1; 
+      }
+      if($counter4 < 5) {
+        for($m = $counter4; $m < 5; $m++) {
+        ?>
+        <div class="col-md"></div>
+      <?php
+        }
       }
       ?>
       <a href="#" class="view-all pt-2">View All <i class="bi bi-arrow-right-square"></i></a>

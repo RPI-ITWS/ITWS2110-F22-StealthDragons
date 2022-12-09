@@ -115,7 +115,7 @@
               $stmt = $dbconn->prepare($query);
               $stmt->bindValue(':itemid', $itemid);
               $stmt->execute();
-              $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final2/Final/index.php";
+              $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final/index.php";
               echo("<script>location.href = '$redirect_URI';</script>");
             } catch (PDOException $e) {
               echo "Error: " . $e->getMessage();
@@ -237,12 +237,12 @@
       $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final/index.php?item_sold_msg=true";
       echo ("<script>location.href = '$redirect_URI';</script>");
     }
-    if (isset($item_id)) {
+    if (isset($_POST['offer-item'])) {
       $offer_query = "INSERT INTO offers(item_id, offerer_id, offer_price) VALUES (:item_id, :buyer_id, :price)";
       $offer_stmt = $dbconn->prepare($offer_query);
       $offer_stmt->bindValue(':item_id', $item_id);
       $offer_stmt->bindValue(':buyer_id', $_SESSION['user']);
-      $offer_stmt->bindValue(':price', $item_id);
+      $offer_stmt->bindValue(':price', $_POST['offer-price']);
       $offer_stmt->execute();
       $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/iit/Final/index.php?offer_msg=true";
       echo ("<script>location.href = '$redirect_URI';</script>");
@@ -262,6 +262,7 @@
       $stmt->bindValue(':sc2', $row['sc2']);
       $stmt->bindValue(':item_id', $item_id);
       $stmt->execute();
+      $counter = 0; 
       foreach ($stmt as $row) {
       ?>
       <div class="col-md">
@@ -282,6 +283,14 @@
         </a>
       </div>
       <?php
+        $counter = $counter + 1; 
+      }
+      if($counter < 5) {
+        for($i = $counter; $i < 5; $i++) {
+        ?>
+        <div class="col-md"></div>
+      <?php
+        }
       }
       ?>
       <a href="#" class="view-all pt-2">View All <i class="bi bi-arrow-right-square"></i></a>
