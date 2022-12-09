@@ -227,7 +227,6 @@
         $stmt->bindValue(':itemid', $itemid);
         $stmt->bindValue(':rcsid', $_SESSION['user']);
         $stmt->execute();
-        $stmt2 = $dbconn->prepare($query2);
         $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/list-item.php?item-deleted=true";
         echo ("<script>alert('Item Deleted');</script>");
         echo ("<script>location.href = '$redirect_URI';</script>");
