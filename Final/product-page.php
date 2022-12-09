@@ -259,7 +259,6 @@
       $stmt->bindValue(':rcsid', $_SESSION['user']);
       $stmt->bindValue(':c', $row['c']);
       $stmt->bindValue(':sc1', $row['sc1']);
-      $stmt->bindValue(':sc2', $row['sc2']);
       $stmt->bindValue(':item_id', $item_id);
       $stmt->execute();
       $counter = 0; 
