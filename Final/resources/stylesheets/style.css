@@ -85,6 +85,23 @@ body {
   max-height: 10rem;
 }
 
+.btn-none {
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  font: inherit;
+  cursor: pointer;
+}
+
+.btn-none:focus,
+.btn-none:active,
+.btn-none:hover,
+.btn-none:visited,
+.btn-none:link {
+  outline: none;
+}
+
+
 /* Text */
 .sec-head-1,
 .sec-head-2,
@@ -172,7 +189,7 @@ select option:checked {
   display: none;
 }
 
-.sell-img-col-div{
+.sell-img-col-div {
   max-height: 200px;
 }
 

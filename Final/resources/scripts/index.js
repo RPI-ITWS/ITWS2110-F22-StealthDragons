@@ -82,51 +82,19 @@ function replaceSubcategory2(data) {
   }
 }
 
-function setToCreate() {
-  document.getElementsByClassName("list-item-modal")[0].innerHTML =
-    "List an Item";
-  document.getElementById("list-or-edit-button").name = "post-item";
-  document.getElementById("list-or-edit-button").innerHTML = "List your Item!";
-  document.getElementById("post-item-title").value = "";
-  document.getElementById("post-item-price").value = "";
-  document.getElementById("condition").value = "select-condition";
-  document.getElementById("post-item-description").value = "";
-  document.getElementById("category").classList.remove("d-none");
-  document.getElementById("subcategory-1").classList.remove("d-none");
-  document.getElementById("subcategory-2").classList.remove("d-none");
-  document.getElementById("image-up-label").classList.remove("d-none");
-  document.getElementById("image-up-input").classList.remove("d-none");
-  document.getElementById("category-div").classList.remove("d-none");
-  document.getElementById("subcat1-div").classList.remove("d-none");
-  document.getElementById("subcat2-div").classList.remove("d-none");
-}
-
 function setToEdit(thisElement) {
-  document.getElementsByClassName("list-item-modal")[0].innerHTML =
-    "Edit an Item";
-  document.getElementById("list-or-edit-button").name = "edit-item";
-  document.getElementById("list-or-edit-button").innerHTML = "Confirm Edits";
   let rowid = thisElement.value;
-  document.getElementById("post-item-title").value = document.getElementById(
+  document.getElementById("edit-item-title").value = document.getElementById(
     "title-" + rowid
   ).value;
-  document.getElementById("post-item-price").value = document.getElementById(
+  document.getElementById("edit-item-price").value = document.getElementById(
     "price-" + rowid
   ).value;
-  document.getElementById("condition").value = document.getElementById(
-    "item_condition-" + rowid
-  ).value;
-  document.getElementById("post-item-description").value =
+  document.getElementById("edit-item-condition").value =
+    document.getElementById("item_condition-" + rowid).value;
+  document.getElementById("edit-item-description").value =
     document.getElementById("item_description-" + rowid).value;
-
-  document.getElementById("category").classList.add("d-none");
-  document.getElementById("subcategory-1").classList.add("d-none");
-  document.getElementById("subcategory-2").classList.add("d-none");
-  document.getElementById("image-up-label").classList.add("d-none");
-  document.getElementById("image-up-input").classList.add("d-none");
-  document.getElementById("category-div").classList.add("d-none");
-  document.getElementById("subcat1-div").classList.add("d-none");
-  document.getElementById("subcat2-div").classList.add("d-none");
+  document.getElementById("id-placeholder-row2").value = thisElement.value;
 }
 
 let removeListBtn = document.getElementsByClassName("remove-listing-btn");
@@ -176,4 +144,3 @@ if (declineOfferBtn.length > 0) {
     });
   }
 }
-

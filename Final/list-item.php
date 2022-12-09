@@ -9,8 +9,7 @@
     <h2 class="sec-head-1 text-center pt-5">Seller Dashboard
     </h2>
     <div class="text-end">
-      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#listing-modal"
-        onclick="setToCreate()">Create
+      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#listing-modal">Create
         Listing</button>
     </div>
     <div class="seller-dash-pill row p-3 my-3 mx-0">
@@ -73,8 +72,6 @@
                       Posted:
                       <?php echo $date ?>
                     </p>
-                    <button data-id="<?php echo $row['id'] ?>" class="btn btn-danger remove-listing-btn"
-                      data-bs-toggle="modal" data-bs-target="#remove-listing-modal">Delete From History</button>
                     <!-- Note: When modifying the database at all use post method as it more secure -->
                     <button data-id="<?php echo $row['id'] ?>" class="btn btn-success relist-item-btn"
                       data-bs-toggle="modal" data-bs-target="#relisting-modal">Relist Item</button>
@@ -191,16 +188,12 @@
               </p>
               <p class="sub-text">
                 Clicks on listing
-                <?php if ($row['item_views'] == 0) {
-          echo "0";
-        } else {
-          echo $row['item_views'];
-        } ?>
+                <?php echo $row['item_views'] ?>
               </p>
               <button data-id="<?php echo $row['id'] ?>" class="btn btn-danger remove-listing-btn"
                 data-bs-toggle="modal" data-bs-target="#remove-listing-modal">Delete Listing</button>
               <!-- Note: When modifying the database at all use post method as it more secure -->
-              <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#listing-modal"
+              <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#edit-listing-modal"
                 onclick="setToEdit(this)" id="<?php echo $row['id'] ?>" value="<?php echo $row['id'] ?>">Edit
                 Listing</button>
               <div class="d-none">
@@ -229,9 +222,10 @@
 
       if (isset($_POST['delete-lisitng'])) {
         $itemid = $_POST['delete-lisitng'];
-        $query = "DELETE FROM items WHERE id = :itemid";
+        $query = "DELETE FROM items WHERE id = :itemid AND rcsid = :rcsid";
         $stmt = $dbconn->prepare($query);
         $stmt->bindValue(':itemid', $itemid);
+        $stmt->bindValue(':rcsid', $_SESSION['user']);
         $stmt->execute();
         $stmt2 = $dbconn->prepare($query2);
         $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/list-item.php";
@@ -239,11 +233,12 @@
       }
       if (isset($_POST['relist-lisitng'])) {
         $itemid = $_POST['relist-lisitng'];
-        $query = "UPDATE items SET sold = false WHERE id = :itemid";
+        $query = "UPDATE items SET sold = false WHERE id = :itemid and rcsid = :rcsid;";
         $query2 = "DELETE FROM sold WHERE item_id = :itemid";
         $stmt = $dbconn->prepare($query);
         $stmt2 = $dbconn->prepare($query2);
         $stmt->bindValue(':itemid', $itemid);
+        $stmt->bindValue(':rcsid', $_SESSION['user']);
         $stmt2->bindValue(':itemid', $itemid);
         $stmt->execute();
         $stmt2->execute();
@@ -253,10 +248,11 @@
       if (isset($_POST['accept-offer'])) {
         $itemid = $_POST['accept-offer'];
         $offerer_id = $_POST['accept-offer-user'];
-        $query = "UPDATE items SET sold = true WHERE id = :itemid";
-        $query2 = "INSERT INTO sold(buyer_id, item_id, purchase_price) SELECT offerer_id, item_id, offer_price FROM offers WHERE item_id = :itemid and offerer_id = :offererid;";
-        $query3 = "DELETE FROM offers WHERE item_id = :itemid;";
+        $query = "UPDATE items SET sold = true WHERE id = :itemid and rcsid = :rcsid";
+        $query2 = "INSERT INTO sold(buyer_id, item_id, purchase_price) SELECT offerer_id, item_id, offer_price FROM offers WHERE item_id = :itemid and offerer_id = :offererid";
+        $query3 = "DELETE FROM offers WHERE item_id = :itemid";
         $stmt = $dbconn->prepare($query);
+        $stmt->bindValue(':rcsid', $_SESSION['user']);
         $stmt2 = $dbconn->prepare($query2);
         $stmt3 = $dbconn->prepare($query3);
         $stmt->bindValue(':itemid', $itemid);
@@ -272,7 +268,7 @@
       if (isset($_POST['decline-offer'])) {
         $itemid = $_POST['decline-offer'];
         $offerer_id = $_POST['decline-offer-user'];
-        $query = "DELETE FROM offers WHERE item_id = :itemid and offerer_id = :offererid";
+        $query = "DELETE FROM offers WHERE item_id = :itemid and offerer_id = :offererid;";
         $stmt = $dbconn->prepare($query);
         $stmt->bindValue(':itemid', $itemid);
         $stmt->bindValue(':offererid', $offerer_id);
@@ -376,7 +372,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title list-item-modal" id="listing-modal"></h5>
+          <h5 class="modal-title list-item-modal" id="listing-modal">List an Item</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -472,16 +468,85 @@
                         <label for="uploadimg" class="form-label" id="image-up-label">Upload Up to Three Images</label>
                         <div class="input-group py-2" id="image-up-input">
                           <input class="form-control" type="file" name="post-item-uploadimgs[]" accept="image/jpg"
-                            multiple required />
+                            multiple required id="upload-img-area" />
                         </div>
                         <!-- Submit Button -->
                         <div class="center-button py-4" id="submit-button-div">
-                          <button type="submit" name="post-item" class="btn btn-primary" id="list-or-edit-button">
-                          </button>
+                          <button type="submit" name="post-item" class="btn btn-primary" id="list-or-edit-button">List your Item!</button>
                         </div>
                         <div class="d-none">
                           <input type="text" class="form-control" name="id-placeholder-row" id="id-placeholder-row"
                             value="<?php echo $row['id'] ?>">
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Edit item modal -->
+  <div class="modal fade" id="edit-listing-modal" tabindex="-1" aria-labelledby="edit-modal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title edit-item-modal" id="edit-modal">Edit Listing</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row d-flex justify-content-center align-items-center">
+            <div class="col">
+              <div class="card custom-card">
+                <div class="card-body">
+                  <div class="row justify-content-center">
+                    <div class="col">
+                      <form action="list-item.php" method="post" enctype="multipart/form-data">
+                        <!-- Title of item -->
+                        <div class="input-group py-2">
+                          <span class="input-group-text">
+                            <i class="bi bi-card-text"></i>
+                          </span>
+                          <input id="edit-item-title" name="edit-item-title" type="text" class="form-control"
+                            placeholder="Title" maxlength="15" required />
+                        </div>
+                        <!-- Price of item -->
+                        <div class="input-group py-2">
+                          <span class="input-group-text">
+                            <i class="bi bi-tags"></i></span>
+                          <input id="edit-item-price" name="edit-item-price" type="number" min="1" max="999999"
+                            class="form-control" placeholder="Price" required />
+                        </div>
+                        <!-- Condition of item -->
+                        <div class="input-group py-2">
+                          <span class="input-group-text">
+                            <i class="bi bi-search-heart"></i>
+                          </span>
+                          <select name="edit-item-condition" id="edit-item-condition" class="form-select" required>
+                            <option value="select-condition" selected disabled>Select Condition of Item</option>
+                            <option value="new">New</option>
+                            <option value="like-new">Like New</option>
+                            <option value="good">Good</option>
+                            <option value="fair">Fair</option>
+                            <option value="poor">Poor</option>
+                          </select>
+                        </div>
+                        <!-- Description -->
+                        <div class="input-group py-2">
+                          <span class="input-group-text"><i class="bi bi-pencil-square"></i></span>
+                          <textarea class="form-control" name="edit-item-description" id="edit-item-description"
+                            maxlength="100" style="resize: none;" placeholder="Description" autocomplete="off"
+                            required></textarea>
+                        </div>
+                        <!-- Submit Button -->
+                        <div class="center-button py-4" id="submit-button-div">
+                          <button type="submit" name="edit-item" class="btn btn-primary" id="list-or-edit-button">Confirm Edits</button>
+                        </div>
+                        <div class="d-none">
+                          <input type="text" class="form-control" name="id-placeholder-row2" id="id-placeholder-row2">
                         </div>
                       </form>
                     </div>
@@ -518,7 +583,7 @@
         $file_error = $file_array['error'][$i];
         $file_type = $file_array['type'][$i];
         $check_file = mime_content_type($file_array['tmp_name'][$i]);
-        if ($check_file !== "image/jpeg" && $check_file !== "image/png") {
+        if ($check_file !== "image/jpeg") {
           echo "<script> alert('Error: File type not supported. Please upload a JPEG/JPG file.')</script>";
           exit();
         }
@@ -567,7 +632,7 @@
       $query = "INSERT INTO items(rcsid, title, price, item_condition, category, subcategory1, subcategory2, date_posted, item_description, image1) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
       $stmt = $dbconn->prepare($query);
       $stmt->execute([$rcsid, $title, $price, $condition, $category, $subcategory, $subcategory_2, $date, $description, $new_file_path1]);
-      $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/list-item.php";
+      $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/list-item.php?listed-item=true";
       echo ("<script>location.href = '$redirect_URI';</script>");
     }
   }
@@ -576,74 +641,24 @@
   <?php
 
   if (isset($_POST["edit-item"])) {
-
     $rcsid = phpCAS::getUser();
-    $title = htmlspecialchars(trim($_POST['post-item-title']));
-    $price = htmlspecialchars(trim($_POST['post-item-price']));
-    $condition = htmlspecialchars(trim($_POST['post-item-condition']));
-    $category = htmlspecialchars(trim($_POST['post-item-category']));
-    $subcategory = htmlspecialchars(trim($_POST['post-item-subcategory']));
-    $subcategory_2 = htmlspecialchars(trim($_POST['post-item-subcategory-2']));
-    $rowID = htmlspecialchars(trim($_POST['id-placeholder-row']));
-    $date = date("Y-m-d H:i:s");
-    $description = htmlspecialchars(trim($_POST['post-item-description']));
-    $file_array = $_FILES['post-item-uploadimgs'];
-    $new_file_paths = array();
-    if (!empty(array_filter($file_array['name']))) {
-      $i = 0;
-      while ($i < 4 && $i < count($file_array['name'])) {
-        $file_name = $file_array['name'][$i];
-        $file_tmp_location = $file_array['tmp_name'][$i];
-        $file_size = $file_array['size'][$i];
-        $file_error = $file_array['error'][$i];
-        $file_type = $file_array['type'][$i];
-        if ($file_error === 0) {
-          if ($file_size < 1000000) {
-            $new_file_name = uniqid('', true) . ".jpg";
-            $new_file_location = '/resources/images/' . $new_file_name;
-            move_uploaded_file($file_tmp_location, $new_file_location);
-            $new_file_paths[$i] = $new_file_location;
-          } else {
-            echo "<script> alert('The file size was too large.')</script>";
-            exit();
-          }
-        } else {
-          // echo "<script> alert('There was an error uploading your file.')</script>";
-          echo "<script> alert('There was an error uploading your file.')</script>";
-          exit();
-        }
-        $i++;
-      }
-    } else {
-      echo "<script> alert('No Files Uploaded.')</script>";
-      exit();
-    }
-
-    if (count($new_file_paths) == 3) {
-      $new_file_path1 = $new_file_paths[0];
-      $new_file_path2 = $new_file_paths[1];
-      $new_file_path3 = $new_file_paths[2];
-      $query = "UPDATE items SET title = '$title', price = '$price', item_condition = '$condition', category = '$category', subcategory1 = '$subcategory', subcategory2 = '$subcategory_2', item_description = '$description', image1 = '$new_file_path1', image2 = '$new_file_path2', image3 = '$new_file_path3' WHERE id = '$rowID';";
-      $stmt = $dbconn->prepare($query);
-      $stmt->execute();
-      $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/list-item.php";
-      echo ("<script>location.href = '$redirect_URI';</script>");
-    } elseif (count($new_file_paths) == 2) {
-      $new_file_path1 = $new_file_paths[0];
-      $new_file_path2 = $new_file_paths[1];
-      $query = "UPDATE items SET title = '$title', price = '$price', item_condition = '$condition', category = '$category', subcategory1 = '$subcategory', subcategory2 = '$subcategory_2', item_description = '$description', image1 = '$new_file_path1', image2 = '$new_file_path2' WHERE id = '$rowID';";
-      $stmt = $dbconn->prepare($query);
-      $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/list-item.php";
-      echo ("<script>location.href = '$redirect_URI';</script>");
-      $stmt->execute();
-    } else {
-      $new_file_path1 = $new_file_paths[0];
-      $query = "UPDATE items SET title = '$title', price = '$price', item_condition = '$condition', category = '$category', subcategory1 = '$subcategory', subcategory2 = '$subcategory_2', item_description = '$description', image1 = '$new_file_path1' WHERE id = '$rowID';";
-      $stmt = $dbconn->prepare($query);
-      $stmt->execute();
-      $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/list-item.php";
-      echo ("<script>location.href = '$redirect_URI';</script>");
-    }
+    $title = htmlspecialchars(trim($_POST['edit-item-title']));
+    $price = htmlspecialchars(trim($_POST['edit-item-price']));
+    $condition = htmlspecialchars(trim($_POST['edit-item-condition']));
+    $rowID = htmlspecialchars(trim($_POST['id-placeholder-row2']));
+    $description = htmlspecialchars(trim($_POST['edit-item-description']));
+    $priceInt = intval($price);
+    $query = "UPDATE items SET title = :title, price = :price, item_condition = :item_condition, item_description = :item_description WHERE id = :id;";
+    $stmt = $dbconn->prepare($query);
+    $stmt->bindValue(':title', $title);
+    $stmt->bindValue(':price', $priceInt);
+    $stmt->bindValue(':item_condition', $condition);
+    $stmt->bindValue(':item_description', $description);
+    $stmt->bindValue(':id', $rowID);
+    echo("<script>alert('".$title.$priceInt.$condition.$rowID.$description."');</script>");
+    $stmt->execute();
+    $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/list-item.php?edited-item=true";
+    echo ("<script>location.href = '$redirect_URI';</script>");
   }
 
   ?>

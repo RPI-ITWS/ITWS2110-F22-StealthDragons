@@ -28,7 +28,7 @@
           echo '<script>alert("Your offer has been sent to the seller!")</script>';
           echo '<script>window.location.href = "' . $redirect_URI . '"</script>';
         }
-        $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid ORDER BY id DESC LIMIT 3";
+        $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid ORDER BY item_views DESC LIMIT 3";
         $stmt = $dbconn->prepare($query);
         $stmt->bindValue(':rcsid', $_SESSION['user']);
         $stmt->execute();
@@ -78,6 +78,7 @@
       $stmt->bindValue(':rcsid', $_SESSION['user']);
       $stmt->execute();
       $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+      $counter = 0; 
       foreach ($stmt as $row) {
         $new_URI_path = "/ITWS2110-F22-StealthDragons/Final/product-page.php?item_ref=".$row['id'];
         $product_URI = $host_URI.$new_URI_path;
@@ -99,9 +100,17 @@
         </a>
       </div>
       <?php
+        $counter = $counter + 1; 
+      }
+      if($counter < 5) {
+        for($i = $counter; $i < 5; $i++) {
+        ?>
+        <div class="col-md"></div>
+      <?php
+        }
       }
       ?>
-      <a href="#" class="view-all pt-2">View All <i class="bi bi-arrow-right-square"></i></a>
+      <a href="browse.php?sort=date_posted-high" class="view-all pt-2">View All <i class="bi bi-arrow-right-square"></i></a>
     </div>
   </section>
   <!-- Top Listings Section -->
@@ -109,11 +118,12 @@
     <h3 class="sec-head-2 pb-3">Top Listings</h3>
     <div class="row">
     <?php
-      $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid ORDER BY item_views DESC LIMIT 5";
+      $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid ORDER BY item_views DESC LIMIT 5 OFFSET 3;";
       $stmt = $dbconn->prepare($query);
       $stmt->bindValue(':rcsid', $_SESSION['user']);
       $stmt->execute();
       $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+      $counter2 = 0; 
       foreach ($stmt as $row) {
         $new_URI_path = "/ITWS2110-F22-StealthDragons/Final/product-page.php?item_ref=".$row['id'];
         $product_URI = $host_URI.$new_URI_path;
@@ -135,9 +145,17 @@
         </a>
       </div>
       <?php
+        $counter2 = $counter2 + 1; 
+      }
+      if($counter2 < 5) {
+        for($j = $counter2; $j < 5; $j++) {
+        ?>
+        <div class="col-md"></div>
+      <?php
+        }
       }
       ?>
-      <a href="#" class="view-all pt-2">View All <i class="bi bi-arrow-right-square"></i></a>
+      <a href="browse.php?sort=item_views-high" class="view-all pt-2">View All <i class="bi bi-arrow-right-square"></i></a>
     </div>
   </section>
   <!-- Featured Items Section -->
@@ -145,11 +163,12 @@
     <h3 class="sec-head-2 pb-3">Featured Items</h3>
     <div class="row">
     <?php
-      $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid LIMIT 5";
+      $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != :rcsid ORDER BY RAND() LIMIT 5";
       $stmt = $dbconn->prepare($query);
       $stmt->bindValue(':rcsid', $_SESSION['user']);
       $stmt->execute();
       $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+      $counter3 = 0; 
       foreach ($stmt as $row) {
         $new_URI_path = "/ITWS2110-F22-StealthDragons/Final/product-page.php?item_ref=".$row['id'];
         $product_URI = $host_URI.$new_URI_path;
@@ -171,9 +190,17 @@
         </a>
       </div>
       <?php
+        $counter3 = $counter3 + 1; 
+      }
+      if($counter3 < 5) {
+        for($k = $counter3; $k < 5; $k++) {
+        ?>
+        <div class="col-md"></div>
+      <?php
+        }
       }
       ?>
-      <a href="#" class="view-all pt-2">View All <i class="bi bi-arrow-right-square"></i></a>
+      <a href="browse.php" class="view-all pt-2">View All <i class="bi bi-arrow-right-square"></i></a>
     </div>
   </section>
   <!-- Text Books Section -->
@@ -186,6 +213,7 @@
       $stmt->bindValue(':rcsid', $_SESSION['user']);
       $stmt->execute();
       $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+      $counter4 = 0; 
       foreach ($stmt as $row) {
         $new_URI_path = "/ITWS2110-F22-StealthDragons/Final/product-page.php?item_ref=".$row['id'];
         $product_URI = $host_URI.$new_URI_path;
@@ -207,9 +235,17 @@
         </a>
       </div>
       <?php
+        $counter4 = $counter4 + 1; 
+      }
+      if($counter4 < 5) {
+        for($m = $counter4; $m < 5; $m++) {
+        ?>
+        <div class="col-md"></div>
+      <?php
+        }
       }
       ?>
-      <a href="#" class="view-all pt-2">View All <i class="bi bi-arrow-right-square"></i></a>
+      <a href="browse.php?filter-item-category=2" class="view-all pt-2">View All <i class="bi bi-arrow-right-square"></i></a>
     </div>
   </section>
   <!-- Site Footer -->

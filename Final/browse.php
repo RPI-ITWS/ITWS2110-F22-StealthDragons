@@ -10,9 +10,15 @@
   <section class="container-xxl pt-5 pb-3">
     <h2 class="sec-head-1">Browse</h2>
     <div class="row">
-      <div class="col-3 pt-4">
+      <div class="col-2 pt-4">
         <h3 class="body-text"><b>Filter By</b></h3>
-        <form action="" method="post">
+        <form action="" method="get">
+          <?php if (isset($_GET['search-items'])) { ?>
+          <input type="hidden" name="search-items" value="<?php echo $_GET['search-items'] ?>">
+          <?php } ?>
+          <?php if (isset($_GET['sort'])) { ?>
+          <input type="hidden" name="sort" value="<?php echo $_GET['sort'] ?>">
+          <?php } ?>
           <!-- Category -->
           <h3 class="body-text">Category</h3>
           <div id="category-div">
@@ -21,7 +27,7 @@
                 <i class="bi bi-basket-fill"></i>
               </span>
               <select name="filter-item-category" id="category" class="form-select" required>
-                <option selected disabled>Select Category</option>
+                <option selected disabled>Category</option>
                 <?php
                 $query = "SELECT category, id FROM categories";
                 $stmt = $dbconn->prepare($query);
@@ -44,7 +50,7 @@
                 <i class="bi bi-basket-fill"></i>
               </span>
               <select name="filter-item-subcategory" id="subcategory-1" class="form-select" required>
-                <option selected disabled>Select Subcategory</option>
+                <option selected disabled>Subcategory</option>
               </select>
             </div>
             <!-- Subcategory -->
@@ -53,7 +59,7 @@
                 <i class="bi bi-basket-fill"></i>
               </span>
               <select name="filter-item-subcategory-2" id="subcategory-2" class="form-select" required>
-                <option selected disabled>Select Subcategory</option>
+                <option selected disabled>Subcategory</option>
               </select>
             </div>
           </div>
@@ -62,8 +68,8 @@
             <span class="input-group-text">
               <i class="bi bi-search-heart"></i>
             </span>
-            <select name="post-item-condition" id="condition" class="form-select" required>
-              <option value="select-condition" selected disabled>Select Condition of Item</option>
+            <select name="filter-item-condition" id="condition" class="form-select" required>
+              <option value="select-condition" selected disabled>Condition</option>
               <option value="new">New</option>
               <option value="like-new">Like New</option>
               <option value="good">Good</option>
@@ -72,76 +78,225 @@
             </select>
           </div>
           <div class="center-button py-4" id="submit-button-div">
-            <button type="submit" name="filters-submit" class="btn btn-primary" id="filters-submit">
+            <button type="submit" class="btn btn-primary" id="filters-submit">
               Apply Filters
             </button>
           </div>
         </form>
       </div>
       <div class="col">
-        <div class="dropdown d-flex justify-content-end py-2">
+        <div class="dropdown d-flex justify-content-between align-items-center py-2">
+          <div>
+            <p class="body-text">
+              <?php echo "Showing Results for: ";
+              if (isset($_GET['search-items']) && $_GET['search-items'] != "") {
+                echo $_GET['search-items'];
+              } else {
+                echo "All Items";
+              }
+              echo "&emsp;";
+              if (isset($_GET['filter-item-category'])) {
+                echo " Category: " . $_GET['filter-item-category'];
+
+              }
+              if (isset($_GET['filter-item-subcategory'])) {
+                echo "/" . $_GET['filter-item-subcategory'];
+              }
+              if (isset($_GET['filter-item-subcategory-2'])) {
+                echo "/" . $_GET['filter-item-subcategory-2'];
+              }
+              echo "&emsp;";
+              if (isset($_GET['filter-item-condition'])) {
+                echo " Condition: " . $_GET['filter-item-condition'];
+              }
+              ?>
+            </p>
+          </div>
           <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
             Sort By
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="browse.php?sort=price-low">Price Lowest</a></li>
-            <li><a class="dropdown-item" href="browse.php?sort=price-high">Price Highest</a></li>
-            <li><a class="dropdown-item" href="browse.php?sort=recent">Recent</a></li>
-            <li><a class="dropdown-item" href="browse.php?sort=oldest">Oldest</a></li>
+            <!-- Sort price low -->
+            <li><a class="dropdown-item <?php if (isset($_GET['sort']) && $_GET['sort'] == "price-low") {
+              echo "active";
+            }
+            ?>" href="#">
+                <form action="" method="get">
+                  <?php if (isset($_GET['search-items'])) { ?>
+                  <input type="hidden" name="search-items" value="<?php echo $_GET['search-items'] ?>">
+                  <?php } ?>
+                  <?php if (isset($_GET['filter-item-category'])) { ?>
+                  <input type="hidden" name="filter-item-category" value="<?php echo $_GET['filter-item-category'] ?>">
+                  <?php } ?>
+                  <?php if (isset($_GET['filter-item-subcategory'])) { ?>
+                  <input type="hidden" name="filter-item-subcategory"
+                    value="<?php echo $_GET['filter-item-subcategory'] ?>">
+                  <?php } ?>
+                  <?php if (isset($_GET['filter-item-subcategory-2'])) { ?>
+                  <input type="hidden" name="filter-item-subcategory-2"
+                    value="<?php echo $_GET['filter-item-subcategory-2'] ?>">
+                  <?php } ?>
+                  <?php if (isset($_GET['filter-item-condition'])) { ?>
+                  <input type="hidden" name="filter-item-condition" value="<?php echo $_GET['filter-item-condition'] ?>">
+                  <?php } ?>
+                  <input type="hidden" name="sort" value="price-low">
+                  <button type="submit" class="btn-none">Price Lowest</button>
+                </form>
+              </a></li>
+            <!-- Sort price high -->
+            <li><a class="dropdown-item <?php if (isset($_GET['sort']) && $_GET['sort'] == "price-high") {
+              echo "active";
+            }
+            ?>" href="#">
+                <form action="" method="get">
+                  <?php if (isset($_GET['search-items'])) { ?>
+                  <input type="hidden" name="search-items" value="<?php echo $_GET['search-items'] ?>">
+                  <?php } ?>
+                  <?php if (isset($_GET['filter-item-category'])) { ?>
+                  <input type="hidden" name="filter-item-category" value="<?php echo $_GET['filter-item-category'] ?>">
+                  <?php } ?>
+                  <?php if (isset($_GET['filter-item-subcategory'])) { ?>
+                  <input type="hidden" name="filter-item-subcategory"
+                    value="<?php echo $_GET['filter-item-subcategory'] ?>">
+                  <?php } ?>
+                  <?php if (isset($_GET['filter-item-subcategory-2'])) { ?>
+                  <input type="hidden" name="filter-item-subcategory-2"
+                    value="<?php echo $_GET['filter-item-subcategory-2'] ?>">
+                  <?php } ?>
+                  <?php if (isset($_GET['filter-item-condition'])) { ?>
+                  <input type="hidden" name="filter-item-condition" value="<?php echo $_GET['filter-item-condition'] ?>">
+                  <?php } ?>
+                  <input type="hidden" name="sort" value="price-high">
+                  <button type="submit" class="btn-none">Price Highest</button>
+                </form>
+              </a>
+            </li>
+            <!-- Sort date posted low -->
+            <li><a class="dropdown-item <?php if (isset($_GET['sort']) && $_GET['sort'] == "date_posted-high") {
+              echo "active";
+            }
+            ?>" href="#">
+                <form action="" method="get">
+                  <?php if (isset($_GET['search-items'])) { ?>
+                  <input type="hidden" name="search-items" value="<?php echo $_GET['search-items'] ?>">
+                  <?php } ?>
+                  <?php if (isset($_GET['filter-item-category'])) { ?>
+                  <input type="hidden" name="filter-item-category" value="<?php echo $_GET['filter-item-category'] ?>">
+                  <?php } ?>
+                  <?php if (isset($_GET['filter-item-subcategory'])) { ?>
+                  <input type="hidden" name="filter-item-subcategory"
+                    value="<?php echo $_GET['filter-item-subcategory'] ?>">
+                  <?php } ?>
+                  <?php if (isset($_GET['filter-item-subcategory-2'])) { ?>
+                  <input type="hidden" name="filter-item-subcategory-2"
+                    value="<?php echo $_GET['filter-item-subcategory-2'] ?>">
+                  <?php } ?>
+                  <?php if (isset($_GET['filter-item-condition'])) { ?>
+                  <input type="hidden" name="filter-item-condition" value="<?php echo $_GET['filter-item-condition'] ?>">
+                  <?php } ?>
+                  <input type="hidden" name="sort" value="date_posted-high">
+                  <button type="submit" class="btn-none">Most Recent</button>
+                </form>
+              </a>
+            </li>
+            <!-- Sort date posted high -->
+            <li><a class="dropdown-item <?php if (isset($_GET['sort']) && $_GET['sort'] == "date_posted-low") {
+              echo "active";
+            }
+            ?>" href="#">
+                <form action="" method="get">
+                  <?php if (isset($_GET['search-items'])) { ?>
+                  <input type="hidden" name="search-items" value="<?php echo $_GET['search-items'] ?>">
+                  <?php } ?>
+                  <?php if (isset($_GET['filter-item-category'])) { ?>
+                  <input type="hidden" name="filter-item-category" value="<?php echo $_GET['filter-item-category'] ?>">
+                  <?php } ?>
+                  <?php if (isset($_GET['filter-item-subcategory'])) { ?>
+                  <input type="hidden" name="filter-item-subcategory"
+                    value="<?php echo $_GET['filter-item-subcategory'] ?>">
+                  <?php } ?>
+                  <?php if (isset($_GET['filter-item-subcategory-2'])) { ?>
+                  <input type="hidden" name="filter-item-subcategory-2"
+                    value="<?php echo $_GET['filter-item-subcategory-2'] ?>">
+                  <?php } ?>
+                  <?php if (isset($_GET['filter-item-condition'])) { ?>
+                  <input type="hidden" name="filter-item-condition" value="<?php echo $_GET['filter-item-condition'] ?>">
+                  <?php } ?>
+                  <input type="hidden" name="sort" value="date_posted-low">
+                  <button type="submit" class="btn-none">Oldest</button>
+                </form>
+              </a>
+            </li>
+            <!-- Sort most viewed -->
+            <li><a class="dropdown-item <?php if (isset($_GET['sort']) && $_GET['sort'] == "item_views-high") {
+              echo "active";
+            } ?>" href="#">
+                <form action="" method="get">
+                  <?php if (isset($_GET['search-items'])) { ?>
+                  <input type="hidden" name="search-items" value="<?php echo $_GET['search-items'] ?>">
+                  <?php } ?>
+                  <?php if (isset($_GET['filter-item-category'])) { ?>
+                  <input type="hidden" name="filter-item-category" value="<?php echo $_GET['filter-item-category'] ?>">
+                  <?php } ?>
+                  <?php if (isset($_GET['filter-item-subcategory'])) { ?>
+                  <input type="hidden" name="filter-item-subcategory"
+                    value="<?php echo $_GET['filter-item-subcategory'] ?>">
+                  <?php } ?>
+                  <?php if (isset($_GET['filter-item-subcategory-2'])) { ?>
+                  <input type="hidden" name="filter-item-subcategory-2"
+                    value="<?php echo $_GET['filter-item-subcategory-2'] ?>">
+                  <?php } ?>
+                  <?php if (isset($_GET['filter-item-condition'])) { ?>
+                  <input type="hidden" name="filter-item-condition" value="<?php echo $_GET['filter-item-condition'] ?>">
+                  <?php } ?>
+                  <input type="hidden" name="sort" value="item_views-high">
+                  <button type="submit" class="btn-none">Most Viewed</button>
+                </form>
+              </a>
+            </li>
           </ul>
         </div>
         <?php
         $query = "SELECT * FROM items WHERE sold = 0 AND rcsid != ?";
         $params = array($_SESSION['user']);
-        if (isset($_POST['filters-submit'])) {
-          if (isset($_POST['filter-item-category'])) {
-            $category = $_POST['filter-item-category'];
-            $query .= " AND category = ?";
-            $params[] = $category;
-          }
 
-          if (isset($_POST['filter-item-subcategory'])) {
-            $subcategory = $_POST['filter-item-subcategory'];
-            $query .= " AND subcategory1 = ?";
-            $params[] = $subcategory;
-          }
-
-          if (isset($_POST['filter-item-subcategory-2'])) {
-            $subcategory2 = $_POST['filter-item-subcategory-2'];
-            $query .= " AND subcategory2 = ?";
-            $params[] = $subcategory2;
-
-          }
-
-          if (isset($_POST['post-item-condition'])) {
-            $condition = $_POST['post-item-condition'];
-            $query .= " AND item_condition = ?";
-            $params[] = $condition;
-          }
+        if (isset($_GET['filter-item-category'])) {
+          $category = htmlspecialchars(trim($_GET['filter-item-category']));
+          $query .= " AND category = ?";
+          $params[] = $category;
         }
-        if (isset($_POST['search-items'])) {
-          $search = htmlspecialchars(trim($_POST['search-items']));
+
+        if (isset($_GET['filter-item-subcategory'])) {
+          $subcategory = htmlspecialchars(trim($_GET['filter-item-subcategory']));
+          $query .= " AND subcategory1 = ?";
+          $params[] = $subcategory;
+        }
+
+        if (isset($_GET['filter-item-subcategory-2'])) {
+          $subcategory2 = htmlspecialchars(trim($_GET['filter-item-subcategory-2']));
+          $query .= " AND subcategory2 = ?";
+          $params[] = $subcategory2;
+        }
+        if (isset($_GET['filter-item-condition'])) {
+          $condition = htmlspecialchars(trim($_GET['filter-item-condition']));
+          $query .= " AND item_condition = ?";
+          $params[] = $condition;
+        }
+        if (isset($_GET['search-items'])) {
+          $search = htmlspecialchars(trim($_GET['search-items']));
           $query .= " AND title LIKE ? ";
           $params[] = '%' . $search . '%';
-          $_SESSION['search-items'] = $search;
-        } else {
-          if (isset($_SESSION['search-items']) && strlen($_SESSION['search-items']) > 0) {
-            $search = $_SESSION['search-items'];
-            $query .= " AND title LIKE ? ";
-            $params[] = '%' . $search . '%';
-          }
         }
-
         if (isset($_GET['sort'])) {
-          if ($_GET['sort'] == 'price-low') {
-            $query .= " ORDER BY price ASC";
-          } else if ($_GET['sort'] == 'price-high') {
-            $query .= " ORDER BY price DESC";
-          } else if ($_GET['sort'] == 'recent') {
-            $query .= " ORDER BY date_posted DESC";
-          } else if ($_GET['sort'] == 'oldest') {
-            $query .= " ORDER BY date_posted ASC";
+          $sort = htmlspecialchars(trim($_GET['sort']));
+          if (strpos($sort, '-')) {
+            $sort_array = explode('-', $sort);
+            if ($sort_array[1] == "high") {
+              $query .= " ORDER BY " . $sort_array[0] . " DESC";
+            } else {
+              $query .= " ORDER BY " . $sort_array[0] . " ASC";
+            }
           }
         }
 
@@ -150,13 +305,14 @@
         $numCols = 0;
         $host_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
         foreach ($stmt as $row) {
-          if ($numCols == 0) {
+          if ($numCols == 0 || $numCols % 5 == 0) {
+            if ($numCols != 0) {
+              echo "</div>";
+            }
             echo "<div class=\"row py-2\">";
           }
           $new_URI_path = "/ITWS2110-F22-StealthDragons/Final/product-page.php?item_ref=" . $row['id'];
           $product_URI = $host_URI . $new_URI_path;
-
-
         ?>
 
         <div class="col-md">
@@ -177,57 +333,19 @@
           </a>
         </div>
         <?php
-          $numCols = $numCols + 1;
-          if ($numCols == 5) {
-            $numCols = 0;
-          }
+          $numCols++;
         }
-        if ($numCols != 0) {
-          for (; $numCols < 5; $numCols++) {
+        if ($numCols % 5 != 0) {
+          while ($numCols % 5 != 0) {
             echo "<div class=\"col-md\"></div>";
+            $numCols++;
           }
+          echo "</div>";
         }
-
         ?>
       </div>
     </div>
   </section>
-
-  <!-- Modal For Signing in -->
-  <div class="modal fade" id="log-in-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="log-in-modal-label" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5 sec-head-2" id="log-in-modal-label">
-            Welcome Back
-          </h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="mb-3">
-              <label for="email-input" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="email-input" />
-            </div>
-            <label for="password-input" class="form-label">Password</label>
-            <div class="mb-3 input-group">
-              <input type="password" class="form-control" id="password-input" />
-              <button class="input-group-text bg-transparent" onclick="togglePassword()">
-                <i class="bi bi-eye-slash" id="toggle-password"></i>
-              </button>
-            </div>
-            <button type="submit" class="btn btn-primary">Log In</button>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <a class="modal-footer-link" href="#">Sign Up</a>
-          <span>|</span>
-          <a class="modal-footer-link" href="#">Forgot Password?</a>
-        </div>
-      </div>
-    </div>
-  </div>
   <!-- Site Footer -->
   <?php include 'footer.php' ?>
 </body>
