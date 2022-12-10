@@ -82,10 +82,11 @@ try {
                         $stmt = $dbconn->prepare($query);
                         $stmt->execute([$rcsid]);
                     }
-                    if($user['ban'] == true) {
-                        header("Location: banned.php");
-                    }
                     $_SESSION["user"] = $rcsid;
+                    if($user['ban'] == true) {
+                        $redirect_URI = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/ITWS2110-F22-StealthDragons/Final/banned.php";
+                        echo ("<script>location.href = '$redirect_URI';</script>");
+                    }
                     echo "<i class='bi bi-person-circle'></i>" . " " . $_SESSION["user"];
                     if($user['admin'] == true) {
                         echo "<span class=\"text-danger\"> [ADMIN]</span>";
